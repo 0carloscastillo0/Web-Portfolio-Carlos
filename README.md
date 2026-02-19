@@ -70,7 +70,7 @@ Prototipo visual completo del sistema.
 - ✅ Diseño preliminar UX/UI
 - ✅ Modelo ER
 - ✅ Arquitectura
-- Implementación del modelo
+- ✅ Implementación del modelo
 - Implementación de consultas REST
 - Implementación del frontend
 - Deploy en producción

@@ -1,0 +1,32 @@
+{
+  "name": "web-portfolio-carlos",
+  "version": "1.0.0",
+  "description": "Aplicación web fullstack desarrollada para presentar la información relacionada a los proyectos en los que he participado, incluyendo datos personales relevantes.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0carloscastillo0/Web-Portfolio-Carlos.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/0carloscastillo0/Web-Portfolio-Carlos/issues"
+  },
+  "homepage": "https://github.com/0carloscastillo0/Web-Portfolio-Carlos#readme",
+  "devDependencies": {
+    "@types/node": "^25.3.0",
+    "prisma": "^7.4.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@prisma/adapter-pg": "^7.4.0",
+    "@prisma/client": "^7.4.0",
+    "dotenv": "^17.3.1"
+  }
+}

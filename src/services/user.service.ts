@@ -14,7 +14,7 @@ const userService = {
         const existingUser = await prisma.user.findUnique({
             where: { email: data.email },
         });
-        if (existingUser) throw new AppError("Email already registered", 409);
+        if (existingUser) throw new AppError("Email alreadyyy registered", 409);
 
         // Create the new user
         const newUser = await prisma.user.create({ data });

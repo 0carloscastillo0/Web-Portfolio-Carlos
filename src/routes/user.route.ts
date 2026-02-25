@@ -7,7 +7,7 @@ import { userCreateSchema } from "../schemas/user.schema";
 const userRouter = Router();
 
 // Create a new user with validation
-userRouter.post("/", validate(userCreateSchema), userController.createUser);
+userRouter.post("/", validate(userCreateSchema,"body"), userController.createUser);
 
 // Get user by ID
 userRouter.get("/:id", userController.getUserById);

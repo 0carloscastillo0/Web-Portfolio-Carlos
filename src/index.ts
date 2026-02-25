@@ -1,6 +1,7 @@
 import express from "express";
 
 import userRouter from "./routes/user.route";
+import educationRouter from "./routes/education.route";
 import { errorHandler } from "./middlewares/error.middleware";
 
 // Create Express app
@@ -11,6 +12,7 @@ app.use(express.json());
 
 // Routes
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1", educationRouter);
 
 // Error handling middleware
 app.use(errorHandler);

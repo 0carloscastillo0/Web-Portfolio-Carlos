@@ -6,7 +6,12 @@ import { userCreateSchema } from "../schemas/user.schema";
 // Router for user-related endpoints
 const userRouter = Router();
 
-// POST /users - Create a new user with validation
+// Create a new user with validation
 userRouter.post("/", validate(userCreateSchema), userController.createUser);
+
+// Get user by ID
+userRouter.get("/:id", userController.getUserById);
+
+// Additional routes (update, delete) can be added here in the future
 
 export default userRouter;

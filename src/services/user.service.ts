@@ -1,20 +1,25 @@
 import { prisma } from "../config/prisma";
+import { AppError } from "../utils/AppError";
 
-
+/// Service for user-related operations
 const userService = {
-    createUser: async (data: any) => {
 
+    /* 
+    Method to create a new user.
+    Input: JSON body with user details (name, email, password).
+    Output: Created user object or error message.
+    */
+    createUser: async (data: any) => {
+        // Check if a user with the same email already exists
         const existingUser = await prisma.user.findUnique({
             where: { email: data.email },
         });
+        if (existingUser) throw new AppError("Email already registered", 409);
 
-        if (existingUser) {
-            throw new Error("EMAIL_ALREADY_EXISTS");
-        }
+        // Create the new user
+        const newUser = await prisma.user.create({ data });
 
-        return prisma.user.create({
-            data,
-        });
+        return newUser;
     },
 };
 

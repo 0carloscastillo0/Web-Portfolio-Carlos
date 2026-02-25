@@ -1,5 +1,6 @@
 import Joi from "joi";
 
+/// Joi schema for validating user creation/edition input
 export const userCreateSchema = Joi.object({
     name: Joi.string().trim().required(),
     lastname: Joi.string().trim().required(),

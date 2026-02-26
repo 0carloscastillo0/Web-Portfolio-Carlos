@@ -68,7 +68,8 @@ model Skill {
 model Project {
   id Int @id @default(autoincrement())
   title String
-  date DateTime
+  startDate DateTime
+  endDate DateTime?
   description String
 
   user User @relation(fields: [userId], references: [id])

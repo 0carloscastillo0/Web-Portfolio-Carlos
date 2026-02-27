@@ -6,6 +6,8 @@ export const projectCreateSchema = Joi.object({
     startDate: Joi.date().iso().max('now').required(),
     endDate: Joi.date().iso().max('now').min(Joi.ref("startDate")).allow(null).optional(),
     description: Joi.string().trim().required(),
+    
+    skillIds: Joi.array().items(Joi.number()).optional(),
 });
 
 /// Joi schema for validating route parameters related to projects

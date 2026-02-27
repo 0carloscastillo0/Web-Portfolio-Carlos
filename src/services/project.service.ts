@@ -133,7 +133,69 @@ const projectService = {
         if (!project) throw new AppError("Project not found for this user", 404);
 
         return project;
-     }
+    },    
+
+    /* 
+    Method to add one or more images to a project.
+    Input: Project ID as a parameter, image file/s in the request body.
+    Output: Updated project object with the new image/s, or error message if project not found or if project does not belong to the user.
+    */
+    addImageToProject: async (projectId: number, files?: Express.Multer.File[]) => {
+
+        // Validate that files are provided
+        if (!files || files.length === 0) {
+            throw new AppError("No image files provided", 400);
+        }
+
+        // Validate that the project exists
+        const project = await prisma.project.findUnique({
+            where: { id: projectId }
+        });
+        if (!project) {
+            throw new AppError("Project not found", 404);
+        }
+
+        // Create image records for each uploaded file and associate them with the project
+        const images = await Promise.all(
+            files.map((file, index) =>
+                prisma.imgProject.create({
+                    data: {
+                        url: `/uploads/projects/${file.filename}`,
+                        filename: file.filename,
+                        size: file.size,
+                        mimeType: file.mimetype,
+                        projectId: projectId,
+                        order: index
+                    }
+                })
+            )
+        );
+
+        return images;
+    },
+
+    /* 
+    Method to get images for a project.
+    Input: Project ID as a parameter.
+    Output: Array of image objects for the specified project, or error message if project not found or if project does not belong to the user.
+    */
+    getImagesForProject: async (projectId: number) => {
+        // Validate that the project exists
+        const project = await prisma.project.findUnique({
+            where: { id: projectId }
+        });
+        if (!project) {
+            throw new AppError("Project not found", 404);
+        }
+
+        // Get images for the project, ordered by the 'order' field
+        const images = await prisma.imgProject.findMany({
+            where: { projectId: projectId },
+            orderBy: { order: "asc" }
+        });
+
+        return images;
+    }
 };
 
 export default projectService;

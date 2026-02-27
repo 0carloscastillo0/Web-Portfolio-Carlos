@@ -39,6 +39,29 @@ const projectController = {
         res.status(200).json(project);
      }),
 
+    /* 
+    Method to add one or more images to a project.
+    Input: User ID and Project ID as URL parameters, image/s file/s in the request body.
+    Output: Updated project object with the new image/s, or error message if project not found or if project does not belong to the user.
+    */
+    addImageToProject: asyncHandler(async (req: Request, res: Response) => {
+        const projectId = Number(req.params.projectId);
+        const files = req.files as Express.Multer.File[];
+        const images = await projectService.addImageToProject(projectId, files);
+        res.status(201).json(images);
+    }),
+
+    /* 
+    Method to get images for a project.
+    Input: User ID and Project ID as URL parameters.
+    Output: Array of image objects for the specified project, or error message if project not found or if project does not belong to the user.
+    */
+    getImagesForProject: asyncHandler(async (req: Request, res: Response) => {
+        const projectId = Number(req.params.projectId);
+        const images = await projectService.getImagesForProject(projectId);
+        res.status(200).json(images);
+    }),
+
 };
 
 export default projectController;

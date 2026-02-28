@@ -9,5 +9,6 @@ export const userCreateSchema = Joi.object({
     city: Joi.string().trim().required(),
     country: Joi.string().trim().required(),
     description: Joi.string().trim().required(),
-    urlCV: Joi.string().trim().required(),
+    urlCV: Joi.string().trim().optional(),
+    urlPhoto: Joi.string().trim().optional(),
 });

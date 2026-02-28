@@ -2,7 +2,7 @@ import { Router } from "express";
 import projectController from "../controllers/project.controller";
 import { validate } from "../middlewares/validate.middleware";
 import { projectCreateSchema, paramsSchemas } from "../schemas/project.schema";
-import { upload } from "../utils/multer";
+import { uploadProjectImage } from "../utils/multer";
 
 // Router for user-related endpoints
 const projectRouter = Router();
@@ -17,7 +17,7 @@ projectRouter.get("/users/:userId/projects", validate(paramsSchemas.userId, "par
 projectRouter.get("/users/:userId/projects/:projectId", validate(paramsSchemas.userProject, "params"), projectController.getProjectById);
 
 // Create one or more images for a project with validation of projectId parameter
-projectRouter.post("/users/:userId/projects/:projectId/images", validate(paramsSchemas.userProject, "params"), upload.array("images",10), projectController.addImageToProject);
+projectRouter.post("/users/:userId/projects/:projectId/images", validate(paramsSchemas.userProject, "params"), uploadProjectImage.array("images",10), projectController.addImageToProject);
 
 // Get images for a project with validation of projectId parameter
 projectRouter.get("/users/:userId/projects/:projectId/images", validate(paramsSchemas.userProject, "params"), projectController.getImagesForProject);

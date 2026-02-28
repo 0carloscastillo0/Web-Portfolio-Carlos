@@ -22,23 +22,13 @@ model User {
   city String
   country String
   description String
-  urlCV String
+  urlCV String?
+  urlPhoto String?
 
-  photo Photo?
   educations Education[]
   skills Skill[]
   projects Project[]
   contacts Contact[]
-}
-
-model Photo {
-  id Int @id @default(autoincrement())
-  title String
-  sice Int
-  url String
-
-  user User @relation(fields: [userId], references: [id])
-  userId Int @unique
 }
 
 model Education {

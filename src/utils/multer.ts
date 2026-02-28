@@ -2,6 +2,7 @@ import multer, { FileFilterCallback } from "multer";
 import { Request } from "express";
 import path from "path";
 import fs from "fs";
+import { AppError } from "./AppError";
 
 // Function to create storage dynamically
 const createStorage = (folder: string) => {
@@ -43,7 +44,7 @@ const fileFilterImg = (
   cb: FileFilterCallback
 ) => {
   if (!file.mimetype.startsWith("image/")) {
-    return cb(new Error("Only image files are allowed"));
+    return cb(new AppError("Only image files are allowed", 400));
   }
 
   cb(null, true);
@@ -55,7 +56,7 @@ const fileFilterPdf = (
   cb: FileFilterCallback
 ) => {
   if (file.mimetype !== "application/pdf") {
-    return cb(new Error("Only PDF files are allowed"));
+    return cb(new AppError("Only PDF files are allowed", 400));
   }
 
   cb(null, true);

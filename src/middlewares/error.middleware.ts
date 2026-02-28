@@ -1,7 +1,8 @@
 import { Request, Response, NextFunction } from "express";
+import multer from "multer";
 import { AppError } from "../utils/AppError";
 
-// Middleware to handle errors in the application
+// Global error handling middleware
 export const errorHandler = (
   err: any,
   req: Request,
@@ -9,17 +10,27 @@ export const errorHandler = (
   next: NextFunction
 ) => {
 
-  // Error control for known application errors
+  // Custom application errors
   if (err instanceof AppError) {
     return res.status(err.statusCode).json({
+      status: "error",
       message: err.message,
     });
   }
 
-  // Error control for unknown errors
+  // Multer errors (e.g., size limit)
+  if (err instanceof multer.MulterError) {
+    return res.status(400).json({
+      status: "error",
+      message: err.message,
+    });
+  }
+
+  // Unknown error
   console.error(err);
 
   return res.status(500).json({
+    status: "error",
     message: "Internal server error",
   });
 };

@@ -31,15 +31,18 @@ export const userSchemas = {
                 example: "Chile" 
             },
             description: { 
-                type: "string" 
+                type: "string",
+                example: "Experienced fullstack developer with a passion for building scalable web applications and working across the full stack." 
             },
             urlCV: { 
                 type: "string", 
-                nullable: true 
+                nullable: true,
+                example: "https://example.com/carlos-cv.pdf"
             },
             urlPhoto: { 
                 type: "string", 
-                nullable: true 
+                nullable: true,
+                example: "https://example.com/carlos-photo.jpg"
             }
         }
     },
@@ -49,25 +52,32 @@ export const userSchemas = {
         required: ["name", "lastname", "email", "title", "city", "country", "description"],
         properties: {
             name: { 
-                type: "string" 
+                type: "string",
+                example: "Carlos"
             },
             lastname: { 
-                type: "string" 
+                type: "string",
+                example: "Castillo"
             },
             email: { 
-                type: "string" 
+                type: "string",
+                example: "carlos@email.com"
             },
             title: { 
-                type: "string" 
+                type: "string",
+                example: "Fullstack Developer"
             },
             city: { 
-                type: "string" 
+                type: "string",
+                example: "Santiago"
             },
             country: { 
-                type: "string" 
+                type: "string",
+                example: "Chile"
             },
             description: { 
-                type: "string" 
+                type: "string",
+                example: "Experienced fullstack developer with a passion for building scalable web applications and working across the full stack."
             }
         }
     },

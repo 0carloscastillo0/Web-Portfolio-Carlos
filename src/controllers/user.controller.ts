@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import userService from "../services/user.service";
 import { asyncHandler } from "../utils/asyncHanfler";
+import { sendResponse } from "../utils/response";
 
 /// Controller for user-related operations
 const userController = {
@@ -12,7 +13,7 @@ const userController = {
     */
     createUser: asyncHandler( async (req: Request, res: Response) => {
         const user = await userService.createUser(req.body);
-        res.status(201).json(user);
+        sendResponse(res, 201, "User created successfully", user);
     }),
 
     /*
@@ -23,7 +24,7 @@ const userController = {
     getUserById: asyncHandler( async (req: Request, res: Response) => {
         const id = Number(req.params.id);
         const user = await userService.getUserById(id);
-        res.status(200).json(user);
+        sendResponse(res, 200, "User retrieved successfully", user);
     }),
 
     /* 
@@ -34,7 +35,7 @@ const userController = {
     uploadUserPhoto: asyncHandler( async (req: Request, res: Response) => {
         const id = Number(req.params.id);
         const updatedUser = await userService.uploadUserPhoto(id, req.file);
-        res.status(200).json(updatedUser);  
+        sendResponse(res, 201, "User photo uploaded successfully", updatedUser);  
     }),
 
     /* 
@@ -45,7 +46,7 @@ const userController = {
     uploadUserCV: asyncHandler( async (req: Request, res: Response) => {
         const id = Number(req.params.id);
         const updatedUser = await userService.uploadUserCV(id, req.file);
-        res.status(200).json(updatedUser);  
+        sendResponse(res, 201, "User CV uploaded successfully", updatedUser);  
     }),
     
 };

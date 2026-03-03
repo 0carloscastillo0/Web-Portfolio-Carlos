@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import skillService from "../services/skill.service";
 import { asyncHandler } from "../utils/asyncHanfler";
+import { sendResponse } from "../utils/response";
 
 /// Controller for user-related operations
 const skillController = {
@@ -13,7 +14,7 @@ const skillController = {
     createSkill: asyncHandler( async (req: Request, res: Response) => {
         const userId = Number(req.params.userId);
         const skill = await skillService.createSkill({...req.body, userId: userId});
-        res.status(201).json(skill);
+        sendResponse(res, 201, "Skill created successfully", skill);
     }),
 
     /* 
@@ -24,7 +25,7 @@ const skillController = {
     getAllSkillsByUserId: asyncHandler( async (req: Request, res: Response) => {
         const userId = Number(req.params.userId);
         const skills = await skillService.getAllSkillsByUserId(userId);
-        res.status(200).json(skills);
+        sendResponse(res, 200, "Skills retrieved successfully", skills);
     }),
 
 };

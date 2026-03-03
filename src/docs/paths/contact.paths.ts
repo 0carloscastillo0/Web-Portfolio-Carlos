@@ -30,24 +30,35 @@ export const contactPaths = {
                     content: {
                         "application/json": {
                         schema: {
-                            $ref: "#/components/schemas/Contact"
+                            allOf: [
+                                { $ref: "#/components/schemas/SuccessResponse" },
+                                {
+                                    type: "object",
+                                    properties: {
+                                        data: {
+                                            $ref: "#/components/schemas/Contact"
+                                        }
+                                    }
+                                }
+                            ]
                         }
                         }
                     }
                 },
                 400: {
-                    description: "Validation error"
+                    $ref: "#/components/responses/BadRequest"
                 },
                 404: {
-                    description: "User not found"
+                    $ref: "#/components/responses/NotFound"
+                },
+                500: {
+                    $ref: "#/components/responses/InternalServerError"
                 }
             }
         },
         get: {
             summary: "Get all contacts for a user",
-            tags: [
-                "Contacts"
-            ],
+            tags: ["Contacts"],
             parameters: [
                 {
                     in: "path",
@@ -60,20 +71,33 @@ export const contactPaths = {
             ],
             responses: {
                 200: {
-                    description: "List of contacts",
+                    description: "Contacts retrieved successfully",
                     content: {
                         "application/json": {
                             schema: {
-                                type: "array",
-                                items: {
-                                $ref: "#/components/schemas/Contact"
-                                }
+                                allOf: [
+                                    { $ref: "#/components/schemas/SuccessResponse" },
+                                    {
+                                        type: "object",
+                                        properties: {
+                                            data: {
+                                                type: "array",
+                                                items: {
+                                                    $ref: "#/components/schemas/Contact"
+                                                }
+                                            }
+                                        }
+                                    }
+                                ]
                             }
                         }
                     }
                 },
                 404: {
-                    description: "User not found"
+                    $ref: "#/components/responses/NotFound"
+                },
+                500: {
+                    $ref: "#/components/responses/InternalServerError"
                 }
             }
         }

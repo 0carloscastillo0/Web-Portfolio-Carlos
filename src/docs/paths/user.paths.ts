@@ -19,13 +19,29 @@ export const userPaths = {
                     content: {
                         "application/json": {
                             schema: {
-                                $ref: '#/components/schemas/User'
+                                allOf: [
+                                    { $ref: "#/components/schemas/SuccessResponse" },
+                                    {
+                                        type: "object",
+                                        properties: {
+                                            data: {
+                                                $ref: "#/components/schemas/User"
+                                            }
+                                        }
+                                    }
+                                ]
                             }
                         }
                     }
                 },
                 400: {
-                    description: "Validation error"
+                    $ref: "#/components/responses/BadRequest"
+                },
+                404: {
+                    $ref: "#/components/responses/NotFound"
+                },
+                500: {
+                    $ref: "#/components/responses/InternalServerError"
                 }
             }
         }
@@ -51,13 +67,29 @@ export const userPaths = {
                     content: {
                         "application/json": {
                             schema: {
-                                $ref: '#/components/schemas/User'
+                                allOf: [
+                                    { $ref: "#/components/schemas/SuccessResponse" },
+                                    {
+                                        type: "object",
+                                        properties: {
+                                            data: {
+                                                type: "array",
+                                                items: {
+                                                    $ref: "#/components/schemas/User"
+                                                }
+                                            }
+                                        }
+                                    }
+                                ]
                             }
                         }
                     }
                 },
                 404: {
-                    description: "User not found"
+                    $ref: "#/components/responses/NotFound"
+                },
+                500: {
+                    $ref: "#/components/responses/InternalServerError"
                 }
             }
         }
@@ -94,8 +126,34 @@ export const userPaths = {
                 }
             },
             responses: {
-                200: {
-                    description: "Photo uploaded successfully"
+                201: {
+                    description: "Photo uploaded successfully",
+                    content: {
+                        "application/json": {
+                            schema: {
+                                allOf: [
+                                    { $ref: "#/components/schemas/SuccessResponse" },
+                                    {
+                                        type: "object",
+                                        properties: {
+                                            data: {
+                                                $ref: "#/components/schemas/User"
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                400: {
+                    $ref: "#/components/responses/BadRequest"
+                },
+                404: {
+                    $ref: "#/components/responses/NotFound"
+                },
+                500: {
+                    $ref: "#/components/responses/InternalServerError"
                 }
             }
         }
@@ -132,8 +190,34 @@ export const userPaths = {
                 }
             },
             responses: {
-                200: {
-                    description: "CV subido correctamente"
+                201: {
+                    description: "CV uploaded successfully",
+                    content: {
+                        "application/json": {
+                            schema: {
+                                allOf: [
+                                    { $ref: "#/components/schemas/SuccessResponse" },
+                                    {
+                                        type: "object",
+                                        properties: {
+                                            data: {
+                                                $ref: "#/components/schemas/User"
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                400: {
+                    $ref: "#/components/responses/BadRequest"
+                },
+                404: {
+                    $ref: "#/components/responses/NotFound"
+                },
+                500: {
+                    $ref: "#/components/responses/InternalServerError"
                 }
             }
         }

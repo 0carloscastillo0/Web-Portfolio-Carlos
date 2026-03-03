@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import educationService from "../services/education.service";
 import { asyncHandler } from "../utils/asyncHanfler";
+import { sendResponse } from "../utils/response";
 
 /// Controller for user-related operations
 const educationController = {
@@ -13,7 +14,7 @@ const educationController = {
     createEducation: asyncHandler( async (req: Request, res: Response) => {
         const userId = Number(req.params.userId);
         const education = await educationService.createEducation({...req.body, userId: userId});
-        res.status(201).json(education);
+        sendResponse(res, 201, "Education created successfully", education);
     }),
 
     /* 
@@ -24,7 +25,7 @@ const educationController = {
     getAllEducationsByUserId: asyncHandler( async (req: Request, res: Response) => {
         const userId = Number(req.params.userId);
         const educations = await educationService.getAllEducationsByUserId(userId);
-        res.status(200).json(educations);
+        sendResponse(res, 200, "Educations retrieved successfully", educations);
     }),
 
 };

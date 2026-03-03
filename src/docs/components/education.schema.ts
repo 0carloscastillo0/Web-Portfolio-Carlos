@@ -16,16 +16,19 @@ export const educationSchemas = {
             },
             startDate: { 
                 type: "string", 
-                format: "date-time" 
+                format: "date-time",
+                example: "2020-03-01T00:00:00Z"
             },
             endDate: { 
                 type: "string", 
                 format: "date-time", 
-                nullable: true 
+                nullable: true,
+                example: "2024-12-31T00:00:00Z"
             },
             description: { 
                 type: "string", 
-                nullable: true 
+                nullable: true,
+                example: "Descripción de la educación"
             },
             userId: { 
                 type: "integer", 
@@ -39,23 +42,28 @@ export const educationSchemas = {
         required: ["place", "name", "startDate"],
         properties: {
             place: { 
-                type: "string" 
+                type: "string",
+                example: "Universidad de Santiago"
             },
             name: { 
-                type: "string" 
+                type: "string",
+                example: "Ingeniería Civil Informática"
             },
             startDate: { 
                 type: "string", 
-                format: "date-time" 
+                format: "date-time",
+                example: "2020-03-01T00:00:00Z"
             },
             endDate: { 
                 type: "string", 
                 format: "date-time", 
-                nullable: true 
+                nullable: true,
+                example: "2024-12-31T00:00:00Z"
             },
             description: { 
                 type: "string", 
-                nullable: true 
+                nullable: true,
+                example: "Descripción de la educación"
             }
         }
     },

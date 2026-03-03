@@ -140,19 +140,24 @@ const projectService = {
     Input: Project ID as a parameter, image file/s in the request body.
     Output: Updated project object with the new image/s, or error message if project not found or if project does not belong to the user.
     */
-    addImageToProject: async (projectId: number, files?: Express.Multer.File[]) => {
+    addImageToProject: async (userId: number, projectId: number, files?: Express.Multer.File[]) => {
+        // Validate that the user exists        
+        const existingUser = await prisma.user.findUnique({
+            where: { id: userId },
+        });
+        if (!existingUser) throw new AppError("User not found", 404);
 
         // Validate that files are provided
         if (!files || files.length === 0) {
             throw new AppError("No image files provided", 400);
         }
 
-        // Validate that the project exists
+        // Validate that the project exists and belongs to the user
         const project = await prisma.project.findUnique({
-            where: { id: projectId }
+            where: { id: projectId, userId: userId }
         });
         if (!project) {
-            throw new AppError("Project not found", 404);
+            throw new AppError("Project not found for this user", 404);
         }
 
         // Create image records for each uploaded file and associate them with the project
@@ -175,17 +180,23 @@ const projectService = {
     },
 
     /* 
-    Method to get images for a project.
-    Input: Project ID as a parameter.
+    Method to get images for a project for a specific user.
+    Input: User ID and Project ID as parameters.
     Output: Array of image objects for the specified project, or error message if project not found or if project does not belong to the user.
     */
-    getImagesForProject: async (projectId: number) => {
-        // Validate that the project exists
+    getImagesForProject: async (userId: number, projectId: number) => {
+        // Validate that the user exists
+        const existingUser = await prisma.user.findUnique({
+            where: { id: userId },
+        });
+        if (!existingUser) throw new AppError("User not found", 404);
+
+        // Validate that the project exists and belongs to the user
         const project = await prisma.project.findUnique({
-            where: { id: projectId }
+            where: { id: projectId, userId: userId }
         });
         if (!project) {
-            throw new AppError("Project not found", 404);
+            throw new AppError("Project not found for this user", 404);
         }
 
         // Get images for the project, ordered by the 'order' field

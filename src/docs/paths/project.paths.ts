@@ -30,13 +30,29 @@ export const projectPaths = {
                     content: {
                         "application/json": {
                             schema: {
-                                $ref: '#/components/schemas/Project'
+                                allOf: [
+                                    { $ref: "#/components/schemas/SuccessResponse" },
+                                    {
+                                        type: "object",
+                                        properties: {
+                                            data: {
+                                                $ref: "#/components/schemas/Project"
+                                            }
+                                        }
+                                    }
+                                ]
                             }
                         }
                     }
                 },
                 400: {
-                    description: "Validation error"
+                    $ref: "#/components/responses/BadRequest"
+                },
+                404: {
+                    $ref: "#/components/responses/NotFound"
+                },
+                500: {
+                    $ref: "#/components/responses/InternalServerError"
                 }
             }
         },
@@ -59,16 +75,29 @@ export const projectPaths = {
                     content: {
                         "application/json": {
                             schema: {
-                                type: "array",
-                                items: {
-                                $ref: "#/components/schemas/Project"
-                                }
+                                allOf: [
+                                    { $ref: "#/components/schemas/SuccessResponse" },
+                                    {
+                                        type: "object",
+                                        properties: {
+                                            data: {
+                                                type: "array",
+                                                items: {
+                                                    $ref: "#/components/schemas/Project"
+                                                }
+                                            }
+                                        }
+                                    }
+                                ]
                             }
                         }
                     }
                 },
                 404: {
-                description: "User not found"
+                    $ref: "#/components/responses/NotFound"
+                },
+                500: {
+                    $ref: "#/components/responses/InternalServerError"
                 }
             }
         }
@@ -98,17 +127,30 @@ export const projectPaths = {
             ],
             responses: {
                 200: {
-                    description: "Project found",
+                    description: "Project retrieved successfully",
                     content: {
                         "application/json": {
                             schema: {
-                                $ref: "#/components/schemas/Project"
+                                allOf: [
+                                    { $ref: "#/components/schemas/SuccessResponse" },
+                                    {
+                                        type: "object",
+                                        properties: {
+                                            data: {
+                                                $ref: "#/components/schemas/Project"
+                                            }
+                                        }
+                                    }
+                                ]
                             }
                         }
                     }
                 },
                 404: {
-                    description: "Project not found"
+                    $ref: "#/components/responses/NotFound"
+                },
+                500: {
+                    $ref: "#/components/responses/InternalServerError"
                 }
             }
         }
@@ -161,19 +203,32 @@ export const projectPaths = {
                     content: {
                         "application/json": {
                             schema: {
-                                type: "array",
-                                items: {
-                                    $ref: "#/components/schemas/Image"
-                                }
+                                allOf: [
+                                    { $ref: "#/components/schemas/SuccessResponse" },
+                                    {
+                                        type: "object",
+                                        properties: {
+                                            data: {
+                                                type: "array",
+                                                items: {
+                                                    $ref: "#/components/schemas/Image"
+                                                }
+                                            }
+                                        }
+                                    }
+                                ]
                             }
                         }
                     }
                 },
-                404: {
-                    description: "Project not found"
-                },
                 400: {
-                    description: "Error uploading images"
+                    $ref: "#/components/responses/BadRequest"
+                },
+                404: {
+                    $ref: "#/components/responses/NotFound"
+                },
+                500: {
+                    $ref: "#/components/responses/InternalServerError"
                 }
             }
         },
@@ -200,20 +255,33 @@ export const projectPaths = {
             ],
             responses: {
                 200: {
-                    description: "List of images",
+                    description: "Images retrieved successfully",
                     content: {
                         "application/json": {
-                            schema: {
-                                type: "array",
-                                items: {
+                        schema: {
+                            allOf: [
+                            { $ref: "#/components/schemas/SuccessResponse" },
+                            {
+                                type: "object",
+                                properties: {
+                                data: {
+                                    type: "array",
+                                    items: {
                                     $ref: "#/components/schemas/Image"
+                                    }
+                                }
                                 }
                             }
+                            ]
+                        }
                         }
                     }
                 },
                 404: {
-                    description: "Project not found"
+                    $ref: "#/components/responses/NotFound"
+                },
+                500: {
+                    $ref: "#/components/responses/InternalServerError"
                 }
             }
         }

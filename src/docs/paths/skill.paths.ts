@@ -30,16 +30,29 @@ export const skillPaths = {
                     content: {
                         "application/json": {
                             schema: {
-                                $ref: "#/components/schemas/Skill"
+                                allOf: [
+                                    { $ref: "#/components/schemas/SuccessResponse" },
+                                    {
+                                        type: "object",
+                                        properties: {
+                                            data: {
+                                                $ref: "#/components/schemas/Skill"
+                                            }
+                                        }
+                                    }
+                                ]
                             }
                         }
                     }
                 },
                 400: {
-                    description: "Validation error"
+                    $ref: "#/components/responses/BadRequest"
                 },
                 404: {
-                    description: "User not found"
+                    $ref: "#/components/responses/NotFound"
+                },
+                500: {
+                    $ref: "#/components/responses/InternalServerError"
                 }
             }
         },
@@ -64,16 +77,29 @@ export const skillPaths = {
                     content: {
                         "application/json": {
                             schema: {
-                                type: "array",
-                                items: {
-                                    $ref: "#/components/schemas/Skill"
-                                }
+                                allOf: [
+                                    { $ref: "#/components/schemas/SuccessResponse" },
+                                    {
+                                        type: "object",
+                                        properties: {
+                                            data: {
+                                                type: "array",
+                                                items: {
+                                                    $ref: "#/components/schemas/Skill"
+                                                }
+                                            }
+                                        }
+                                    }
+                                ]
                             }
                         }
                     }
                 },
                 404: {
-                    description: "User not found"
+                    $ref: "#/components/responses/NotFound"
+                },
+                500: {
+                    $ref: "#/components/responses/InternalServerError"
                 }
             }
         }

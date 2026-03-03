@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import contactService from "../services/contact.service";
 import { asyncHandler } from "../utils/asyncHanfler";
+import { sendResponse } from "../utils/response";
 
 /// Controller for contact-related operations
 const contactController = {
@@ -13,7 +14,7 @@ const contactController = {
     createContact: asyncHandler( async (req: Request, res: Response) => {
         const userId = Number(req.params.userId);
         const contact = await contactService.createContact({...req.body, userId: userId});
-        res.status(201).json(contact);
+        sendResponse(res, 201, "Contact created successfully", contact);
     }),
 
     /* 
@@ -24,7 +25,7 @@ const contactController = {
     getAllContactsByUserId: asyncHandler( async (req: Request, res: Response) => {
         const userId = Number(req.params.userId);
         const contacts = await contactService.getAllContactsByUserId(userId);
-        res.status(200).json(contacts);
+        sendResponse(res, 200, "Contacts retrieved successfully", contacts);
     }),
 
 };

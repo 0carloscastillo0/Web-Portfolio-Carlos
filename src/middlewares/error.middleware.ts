@@ -10,27 +10,28 @@ export const errorHandler = (
   next: NextFunction
 ) => {
 
-  // Custom application errors
+  let statusCode = 500;
+  let message = err.message;
+
+  // AppError instances (custom application errors)
   if (err instanceof AppError) {
-    return res.status(err.statusCode).json({
-      status: "error",
-      message: err.message,
-    });
+    statusCode = err.statusCode;
+    message = err.message;
   }
 
   // Multer errors (e.g., size limit)
-  if (err instanceof multer.MulterError) {
-    return res.status(400).json({
-      status: "error",
-      message: err.message,
-    });
+  else if (err instanceof multer.MulterError) {
+    statusCode = 400;
+    message = err.message;
   }
 
-  // Unknown error
-  console.error(err);
-
-  return res.status(500).json({
-    status: "error",
-    message: "Internal server error",
+  // Log only non-operational errors for debugging
+  if (!(err instanceof AppError)) {
+    console.error(err);
+  }
+  
+  return res.status(statusCode).json({
+    success: false,
+    message,
   });
 };

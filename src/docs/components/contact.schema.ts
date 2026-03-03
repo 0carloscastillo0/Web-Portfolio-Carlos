@@ -30,13 +30,16 @@ export const contactSchemas = {
         required: ["name", "icon", "url"],
         properties: {
             name: { 
-                type: "string" 
+                type: "string",
+                example: "LinkedIn" 
             },
             icon: { 
-                type: "string" 
+                type: "string",
+                example: "linkedin-icon"
             },
             url: { 
-                type: "string" 
+                type: "string",
+                example: "https://linkedin.com/in/usuario"
             }
         }
     }

@@ -30,16 +30,29 @@ export const educationPaths = {
                     content: {
                         "application/json": {
                             schema: {
-                                $ref: "#/components/schemas/Education"
+                                allOf: [
+                                    { $ref: "#/components/schemas/SuccessResponse" },
+                                    {
+                                        type: "object",
+                                        properties: {
+                                            data: {
+                                                $ref: "#/components/schemas/Education"
+                                            }
+                                        }
+                                    }
+                                ]
                             }
                         }
                     }
                 },
                 400: {
-                    description: "Validation error"
+                    $ref: "#/components/responses/BadRequest"
                 },
                 404: {
-                    description: "User not found"
+                    $ref: "#/components/responses/NotFound"
+                },
+                500: {
+                    $ref: "#/components/responses/InternalServerError"
                 }
             }
         },
@@ -61,17 +74,30 @@ export const educationPaths = {
                     description: "List of educations retrieved successfully",
                     content: {
                         "application/json": {
-                        schema: {
-                            type: "array",
-                            items: {
-                                $ref: "#/components/schemas/Education"
+                            schema: {
+                                allOf: [
+                                    { $ref: "#/components/schemas/SuccessResponse" },
+                                    {
+                                        type: "object",
+                                        properties: {
+                                            data: {
+                                                type: "array",
+                                                items: {
+                                                    $ref: "#/components/schemas/Education"
+                                                }
+                                            }
+                                        }
+                                    }
+                                ]
                             }
-                        }
                         }
                     }
                 },
                 404: {
-                    description: "User not found"
+                    $ref: "#/components/responses/NotFound"
+                },
+                500: {
+                    $ref: "#/components/responses/InternalServerError"
                 }
             }
         }

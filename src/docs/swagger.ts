@@ -5,6 +5,7 @@ import { projectSchemas } from "./components/project.schema";
 import { educationSchemas } from "./components/education.schema";
 import { contactSchemas } from "./components/contact.schema";
 import { skillSchemas } from "./components/skill.schema";
+import { commonResponses, commonSchema } from "./components/common.schema";
 
 import { userPaths } from "./paths/user.paths";
 import { projectPaths } from "./paths/project.paths";
@@ -26,8 +27,12 @@ const options: swaggerJsdoc.Options = {
         ...projectSchemas,
         ...educationSchemas,
         ...contactSchemas,
-        ...skillSchemas
-      }
+        ...skillSchemas,
+        ...commonSchema,
+      },
+      responses: {
+        ...commonResponses,
+      },
     },
     paths: {
       ...userPaths,

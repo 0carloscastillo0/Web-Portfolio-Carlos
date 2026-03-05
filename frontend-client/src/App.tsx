@@ -1,19 +1,16 @@
+import Header from "./layouts/Header"
+import Footer from "./layouts/Footer"
+
 function App() {
   return (
-    <div className="min-h-screen bg-slate-900 flex items-center justify-center">
-      <div className="text-center space-y-6">
-        <h1 className="text-5xl font-bold text-cyan-400">
-          Hello World 🚀
-        </h1>
+    <div className="min-h-screen flex flex-col bg-slate-950 text-slate-200">
+      <Header />
 
-        <p className="text-slate-300 text-lg">
-          Portfolio Fullstack with React + TypeScript + Tailwind
-        </p>
+      <main className="flex-grow">
+        {/* Contenido irá aquí */}
+      </main>
 
-        <button className="px-6 py-3 bg-cyan-500 hover:bg-cyan-600 transition-colors rounded-xl text-white font-semibold shadow-lg">
-          Start
-        </button>
-      </div>
+      <Footer />
     </div>
   )
 }

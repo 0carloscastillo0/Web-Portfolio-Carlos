@@ -9,6 +9,7 @@ import {
     ChevronRight,
     ChevronLeft
 } from "lucide-react"
+import { useTheme } from "../contexts/ThemeContext"
 
 function Header() {
 
@@ -20,7 +21,6 @@ function Header() {
     type Language = typeof languages[number]
 
     const themes = ["Dark", "Light"] as const
-    type Theme = typeof themes[number]
 
     type MobileView = "menu" | "language" | "theme"
 
@@ -32,9 +32,8 @@ function Header() {
     /* =====================================================
         STATE
     ===================================================== */
-
+    const { theme, setTheme } = useTheme()
     const [language, setLanguage] = useState<Language>("EN")
-    const [theme, setTheme] = useState<Theme>("Dark")
 
     const [openLang, setOpenLang] = useState(false)
     const [openTheme, setOpenTheme] = useState(false)
@@ -72,9 +71,8 @@ function Header() {
         HANDLERS
     ===================================================== */
 
-    const changeTheme = (selected: Theme) => {
+    const changeTheme = (selected: "Dark" | "Light") => {
         setTheme(selected)
-        document.documentElement.classList.toggle("dark", selected === "Dark")
         setOpenTheme(false)
     }
 
@@ -88,8 +86,8 @@ function Header() {
     ===================================================== */
 
     return (
-        <header className="w-full border-b border-slate-800 bg-slate-950 text-slate-200 relative">
-
+        <header className="border-b border-soft surface-primary">
+              
             {/* ================= CONTAINER ================= */}
             <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
 
@@ -99,7 +97,7 @@ function Header() {
                 <div className="hidden md:flex w-full items-center justify-between">
 
                     {/* -------- LEFT: SITE TITLE -------- */}
-                    <h1 className="text-xl font-bold text-cyan-400">
+                    <h1 className="text-xl font-bold text-accent">
                         Castillo Sites
                     </h1>
 
@@ -108,12 +106,12 @@ function Header() {
 
                         {/* ===== NAVIGATION MENU ===== */}
                         <nav className="flex space-x-6 text-sm font-medium">
-                            <a href="#home" className="hover:text-cyan-400 transition">Home</a>
-                            <a href="#about" className="hover:text-cyan-400 transition">About Me</a>
-                            <a href="#projects" className="hover:text-cyan-400 transition">Projects</a>
+                            <a href="#home" className="hover:text-accent transition">Home</a>
+                            <a href="#about" className="hover:text-accent transition">About Me</a>
+                            <a href="#projects" className="hover:text-accent transition">Projects</a>
                         </nav>
 
-                        <div className="h-6 w-px bg-slate-700" />
+                        <div className="h-6 w-px bg-[var(--border-primary)]" />
 
                         {/* ===== LANGUAGE + THEME ===== */}
                         <div className="flex items-center space-x-3">
@@ -122,7 +120,7 @@ function Header() {
                             <div className="relative" ref={langRef}>
                                 <button
                                     onClick={() => setOpenLang(!openLang)}
-                                    className="flex items-center space-x-2 text-sm px-3 py-2 border border-slate-700 rounded-xl hover:bg-slate-800 transition"
+                                    className="flex items-center space-x-2 text-sm px-3 py-2 border border-button rounded-xl hover:bg-secondary transition"
                                 >
                                     <Globe size={16} />
                                     <span>{language}</span>
@@ -130,12 +128,12 @@ function Header() {
                                 </button>
 
                                 {openLang && (
-                                <div className="absolute right-0 mt-2 w-28 bg-slate-900 border border-slate-700 rounded-xl shadow-lg">
+                                <div className="absolute right-0 mt-2 w-28 surface-primary border border-soft rounded-xl shadow-lg">
                                     {languages.map((lang) => (
                                     <button
                                         key={lang}
                                         onClick={() => changeLanguage(lang)}
-                                        className="block w-full text-left px-4 py-2 hover:bg-slate-800 text-sm"
+                                        className="block w-full text-left px-4 py-2 hover:bg-secondary text-sm"
                                     >
                                         {languageLabels[lang]}
                                     </button>
@@ -148,7 +146,7 @@ function Header() {
                             <div className="relative" ref={themeRef}>
                                 <button
                                     onClick={() => setOpenTheme(!openTheme)}
-                                    className="flex items-center space-x-2 text-sm px-3 py-2 border border-slate-700 rounded-xl hover:bg-slate-800 transition"
+                                    className="flex items-center space-x-2 text-sm px-3 py-2 border border-button rounded-xl hover:bg-secondary transition"
                                 >
                                     {theme === "Dark" ? <Moon size={16} /> : <Sun size={16} />}
                                     <span>{theme}</span>
@@ -156,12 +154,12 @@ function Header() {
                                 </button>
 
                                 {openTheme && (
-                                <div className="absolute right-0 mt-2 w-28 bg-slate-900 border border-slate-700 rounded-xl shadow-lg">
+                                <div className="absolute right-0 mt-2 w-28 surface-primary border border-soft rounded-xl shadow-lg">
                                     {themes.map((mode) => (
                                     <button
                                         key={mode}
                                         onClick={() => changeTheme(mode)}
-                                        className="block w-full text-left px-4 py-2 hover:bg-slate-800 text-sm"
+                                        className="block w-full text-left px-4 py-2 hover:bg-secondary text-sm"
                                     >
                                         {mode}
                                     </button>
@@ -173,7 +171,7 @@ function Header() {
                         </div>
 
                         {/* ===== DOWNLOAD CV BUTTON ===== */}
-                        <button className="px-5 py-2 bg-cyan-500 hover:bg-cyan-600 transition rounded-xl text-sm font-semibold text-white shadow-lg">
+                        <button className="px-5 py-2 bg-accent bg-accent-hover transition rounded-xl text-sm font-semibold text-white shadow-lg">
                             Download CV
                         </button>
 
@@ -187,7 +185,7 @@ function Header() {
 
                     <div className="w-8" /> {/* spacer */}
 
-                    <h1 className="text-lg font-bold text-cyan-400 text-center">
+                    <h1 className="text-lg font-bold text-accent text-center">
                         Castillo Sites
                     </h1>
 
@@ -201,17 +199,17 @@ function Header() {
                 MOBILE DROPDOWN MENU
             ===================================================== */}
             {mobileMenuOpen && (
-                <div className="md:hidden bg-slate-900 border-t border-slate-800">
+                <div className="md:hidden bg-primary border-t border-secondary">
                     <div className="px-6 py-6 space-y-4">
 
                         {/* ================= MAIN MOBILE MENU ================= */}
                         {mobileView === "menu" && (
                         <>
-                            <a className="block text-sm hover:text-cyan-400">Home</a>
-                            <a className="block text-sm hover:text-cyan-400">About Me</a>
-                            <a className="block text-sm hover:text-cyan-400">Projects</a>
+                            <a className="block text-sm hover:text-accent">Home</a>
+                            <a className="block text-sm hover:text-accent">About Me</a>
+                            <a className="block text-sm hover:text-accent">Projects</a>
 
-                            <button className="mx-auto block px-4 py-2 bg-cyan-500 hover:bg-cyan-600 transition rounded-lg text-sm font-semibold text-white">
+                            <button className="mx-auto block px-4 py-2 bg-accent hover:bg-accent-hover transition rounded-lg text-sm font-semibold text-white">
                                 Download CV
                             </button>
 
@@ -222,7 +220,7 @@ function Header() {
                             >
                                 <span className="flex items-center space-x-2">
                                     <span>🌐</span>
-                                    <span className="text-slate-400">
+                                    <span className="opacity-70">
                                         {languageLabels[language]}
                                     </span>
                                 </span>
@@ -236,7 +234,7 @@ function Header() {
                             >
                                 <span className="flex items-center space-x-2">
                                     {theme === "Dark" ? <Moon size={16} /> : <Sun size={16} />}
-                                    <span className="text-slate-400">{theme}</span>
+                                    <span className="opacity-70">{theme}</span>
                                 </span>
                                 <ChevronRight size={16} />
                             </button>
@@ -264,8 +262,8 @@ function Header() {
                                         }}
                                         className={`block w-full text-left text-sm px-3 py-2 rounded-lg ${
                                             language === lang
-                                            ? "bg-cyan-500 text-white"
-                                            : "hover:bg-slate-800"
+                                            ? "bg-accent text-white"
+                                            : "hover:bg-secondary"
                                         }`}
                                         >
                                         {languageLabels[lang]}
@@ -296,8 +294,8 @@ function Header() {
                                         }}
                                         className={`block w-full text-left text-sm px-3 py-2 rounded-lg ${
                                             theme === mode
-                                            ? "bg-cyan-500 text-white"
-                                            : "hover:bg-slate-800"
+                                            ? "bg-accent text-white"
+                                            : "hover:bg-secondary"
                                         }`}
                                         >
                                         {mode}

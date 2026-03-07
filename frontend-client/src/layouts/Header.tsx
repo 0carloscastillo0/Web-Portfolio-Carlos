@@ -10,6 +10,10 @@ import {
     ChevronLeft
 } from "lucide-react"
 import { useTheme } from "../contexts/ThemeContext"
+import { useLanguage } from "../contexts/LanguageContext"
+import { useTranslation } from "../hooks/useTranslation"
+import { translations } from "../i18n/index"
+import type { Language } from "../i18n/index"
 
 function Header() {
 
@@ -17,23 +21,20 @@ function Header() {
         TYPES & CONSTANTS
     ===================================================== */
 
-    const languages = ["EN", "ES"] as const
-    type Language = typeof languages[number]
+    const languages = Object.keys(translations) as Language[]
 
     const themes = ["Dark", "Light"] as const
+    type Theme = typeof themes[number]
 
     type MobileView = "menu" | "language" | "theme"
 
-    const languageLabels: Record<Language, string> = {
-        EN: "English",
-        ES: "Español"
-    }
+    const { language, setLanguage } = useLanguage()
+    const { t } = useTranslation()
 
     /* =====================================================
         STATE
     ===================================================== */
     const { theme, setTheme } = useTheme()
-    const [language, setLanguage] = useState<Language>("EN")
 
     const [openLang, setOpenLang] = useState(false)
     const [openTheme, setOpenTheme] = useState(false)
@@ -71,7 +72,7 @@ function Header() {
         HANDLERS
     ===================================================== */
 
-    const changeTheme = (selected: "Dark" | "Light") => {
+    const changeTheme = (selected: Theme) => {
         setTheme(selected)
         setOpenTheme(false)
     }
@@ -106,9 +107,9 @@ function Header() {
 
                         {/* ===== NAVIGATION MENU ===== */}
                         <nav className="flex space-x-6 text-sm font-medium">
-                            <a href="#home" className="hover:text-accent transition">Home</a>
-                            <a href="#about" className="hover:text-accent transition">About Me</a>
-                            <a href="#projects" className="hover:text-accent transition">Projects</a>
+                            <a href="#home" className="hover:text-accent transition">{t("nav.home")}</a>
+                            <a href="#about" className="hover:text-accent transition">{t("nav.about")}</a>
+                            <a href="#projects" className="hover:text-accent transition">{t("nav.projects")}</a>
                         </nav>
 
                         <div className="h-6 w-px bg-[var(--border-primary)]" />
@@ -135,7 +136,7 @@ function Header() {
                                         onClick={() => changeLanguage(lang)}
                                         className="block w-full text-left px-4 py-2 hover:bg-secondary text-sm"
                                     >
-                                        {languageLabels[lang]}
+                                        {t(`language.${lang}`)}
                                     </button>
                                     ))}
                                 </div>
@@ -149,7 +150,7 @@ function Header() {
                                     className="flex items-center space-x-2 text-sm px-3 py-2 border border-button rounded-xl hover:bg-secondary transition"
                                 >
                                     {theme === "Dark" ? <Moon size={16} /> : <Sun size={16} />}
-                                    <span>{theme}</span>
+                                    <span>{t(`theme.${theme}`)}</span>
                                     <ChevronDown size={14} />
                                 </button>
 
@@ -161,7 +162,7 @@ function Header() {
                                         onClick={() => changeTheme(mode)}
                                         className="block w-full text-left px-4 py-2 hover:bg-secondary text-sm"
                                     >
-                                        {mode}
+                                        {t(`theme.${mode}`)}
                                     </button>
                                     ))}
                                 </div>
@@ -172,7 +173,7 @@ function Header() {
 
                         {/* ===== DOWNLOAD CV BUTTON ===== */}
                         <button className="px-5 py-2 bg-accent bg-accent-hover transition rounded-xl text-sm font-semibold text-white shadow-lg">
-                            Download CV
+                            {t("header.downloadCV")}
                         </button>
 
                     </div>
@@ -205,12 +206,12 @@ function Header() {
                         {/* ================= MAIN MOBILE MENU ================= */}
                         {mobileView === "menu" && (
                         <>
-                            <a className="block text-sm hover:text-accent">Home</a>
-                            <a className="block text-sm hover:text-accent">About Me</a>
-                            <a className="block text-sm hover:text-accent">Projects</a>
+                            <a className="block text-sm hover:text-accent">{t("nav.home")}</a>
+                            <a className="block text-sm hover:text-accent">{t("nav.about")}</a>
+                            <a className="block text-sm hover:text-accent">{t("nav.projects")}</a>
 
                             <button className="mx-auto block px-4 py-2 bg-accent hover:bg-accent-hover transition rounded-lg text-sm font-semibold text-white">
-                                Download CV
+                                {t("header.downloadCV")}
                             </button>
 
                             {/* LANGUAGE ENTRY */}
@@ -219,9 +220,9 @@ function Header() {
                                 className="flex items-center justify-between w-full text-sm py-2"
                             >
                                 <span className="flex items-center space-x-2">
-                                    <span>🌐</span>
+                                    <Globe size={16} />
                                     <span className="opacity-70">
-                                        {languageLabels[language]}
+                                        {t(`language.${language}`)}
                                     </span>
                                 </span>
                                 <ChevronRight size={16} />
@@ -234,7 +235,7 @@ function Header() {
                             >
                                 <span className="flex items-center space-x-2">
                                     {theme === "Dark" ? <Moon size={16} /> : <Sun size={16} />}
-                                    <span className="opacity-70">{theme}</span>
+                                    <span className="opacity-70">{t(`theme.${theme}`)}</span>
                                 </span>
                                 <ChevronRight size={16} />
                             </button>
@@ -249,7 +250,7 @@ function Header() {
                                 className="flex items-center space-x-2 text-sm font-semibold"
                             >
                                 <ChevronLeft size={16} />
-                                <span>Language</span>
+                                <span>{t("header.language")}</span>
                             </button>
 
                             <div className="pt-4 space-y-3">
@@ -266,7 +267,7 @@ function Header() {
                                             : "hover:bg-secondary"
                                         }`}
                                         >
-                                        {languageLabels[lang]}
+                                        {t(`language.${lang}`)}
                                     </button>
                                 ))}
                             </div>
@@ -281,7 +282,7 @@ function Header() {
                                 className="flex items-center space-x-2 text-sm font-semibold"
                             >
                                 <ChevronLeft size={16} />
-                                <span>Theme</span>
+                                <span>{t("header.theme")}</span>
                             </button>
 
                             <div className="pt-4 space-y-3">
@@ -298,7 +299,7 @@ function Header() {
                                             : "hover:bg-secondary"
                                         }`}
                                         >
-                                        {mode}
+                                        {t(`theme.${mode}`)}
                                     </button>
                                 ))}
                             </div>

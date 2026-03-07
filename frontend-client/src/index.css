@@ -3,6 +3,10 @@
 /* ===============================
    GLOBAL STYLES
 ================================ */
+html{
+  scroll-behavior: smooth;
+}
+
 button {
   cursor: pointer;
 }
@@ -55,12 +59,20 @@ button {
   background-color: var(--color-bg-primary);
 }
 
+.surface-secondary {
+  background-color: var(--color-bg-secondary);
+}
+
 .bg-secondary {
   background-color: var(--color-bg-secondary);
 }
 
-.text-text {
+.text-primary {
   color: var(--color-text-primary);
+}
+
+.text-secondary {
+  color: var(--color-text-secondary);
 }
 
 .text-muted {

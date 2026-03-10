@@ -21,6 +21,11 @@ function Header() {
     /* =====================================================
         TYPES & CONSTANTS
     ===================================================== */
+    const sections = [
+        { id: "home", label: "nav.home" },
+        { id: "about", label: "nav.about" },
+        { id: "projects", label: "nav.projects" }
+    ]
 
     const languages = Object.keys(translations) as Language[]
 
@@ -238,42 +243,23 @@ function Header() {
 
                             {/* ===== NAVIGATION MENU ===== */}
                             <nav className="flex space-x-6 text-sm font-medium">
-                                <button
-                                    onClick={() => scrollToSection("home")}
-                                    className={`relative pb-1 transition ${
-                                        activeSection === "home" ? "text-accent" : "hover:text-accent"
-                                    }`}
+                                {sections.map((section) => (
+                                    <button
+                                        key={section.id}
+                                        onClick={() => scrollToSection(section.id)}
+                                        className={`relative pb-1 transition ${
+                                            activeSection === section.id
+                                                ? "text-accent"
+                                                : "hover:text-accent"
+                                        }`}
                                     >
-                                    {t("nav.home")}
+                                        {t(section.label)}
 
-                                    {activeSection === "home" && (
-                                        <span className="absolute left-0 -bottom-1 w-full h-[2px] bg-accent rounded-full"></span>
-                                    )}
-                                </button>
-                                <button
-                                    onClick={() => scrollToSection("about")}
-                                    className={`relative pb-1 transition ${
-                                        activeSection === "about" ? "text-accent" : "hover:text-accent"
-                                    }`}
-                                    >
-                                    {t("nav.about")}
-
-                                    {activeSection === "about" && (
-                                        <span className="absolute left-0 -bottom-1 w-full h-[2px] bg-accent rounded-full"></span>
-                                    )}
-                                </button>
-                                <button
-                                    onClick={() => scrollToSection("projects")}
-                                    className={`relative pb-1 transition ${
-                                        activeSection === "projects" ? "text-accent" : "hover:text-accent"
-                                    }`}
-                                    >
-                                    {t("nav.projects")}
-
-                                    {activeSection === "projects" && (
-                                        <span className="absolute left-0 -bottom-1 w-full h-[2px] bg-accent rounded-full"></span>
-                                    )}
-                                </button>
+                                        {activeSection === section.id && (
+                                            <span className="absolute left-0 -bottom-1 w-full h-[2px] bg-accent rounded-full"></span>
+                                        )}
+                                    </button>
+                                ))}
                             </nav>
 
                             <div className="h-6 w-px border border-soft" />
@@ -386,30 +372,19 @@ function Header() {
                             {/* ================= MAIN MOBILE MENU ================= */}
                             {mobileView === "menu" && (
                             <>
-                                <button
-                                    onClick={() => scrollToSection("home")}
-                                    className={`block text-sm font-medium text-text py-1 ${
-                                        activeSection === "home" ? "text-accent" : "hover:text-accent"
-                                    }`}
-                                >
-                                    {t("nav.home")}
-                                </button>
-                                <button
-                                    onClick={() => scrollToSection("about")}
-                                    className={`block text-sm font-medium text-text py-1 ${
-                                        activeSection === "about" ? "text-accent" : "hover:text-accent"
-                                    }`}
-                                >
-                                    {t("nav.about")}
-                                </button>
-                                <button
-                                    onClick={() => scrollToSection("projects")}
-                                    className={`block text-sm font-medium text-text py-1 ${
-                                        activeSection === "projects" ? "text-accent" : "hover:text-accent"
-                                    }`}
-                                >
-                                    {t("nav.projects")}
-                                </button>
+                                {sections.map((section) => (
+                                    <button
+                                        key={section.id}
+                                        onClick={() => scrollToSection(section.id)}
+                                        className={`block text-sm font-medium text-text py-1 ${
+                                            activeSection === section.id
+                                                ? "text-accent"
+                                                : "hover:text-accent"
+                                        }`}
+                                    >
+                                        {t(section.label)}
+                                    </button>
+                                ))}
 
                                 <button className="mx-auto block px-4 py-2 bg-accent hover:bg-accent-hover transition rounded-lg text-sm font-semibold text-white">
                                     {t("header.downloadCV")}

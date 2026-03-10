@@ -94,6 +94,10 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
         updateURLLanguage(language)
     }, [language])
 
+    useEffect(() => {
+        document.documentElement.lang = language.toLowerCase()
+    }, [language])
+
     return (
         <LanguageContext.Provider value={{ language, setLanguage }}>
         {children}

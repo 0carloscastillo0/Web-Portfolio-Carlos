@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react"
+import { useNavigate, useParams } from "react-router-dom"
 import {
     Globe,
     Sun,
@@ -31,6 +32,14 @@ function Header() {
     const { language, setLanguage } = useLanguage()
     const { t } = useTranslation()
 
+    const navigate = useNavigate()
+    const { lang } = useParams()
+
+    const isScrollingProgrammatically = useRef(false)
+    const currentLangRef = useRef(language)
+
+    const { section } = useParams()
+
     /* =====================================================
         STATE
     ===================================================== */
@@ -57,6 +66,10 @@ function Header() {
     /* =====================================================
         EFFECTS
     ===================================================== */
+    useEffect(() => {
+        if (!section) return
+        setActiveSection(section)
+    }, [section])
 
     // Close dropdowns when clicking outside
     useEffect(() => {
@@ -110,20 +123,37 @@ function Header() {
     }, [mobileMenuOpen])
 
     useEffect(() => {
-
-        const sections = document.querySelectorAll("section")
+        const sections = document.querySelectorAll("section[id]")
 
         const observer = new IntersectionObserver(
             (entries) => {
+
+                let mostVisibleSection = null
+                let highestRatio = 0
+
                 entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        setActiveSection(entry.target.id)
-                        window.history.replaceState(null, "", `#${entry.target.id}`)
+                    if (entry.intersectionRatio > highestRatio){
+                        highestRatio = entry.intersectionRatio
+                        mostVisibleSection = entry
                     }
                 })
+
+                if (!mostVisibleSection) return 
+                    
+                const id = mostVisibleSection.target.id
+                setActiveSection(prev => prev === id ? prev : id)
+
+                if(isScrollingProgrammatically.current) return
+
+                const currentLang = currentLangRef.current.toLowerCase()
+                const newPath = `/${currentLang}/${id}`
+
+                if (window.location.pathname !== newPath){
+                    navigate(newPath, { replace: true })
+                }
             },
             {
-            threshold: 0.6
+                threshold: [0.25, 0.5, 0.75]
             }
         )
 
@@ -131,7 +161,11 @@ function Header() {
 
         return () => observer.disconnect()
 
-    }, [])
+    }, [navigate])
+
+    useEffect(() => {
+        currentLangRef.current = language
+    }, [language])
     
 
     /* =====================================================
@@ -145,18 +179,32 @@ function Header() {
 
     const changeLanguage = (selected: Language) => {
         setLanguage(selected)
+        const currentSection = activeSection || "home"
+        navigate(`/${selected.toLowerCase()}/${currentSection}`)
         setOpenLang(false)
     }
 
     const scrollToSection = (id: string) => {
+        const currentLang = lang?.toLowerCase() || language.toLowerCase()
+        const newPath = `/${currentLang}/${id}`
+
+        if(window.location.pathname !== newPath){
+            navigate(newPath)
+        }
+        
         const element = document.getElementById(id)
         if (element) {
+            isScrollingProgrammatically.current = true
+
             element.scrollIntoView({
-            behavior: "smooth"
+                behavior: "smooth"
             })
 
-            window.history.replaceState(null, "", `#${id}`)
+            setTimeout(() => {
+                isScrollingProgrammatically.current = false
+            }, 600)
         }
+
         setMobileMenuOpen(false)
     }
 

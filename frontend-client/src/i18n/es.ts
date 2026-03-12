@@ -23,7 +23,11 @@ const es = {
 
   footer: {
     rights: "Todos los derechos reservados.",
-  }
+  },
+
+  home: {
+    greeting: "Hola, soy"
+  },
 }
 
 export default es

@@ -8,34 +8,28 @@ import Home from "./sections/Home"
 import About from "./sections/About"
 import Projects from "./sections/Projects"
 
-function RouteScrollHandler(){
+import { PortfolioProvider } from "./contexts/PortfolioProvider"
 
+function PortfolioPage() {
   const { section } = useParams()
 
   useEffect(() => {
 
     if (!section) return
-    
-    const element = document.getElementById(section.toLowerCase())
-    if (element){
-      setTimeout(() => {
-        element.scrollIntoView({
-          behavior: "auto"
-        })
-      }, 50)
+
+    const element = document.getElementById(section)
+
+    if (element) {
+      element.scrollIntoView({
+        behavior: "auto",
+        block: "start"
+      })
     }
 
-  }, [section])
+  }, [])
 
-  return null
-
-}
-
-function PortfolioPage() {
   return (
     <>
-      <RouteScrollHandler />
-
       <Home />
       <About />
       <Projects />
@@ -49,17 +43,19 @@ function App() {
 
       <Header />
 
-      <main className="flex-1">
+      <main className="flex-1 px-6 lg:px-12">
 
-        <Routes>
-          
-          <Route path="/" element={<Navigate to="/en/home" replace />} />
+        <PortfolioProvider>
+          <Routes>
+            
+            <Route path="/" element={<Navigate to="/en/home" replace />} />
 
-          <Route path="/:lang/:section" element={<PortfolioPage />} />
+            <Route path="/:lang/:section" element={<PortfolioPage />} />
 
-          <Route path="/:lang" element={<PortfolioPage />} />
+            <Route path="/:lang" element={<PortfolioPage />} />
 
-        </Routes>
+          </Routes>
+        </PortfolioProvider>
 
       </main>
 

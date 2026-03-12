@@ -158,7 +158,7 @@ function Header() {
                 }
             },
             {
-                threshold: [0.25, 0.5, 0.75]
+                threshold: 0.6
             }
         )
 
@@ -202,7 +202,9 @@ function Header() {
             isScrollingProgrammatically.current = true
 
             element.scrollIntoView({
-                behavior: "smooth"
+                behavior: "smooth",
+                block: "start",
+                inline: "nearest"
             })
 
             setTimeout(() => {

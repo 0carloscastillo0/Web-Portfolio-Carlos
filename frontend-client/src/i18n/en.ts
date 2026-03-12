@@ -24,6 +24,10 @@ const en = {
   footer: {
     rights: "All rights reserved.",
   },
+
+  home: {
+    greeting: "Hi, I am"
+  },
 }
 
 export default en

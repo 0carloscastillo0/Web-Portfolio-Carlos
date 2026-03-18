@@ -14,7 +14,7 @@ function Home() {
   return (
     <section
       id="home"
-      className="min-h-[calc(100vh-80px)] scroll-mt-24 flex items-center"
+      className="min-h-[calc(100vh-80px)] flex items-center"
     >
       <div className="max-w-6xl mx-auto w-full px-6">
 

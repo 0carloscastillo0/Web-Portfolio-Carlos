@@ -122,11 +122,12 @@ function AboutModal({ children, onClose }: Props) {
         className={`
           relative
           w-full md:max-w-3xl
-          h-[90vh] md:h-auto
+          h-[85vh] md:h-auto md:max-h-[90vh]
           surface-primary
           border border-soft
           shadow-2xl
           flex flex-col
+          overflow-hidden
           transition-all duration-300
 
           ${isMobile ? "rounded-t-2xl" : "rounded-2xl"}

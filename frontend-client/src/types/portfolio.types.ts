@@ -4,6 +4,7 @@ export type Profile = {
   role: string
   location: string
   photo: string
+  description: string
 }
 
 export type Contact = {
@@ -13,7 +14,25 @@ export type Contact = {
   icon: string
 }
 
+export type Skill = {
+  id: string
+  name: string
+  category: string
+  icon: string
+}
+
+export type Education = {
+  id: string
+  place: string
+  name: string
+  description: string
+  startDate: string
+  endDate: string
+}
+
 export type PortfolioData = {
   profile: Profile | null
+  skills: Skill[]
   contacts: Contact[]
+  educations: Education[]
 }

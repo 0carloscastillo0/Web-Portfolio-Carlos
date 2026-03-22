@@ -5,5 +5,6 @@ export const fallbackProfile: Profile = {
   name: "Name Lastname",
   role: "Role",
   location: "City, Country",
-  photo: "/profile.jpg"
+  photo: "/profile.jpg",
+  description: "this is my description"
 }

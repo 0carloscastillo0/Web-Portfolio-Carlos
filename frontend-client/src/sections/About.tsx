@@ -1,6 +1,6 @@
 import { useState } from "react"
-import AboutCard from "../components/AboutCard"
-import AboutModal from "../components/AboutModal"
+import AboutCard from "../components/Card"
+import AboutModal from "../components/Modal"
 
 import DescriptionContent from "../content/DescriptionContent"
 import SkillsContent from "../content/SkillsContent"

@@ -9,6 +9,8 @@ type PortfolioContextType = PortfolioData & {
 export const PortfolioContext = createContext<PortfolioContextType>({
   profile: null,
   contacts: [],
+  skills: [],
+  educations: [],
   loading: true,
   error: null
 })

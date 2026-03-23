@@ -11,6 +11,7 @@ export const PortfolioContext = createContext<PortfolioContextType>({
   contacts: [],
   skills: [],
   educations: [],
+  projects: [],
   loading: true,
   error: null
 })

@@ -30,9 +30,26 @@ export type Education = {
   endDate: string
 }
 
+export type Project = {
+  id: string
+  title: string
+  description: string
+  startDate: string
+  endDate: string
+  skills: Skill[]
+  coverImage: string
+}
+
+export type ProjectImage = {
+  id: string
+  url: string
+  order: number
+}
+
 export type PortfolioData = {
   profile: Profile | null
   skills: Skill[]
   contacts: Contact[]
   educations: Education[]
+  projects: Project[]
 }

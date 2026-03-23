@@ -1,6 +1,6 @@
 import { useState } from "react"
-import AboutCard from "../components/Card"
-import AboutModal from "../components/Modal"
+import AboutCard from "../components/AboutCard"
+import Modal from "../components/Modal"
 
 import DescriptionContent from "../content/DescriptionContent"
 import SkillsContent from "../content/SkillsContent"
@@ -50,11 +50,11 @@ function About() {
 
       {/* MODAL */}
       {activeModal && (
-        <AboutModal onClose={() => setActiveModal(null)}>
+        <Modal onClose={() => setActiveModal(null)}>
           {activeModal === "description" && <DescriptionContent />}
           {activeModal === "skills" && <SkillsContent />}
           {activeModal === "education" && <EducationContent />}
-        </AboutModal>
+        </Modal>
       )}
     </section>
   )

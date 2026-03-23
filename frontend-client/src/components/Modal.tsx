@@ -6,7 +6,7 @@ type Props = {
   onClose: () => void
 }
 
-function AboutModal({ children, onClose }: Props) {
+function Modal({ children, onClose }: Props) {
   const sheetRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
 
@@ -173,4 +173,4 @@ function AboutModal({ children, onClose }: Props) {
   )
 }
 
-export default AboutModal
+export default Modal

@@ -1,9 +1,9 @@
-import Header from "./layouts/Header"
-import Footer from "./layouts/Footer"
+import Header from "./views/layouts/header/Header"
+import Footer from "./views/layouts/footer/Footer"
 
-import Home from "./sections/Home"
-import About from "./sections/About"
-import Projects from "./sections/Projects"
+import Home from "./views/sections/home/Home"
+import About from "./views/sections/about/About"
+import Projects from "./views/sections/projects/Projects"
 
 import { PortfolioProvider } from "./contexts/PortfolioProvider"
 

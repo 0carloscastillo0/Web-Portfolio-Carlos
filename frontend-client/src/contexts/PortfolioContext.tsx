@@ -1,5 +1,5 @@
 import { createContext } from "react"
-import type { PortfolioData } from "../types/portfolio.types"
+import type { PortfolioData } from "../modules/portfolio.interface"
 
 type PortfolioContextType = PortfolioData & {
   loading: boolean

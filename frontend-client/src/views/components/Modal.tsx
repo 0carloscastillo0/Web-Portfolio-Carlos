@@ -121,7 +121,7 @@ function Modal({ children, onClose }: Props) {
         onClick={(e) => e.stopPropagation()}
         className={`
           relative
-          w-full md:max-w-3xl
+          w-full md:w-[90%] md:max-w-6xl
           h-[85vh] md:h-auto md:max-h-[90vh]
           surface-primary
           border border-soft

@@ -28,6 +28,19 @@ const es = {
   home: {
     greeting: "Hola, soy"
   },
+
+  about: {
+    title: "Sobre mí",
+    subtitle: "Conozca más sobre mis áreas de interés, herramientas y formación académica.",
+    description: "Descripción",
+    skills: "Habilidades técnicas",
+    education: "Educación",
+  },
+
+  projects: {
+    title: "Proyectos",
+    subtitle: "Aquí encontrarás mis trabajos personales y los proyectos en los que he colaborado."
+  }
 }
 
 export default es

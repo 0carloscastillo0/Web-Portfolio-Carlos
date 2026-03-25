@@ -1,8 +1,10 @@
 import { usePortfolio } from "@/hooks/usePortfolio"
+import { useTranslation } from "@/hooks/useTranslation"
 import { skillIconMap } from "@/utils/ToolsIconMap"
 import type { Skill } from "@/modules/portfolio.interface"
 
 function SkillsContent() {
+  const { t } = useTranslation()
   const { skills, loading } = usePortfolio()
 
   if (loading) {
@@ -23,7 +25,7 @@ function SkillsContent() {
 
       {/* ================= TITLE ================= */}
       <h3 className="text-subtitle text-accent font-bold text-center md:text-left">
-        Skills
+        {t("about.skills")}
       </h3>
 
       {/* ================= GROUPS ================= */}
@@ -64,7 +66,7 @@ function SkillsContent() {
                     )}
 
                     {/* NAME */}
-                    <span className="text-small mt-2 text-center">
+                    <span className="text-body mt-2 text-center">
                       {skill.name}
                     </span>
                   </div>

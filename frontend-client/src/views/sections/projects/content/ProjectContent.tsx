@@ -58,7 +58,7 @@ function ProjectContent({ projectId }: Props) {
       <ProjectCarousel images={images} />
 
       {/* DESCRIPTION */}
-      <p className="text-secondary leading-relaxed">
+      <p className="text-body text-secondary leading-relaxed">
         {project.description}
       </p>
 

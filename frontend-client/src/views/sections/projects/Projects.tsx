@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { useTranslation } from "@/hooks/useTranslation"
 import { getProjects } from "@/modules/project/project.service"
 
 import Modal from "@/views/components/Modal"
@@ -7,6 +8,8 @@ import ProjectCard from "./components/ProjectCard"
 import ProjectContent from "./content/ProjectContent"
 
 function Projects() {
+  const { t } = useTranslation()
+  
   const [projects, setProjects] = useState<any[]>([])
   const [selected, setSelected] = useState<string | null>(null)
 
@@ -16,16 +19,16 @@ function Projects() {
 
   return (
     <section id="projects" className="min-h-screen flex flex-col">
-      <div className="max-w-6xl mx-auto w-full px-6 py-16">
+      <div className="max-w-7xl mx-auto w-full py-16">
 
         {/* HEADER */}
         <div className="text-center mb-16">
           <h2 className="text-3xl font-bold">
-            Projects
+            {t("projects.title")}
           </h2>
 
-          <p className="mt-4 max-w-2xl mx-auto text-secondary">
-            Here you will showcase your work and personal projects.
+          <p className="mt-4 max-w-2xl mx-auto text-body text-secondary">
+            {t("projects.subtitle")}
           </p>
         </div>
 

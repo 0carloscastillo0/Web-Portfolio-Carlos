@@ -51,7 +51,7 @@ function MobileMenu({
                     <button
                         key={section.id}
                         onClick={() => onNavigate(section.id)}
-                        className={`block text-sm font-medium py-1 ${
+                        className={`block text-body font-medium py-1 ${
                             activeSection === section.id
                                 ? "text-accent"
                                 : "hover:text-accent"
@@ -61,7 +61,7 @@ function MobileMenu({
                     </button>
                 ))}
 
-                <button className="mx-auto block px-4 py-2 bg-accent hover:bg-accent-hover transition rounded-lg text-sm font-semibold text-white">
+                <button className="mx-auto block px-4 py-2 bg-accent hover:bg-accent-hover transition rounded-lg text-body font-semibold text-white">
                     {t("header.downloadCV")}
                 </button>
 
@@ -98,7 +98,7 @@ function MobileMenu({
             <>
                 <button
                     onClick={() => setMobileView("menu")}
-                    className="flex items-center space-x-2 text-sm font-semibold"
+                    className="flex items-center space-x-2 text-body font-semibold"
                 >
                     <ChevronLeft size={16} />
                     <span>{t("header.language")}</span>
@@ -130,7 +130,7 @@ function MobileMenu({
             <>
                 <button
                     onClick={() => setMobileView("menu")}
-                    className="flex items-center space-x-2 text-sm font-semibold"
+                    className="flex items-center space-x-2 text-body font-semibold"
                 >
                     <ChevronLeft size={16} />
                     <span>{t("header.theme")}</span>

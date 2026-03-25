@@ -1,6 +1,8 @@
 import { usePortfolio } from "@/hooks/usePortfolio"
+import { useTranslation } from "@/hooks/useTranslation"
 
 function EducationContent() {
+  const { t } = useTranslation()
   const { educations, loading } = usePortfolio()
 
   if (loading) {
@@ -20,7 +22,7 @@ function EducationContent() {
 
       {/* ================= TITLE ================= */}
       <h3 className="text-subtitle text-accent font-bold text-center md:text-left">
-        Education
+        {t("about.education")}
       </h3>
 
       {/* ================= LIST ================= */}
@@ -39,22 +41,22 @@ function EducationContent() {
             <div className="hidden md:grid grid-cols-[1fr_2fr_1fr] items-start gap-4">
 
               {/* PLACE */}
-              <div className="text-primary font-semibold">
+              <div className="text-body text-primary font-semibold">
                 {edu.place}
               </div>
 
               {/* CENTER */}
               <div className="space-y-1">
-                <p className="text-primary font-semibold">
+                <p className="text-body text-primary font-semibold">
                   {edu.name}
                 </p>
-                <p className="text-secondary text-small">
+                <p className="text-secondary text-body">
                   {edu.description}
                 </p>
               </div>
 
               {/* DATES */}
-              <div className="text-right text-secondary text-small">
+              <div className="text-right text-secondary text-body">
                 {formatDate(edu.startDate, edu.endDate)}
               </div>
 
@@ -63,19 +65,19 @@ function EducationContent() {
             {/* ================= MOBILE ================= */}
             <div className="md:hidden space-y-1">
 
-              <p className="text-primary font-semibold">
+              <p className="text-body text-primary font-semibold">
                 {edu.place}
               </p>
 
-              <p className="text-secondary text-small">
+              <p className="text-secondary text-body">
                 {formatDate(edu.startDate, edu.endDate)}
               </p>
 
-              <p className="text-primary font-semibold">
+              <p className="text-body text-primary font-semibold">
                 {edu.name}
               </p>
 
-              <p className="text-secondary text-small">
+              <p className="text-secondary text-body">
                 {edu.description}
               </p>
 

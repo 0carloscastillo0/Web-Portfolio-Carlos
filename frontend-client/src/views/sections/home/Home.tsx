@@ -16,7 +16,7 @@ function Home() {
       id="home"
       className="min-h-[calc(100vh-80px)] flex items-center"
     >
-      <div className="max-w-6xl mx-auto w-full px-6">
+      <div className="max-w-7xl mx-auto w-full">
 
         <div className="grid md:grid-cols-2 gap-12 items-center h-full">
 

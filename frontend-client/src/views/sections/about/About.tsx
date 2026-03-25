@@ -1,6 +1,7 @@
 import { useState } from "react"
+import Modal from "@/views/components/Modal"
+
 import AboutCard from "./components/AboutCard"
-import Modal from "../../components/Modal"
 
 import DescriptionContent from "./content/DescriptionContent"
 import SkillsContent from "./content/SkillsContent"

@@ -1,5 +1,5 @@
 import { ChevronRight, Globe, Moon, Sun, ChevronLeft } from "lucide-react"
-import type { Language } from "../../../../i18n/index"
+import type { Language } from "@/i18n/index"
 
 type Props = {
   isOpen: boolean

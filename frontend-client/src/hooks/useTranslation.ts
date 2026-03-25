@@ -1,5 +1,5 @@
-import { translations } from "../i18n"
-import { useLanguage } from "../contexts/LanguageContext"
+import { translations } from "@/i18n"
+import { useLanguage } from "@/contexts/LanguageContext"
 
 export function useTranslation() {
 

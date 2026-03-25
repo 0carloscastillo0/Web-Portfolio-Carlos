@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
-import { getProjects } from "../../../modules/project/project.service"
+import { getProjects } from "@/modules/project/project.service"
+
+import Modal from "@/views/components/Modal"
 
 import ProjectCard from "./components/ProjectCard"
 import ProjectContent from "./content/ProjectContent"
-import Modal from "../../components/Modal"
 
 function Projects() {
   const [projects, setProjects] = useState<any[]>([])

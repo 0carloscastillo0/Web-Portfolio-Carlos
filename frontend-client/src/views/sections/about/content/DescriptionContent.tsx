@@ -1,4 +1,4 @@
-import { usePortfolio } from "../../../../hooks/usePortfolio"
+import { usePortfolio } from "@/hooks/usePortfolio"
 
 function DescriptionContent() {
   const { profile, loading } = usePortfolio()

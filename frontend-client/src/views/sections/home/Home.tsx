@@ -1,6 +1,6 @@
-import { iconMap } from "../../../utils/iconMap"
-import { useTranslation } from "../../../hooks/useTranslation"
-import { usePortfolio } from "../../../hooks/usePortfolio"
+import { iconMap } from "@/utils/iconMap"
+import { useTranslation } from "@/hooks/useTranslation"
+import { usePortfolio } from "@/hooks/usePortfolio"
 
 function Home() {
 

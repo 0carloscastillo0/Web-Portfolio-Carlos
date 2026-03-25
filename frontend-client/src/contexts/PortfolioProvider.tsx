@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react"
 import { PortfolioContext } from "./PortfolioContext"
-import type { PortfolioData } from "../modules/portfolio.interface"
+import type { PortfolioData } from "@/modules/portfolio.interface"
 
-import { fallbackContacts } from "../modules/contact/fallbackContact"
-import { fallbackProfile } from "../modules/profile/fallbackProfile"
-import { fallbackSkills } from "../modules/skills/fallbackSkill"
-import { fallbackEducations } from "../modules/education/fallbackEducation"
-import { fallbackProjects } from "../modules/project/fallbackProject"
+import { fallbackContacts } from "@/modules/contact/fallbackContact"
+import { fallbackProfile } from "@/modules/profile/fallbackProfile"
+import { fallbackSkills } from "@/modules/skills/fallbackSkill"
+import { fallbackEducations } from "@/modules/education/fallbackEducation"
+import { fallbackProjects } from "@/modules/project/fallbackProject"
 
-import { resolveData, resolveArray } from "../utils/resolveData"
+import { resolveData, resolveArray } from "@/utils/resolveData"
 
-import { getProfile } from "../modules/profile/profile.service"
-import { getContacts } from "../modules/contact/contact.service"
-import { getUserSkills } from "../modules/skills/skill.service"
-import { getEducations } from "../modules/education/education.service"
-import { getProjects } from "../modules/project/project.service"
+import { getProfile } from "@/modules/profile/profile.service"
+import { getContacts } from "@/modules/contact/contact.service"
+import { getUserSkills } from "@/modules/skills/skill.service"
+import { getEducations } from "@/modules/education/education.service"
+import { getProjects } from "@/modules/project/project.service"
 
 export const PortfolioProvider = ({ children }: { children: React.ReactNode }) => {
 

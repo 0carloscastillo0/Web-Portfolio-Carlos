@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react"
 import { Globe, ChevronDown } from "lucide-react"
-import type { Language } from "../../../../i18n/index"
+import type { Language } from "@/i18n/index"
 
 type Props = {
   language: Language

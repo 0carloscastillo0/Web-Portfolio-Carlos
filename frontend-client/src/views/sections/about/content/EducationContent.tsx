@@ -1,4 +1,4 @@
-import { usePortfolio } from "../../../../hooks/usePortfolio"
+import { usePortfolio } from "@/hooks/usePortfolio"
 
 function EducationContent() {
   const { educations, loading } = usePortfolio()

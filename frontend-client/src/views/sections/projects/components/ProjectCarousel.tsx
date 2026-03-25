@@ -1,5 +1,5 @@
-import Slider from "../../../components/Slider"
-import type { ProjectImage } from "../../../../modules/portfolio.interface"
+import type { ProjectImage } from "@/modules/portfolio.interface"
+import Slider from "@/views/components/Slider"
 
 type Props = {
   images: ProjectImage[]

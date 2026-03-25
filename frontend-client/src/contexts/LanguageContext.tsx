@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react"
-import { translations } from "../i18n"
-import type { Language } from "../i18n"
+import { translations } from "@/i18n"
+import type { Language } from "@/i18n"
 
 type LanguageContextType = {
     language: Language

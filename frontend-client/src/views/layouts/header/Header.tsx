@@ -1,10 +1,10 @@
 import { useState, useRef, useEffect } from "react"
 
-import { useTheme } from "../../../contexts/ThemeContext"
-import { useLanguage } from "../../../contexts/LanguageContext"
-import { useTranslation } from "../../../hooks/useTranslation"
-import { translations } from "../../../i18n/index"
-import type { Language } from "../../../i18n/index"
+import { useTheme } from "@/contexts/ThemeContext"
+import { useLanguage } from "@/contexts/LanguageContext"
+import { useTranslation } from "@/hooks/useTranslation"
+import { translations } from "@/i18n/index"
+import type { Language } from "@/i18n/index"
 
 import DesktopHeader from "./components/DesktopHeader"
 import MobileHeader from "./components/MobileHeader"

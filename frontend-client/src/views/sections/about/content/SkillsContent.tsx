@@ -1,6 +1,6 @@
-import { usePortfolio } from "../../../../hooks/usePortfolio"
-import { skillIconMap } from "../../../../utils/ToolsIconMap"
-import type { Skill } from "../../../../modules/portfolio.interface"
+import { usePortfolio } from "@/hooks/usePortfolio"
+import { skillIconMap } from "@/utils/ToolsIconMap"
+import type { Skill } from "@/modules/portfolio.interface"
 
 function SkillsContent() {
   const { skills, loading } = usePortfolio()

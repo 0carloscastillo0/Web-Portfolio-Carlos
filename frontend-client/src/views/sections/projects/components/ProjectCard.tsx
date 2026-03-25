@@ -1,5 +1,5 @@
-import Card from "../../../components/Card"
-import type { Project } from "../../../../modules/portfolio.interface"
+import type { Project } from "@/modules/portfolio.interface"
+import Card from "@/views/components/Card"
 
 type Props = {
   project: Project

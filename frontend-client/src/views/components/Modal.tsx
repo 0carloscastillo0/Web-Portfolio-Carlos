@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react"
-import { iconMap } from "../../utils/iconMap"
+import { iconMap } from "@/utils/iconMap"
 
 type Props = {
   children: React.ReactNode

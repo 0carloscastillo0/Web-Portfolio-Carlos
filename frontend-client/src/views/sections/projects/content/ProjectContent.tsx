@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import {
   getProjectById,
   getProjectImages
-} from "../../../../modules/project/project.service"
+} from "@/modules/project/project.service"
 import ProjectCarousel from "../components/ProjectCarousel"
 
 type Props = {

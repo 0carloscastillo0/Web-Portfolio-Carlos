@@ -1,4 +1,4 @@
-import { useTranslation } from "../../../hooks/useTranslation"
+import { useTranslation } from "@/hooks/useTranslation"
 
 function Footer() {
   const { t } = useTranslation()

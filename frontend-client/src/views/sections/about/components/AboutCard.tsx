@@ -1,5 +1,5 @@
-import { iconMap } from "../../../../utils/iconMap"
-import Card from "../../../components/Card"
+import { iconMap } from "@/utils/iconMap"
+import Card from "@/views/components/Card"
 
 type Props = {
   iconKey: keyof typeof iconMap

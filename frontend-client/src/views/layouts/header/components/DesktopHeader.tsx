@@ -1,4 +1,4 @@
-import type { Language } from "../../../../i18n/index"
+import type { Language } from "@/i18n/index"
 
 import NavMenu from "./NavMenu"
 import LanguageDropdown from "./LanguageDropdown"

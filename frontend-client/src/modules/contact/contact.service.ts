@@ -1,25 +1,10 @@
-import type { Contact } from "../portfolio.interface"
+import { fallbackContacts } from "./contact.fallback"
 
-export const getContacts = async (): Promise<Contact[]> => {
+// Simula delay de una llamada a la API
+const delay = (ms: number = 50) => new Promise(res => setTimeout(res, ms))
 
-  return [
-    {
-      id: "1",
-      name: "email",
-      url: "mailto:carlos@email.com",
-      icon: "mail"
-    },
-    {
-      id: "2",
-      name: "linkedin",
-      url: "https://linkedin.com",
-      icon: "linkedin"
-    },
-    {
-      id: "3",
-      name: "github",
-      url: "https://github.com",
-      icon: "github"
-    }
-  ]
+// Simula llamada a la API para obtener contactos
+export const getContacts = async () => {
+  await delay()
+  return fallbackContacts
 }

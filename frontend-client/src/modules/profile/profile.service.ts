@@ -1,12 +1,10 @@
-import type { Profile } from "../portfolio.interface"
+import { fallbackProfile } from "./profile.fallback"
 
-export const getProfile = async (): Promise<Profile> => {
-  return {
-    id: "1",
-    name: "Carlos Castillo",
-    role: "Software Engineer",
-    location: "Santiago, Chile",
-    photo: "/vite.svg",
-    description: "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet."
-  }
+// Simula delay de una llamada a la API
+const delay = (ms: number = 50) => new Promise(res => setTimeout(res, ms))
+
+// Simula llamada a la API para obtener el perfil del usuario
+export const getProfile = async () => {
+  await delay()
+  return fallbackProfile
 }

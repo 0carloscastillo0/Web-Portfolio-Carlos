@@ -2,14 +2,6 @@ import { useEffect, useState } from "react"
 import { PortfolioContext } from "./PortfolioContext"
 import type { PortfolioData } from "@/modules/portfolio.interface"
 
-import { fallbackContacts } from "@/modules/contact/fallbackContact"
-import { fallbackProfile } from "@/modules/profile/fallbackProfile"
-import { fallbackSkills } from "@/modules/skills/fallbackSkill"
-import { fallbackEducations } from "@/modules/education/fallbackEducation"
-import { fallbackProjects } from "@/modules/project/fallbackProject"
-
-import { resolveData, resolveArray } from "@/utils/resolveData"
-
 import { getProfile } from "@/modules/profile/profile.service"
 import { getContacts } from "@/modules/contact/contact.service"
 import { getUserSkills } from "@/modules/skills/skill.service"
@@ -30,11 +22,8 @@ export const PortfolioProvider = ({ children }: { children: React.ReactNode }) =
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-
     const loadPortfolio = async () => {
-
       try {
-
         const [profile, contacts, skills, educations, projects] = await Promise.all([
           getProfile(),
           getContacts(),
@@ -43,34 +32,16 @@ export const PortfolioProvider = ({ children }: { children: React.ReactNode }) =
           getProjects(),
         ])
 
-        setData({
-          profile: resolveData(profile, fallbackProfile),
-          contacts: resolveArray(contacts, fallbackContacts),
-          skills: resolveArray(skills, fallbackSkills),
-          educations: resolveArray(educations, fallbackEducations),
-          projects: resolveArray(projects, fallbackProjects),
-        })
+        setData({ profile, contacts, skills, educations, projects })
 
       } catch {
-
-        setError("Error loading portfolio")
-
-        setData({
-          profile: fallbackProfile,
-          contacts: fallbackContacts,
-          skills: fallbackSkills,
-          educations: fallbackEducations,
-          projects: fallbackProjects,
-        })
-
+        setError("Unexpected error loading portfolio")
       } finally {
         setLoading(false)
       }
-
     }
 
     loadPortfolio()
-
   }, [])
 
   return (

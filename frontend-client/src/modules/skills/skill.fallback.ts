@@ -5,13 +5,13 @@ export const fallbackSkills: Skill[] = [
       id: "1",
       name: "JavaScript",
       category: "Language",
-      icon: "JavaScript"
+      icon: "javascript"
     },
     {
       id: "2",
       name: "TypeScript",
       category: "Language",
-      icon: "TypeScript"
+      icon: "typescript"
     },
     {
       id: "3",
@@ -23,13 +23,13 @@ export const fallbackSkills: Skill[] = [
       id: "4",
       name: "HTML5",
       category: "Frontend",
-      icon: "html"
+      icon: "html5"
     },
     {
       id: "5",
       name: "CSS3",
       category: "Frontend",
-      icon: "css"
+      icon: "css3"
     },
     {
       id: "6",
@@ -60,5 +60,53 @@ export const fallbackSkills: Skill[] = [
       name: "Django",
       category: "Backend",
       icon: "django"
-    }
+    },
+    {
+      id: "11",
+      name: "MySQL",
+      category: "Databases",
+      icon: "mysql"
+    },
+    {
+      id: "12",
+      name: "PostgreSQL",
+      category: "Databases",
+      icon: "postgresql"
+    },
+    {
+      id: "13",
+      name: "MongoDB",
+      category: "Databases",
+      icon: "mongodb"
+    },
+    {
+      id: "14",
+      name: "Git",
+      category: "Devops/Tools",
+      icon: "git"
+    },
+    {
+      id: "15",
+      name: "GitHub",
+      category: "Devops/Tools",
+      icon: "github"
+    },
+    {
+      id: "16",
+      name: "Linux",
+      category: "Devops/Tools",
+      icon: "linux"
+    },
+    {
+      id: "17",
+      name: "Docker",
+      category: "Devops/Tools",
+      icon: "docker"
+    },
+    {
+      id: "18",
+      name: "Figma",
+      category: "Design",
+      icon: "figma"
+    },
 ]

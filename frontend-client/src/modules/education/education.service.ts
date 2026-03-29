@@ -1,15 +1,9 @@
-import type { Education } from "../portfolio.interface"
+import { fallbackEducations } from "./education.fallback"
 
-export const getEducations = async (): Promise<Education[]> => {
+const delay = (ms: number = 50) => new Promise(res => setTimeout(res, ms))
 
-  return [
-    {
-      id: "1",
-      place: "University of Santiago of Chile",
-      name: "B.Sc. in Computer Engineer",
-      description: "Description: Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.",
-      startDate: "2018-03-01 00:00:00.000",
-      endDate: "2025-07-19 00:00:00.000",
-    },
-  ]
+// Simula llamada a la API para obtener la lista de educaciones
+export const getEducations = async () => {
+  await delay()
+  return fallbackEducations
 }

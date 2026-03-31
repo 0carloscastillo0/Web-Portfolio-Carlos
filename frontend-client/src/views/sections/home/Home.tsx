@@ -31,11 +31,11 @@ function Home() {
               </p>
 
               <h1 className="text-title">
-                {profile?.name}
+                {profile?.name} {profile?.lastname}
               </h1>
 
               <h2 className="text-subtitle text-accent font-semibold">
-                {profile?.role}
+                {profile?.title}
               </h2>
 
             </div>
@@ -71,7 +71,7 @@ function Home() {
               <iconMap.MapPin size={18} />
 
               <span className="text-body">
-                {profile?.location}
+                {profile?.country}, {profile?.city}
               </span>
 
             </div>
@@ -81,12 +81,12 @@ function Home() {
           {/* ================= IMAGE SIDE ================= */}
           <div className="relative flex items-center justify-center md:justify-end order-1 md:order-2">
 
-            <div className="absolute w-56 h-56 md:w-72 md:h-72 rounded-full bg-accent/20 blur-3xl" />
+            <div className="absolute w-72 h-72 md:w-96 md:h-96 rounded-2xl bg-accent/20 blur-3xl" />
 
             <img
-              src={profile?.photo}
+              src={profile?.Urlphoto}
               alt={profile?.name}
-              className="relative w-56 h-56 md:w-72 md:h-72 rounded-full object-cover shadow-xl"
+              className="relative w-72 h-72 md:w-96 md:h-96 rounded-2xl object-cover shadow-xl"
             />
 
           </div>

@@ -29,7 +29,7 @@ function DescriptionContent() {
             <div className="absolute w-52 h-52 md:w-64 md:h-64 rounded-full bg-accent/20 blur-3xl" />
 
             <img
-              src={profile?.photo}
+              src={profile?.Urlphoto}
               alt={profile?.name}
               className="
                 relative

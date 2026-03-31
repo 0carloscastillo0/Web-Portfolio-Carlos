@@ -1,10 +1,14 @@
 export interface Profile {
   id: string
   name: string
-  role: string
-  location: string
-  photo: string
+  lastname: string
+  email: string
+  title: string
+  city: string
+  country: string
   description: string
+  UrlCV: string
+  Urlphoto: string
 }
 
 export interface Contact {

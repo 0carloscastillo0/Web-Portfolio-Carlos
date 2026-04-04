@@ -5,8 +5,8 @@ export const fallbackProjects: Project[] = [
     id: "1",
     title: "Design and development of a CMS for the creation of websites about meeting management.",
     description: "• Led the design and development of a scalable SaaS-based CMS platform, aimed at enabling non-technical users to create customized web applications. • Integrated the backend (NestJS, Node.js, JavaScript, TypeScript) based on a microservices architecture (REST APIs), adding new CMS configuration endpoints. • Implemented the frontend (React, TypeScript) based on a microfrontend architecture (Webpack 5 Module Federation) in a maintainable and scalable way. • Redesigned the NoSQL database model (MongoDB) with a dynamic and long-term maintainability approach. • Managed cloud deployments using Docker (Docker Compose) and handled the software lifecycle through Git version control (GitHub, CI/CD). • Reduced implementation time by 90% for two new systems. • Decreased development effort for new features by 60% by identifying core functionalities and system-specific components.",
-    startDate: "2024-08-01 00:00:00.000",
-    endDate: "2025-07-01 00:00:00.000",
+    startDate: "2024-08-05 00:00:00.000",
+    endDate: "2025-07-18 00:00:00.000",
     coverImage: "/projects/project-cms-1.png",
     projectImages: [
       { id: "1", url: "/projects/project-cms-1.png", order: 0 },
@@ -59,8 +59,8 @@ export const fallbackProjects: Project[] = [
     id: "3",
     title: "Prototype of an advanced document management system.",
     description: "• Designed and implemented a desktop application for document management using Python. • The system allows managing documents locally or in the cloud (via Google Drive). • Advanced document search using Python libraries such as NLTK and PyPDF. • Intelligent document organization from a specific location using the Scikit-learn library in Python. • Implemented AI-assisted features using OpenAI to query information within specific documents. • Achieved a reduction in search time for unorganized documents. • Improved user productivity and operational efficiency.",
-    startDate: "2023-01-01 00:00:00.000",
-    endDate: "2023-01-01 00:00:00.000",
+    startDate: "2023-08-28 00:00:00.000",
+    endDate: "2023-12-22 00:00:00.000",
     coverImage: "/projects/project-docs-2.png",
     projectImages: [
       { id: "1", url: "/projects/project-docs-1.png", order: 0 },
@@ -80,8 +80,8 @@ export const fallbackProjects: Project[] = [
     id: "4",
     title: "Web interface for an educational system simulating mathematical exercises.",
     description: "• Collaborated in the development of an educational web application (using Scrum) to automate course management and simulate exercises on integers using a number line. • Supported the understanding of interactive exercises (metaphors) for different simulation scenarios on the number line. • Designed and developed the user interface using Vue.js, including the consumption of CRUD requests with Axios to a backend (REST API) built with Spring Boot (Java). • Reduced teachers' preparation time by 30% through automation in the creation and grading of exercises.",
-    startDate: "2023-01-01 00:00:00.000",
-    endDate: "2023-01-01 00:00:00.000",
+    startDate: "2023-03-06 00:00:00.000",
+    endDate: "2023-08-04 00:00:00.000",
     coverImage: "/projects/project-math-1.png",
     projectImages: [
       { id: "1", url: "/projects/project-math-1.png", order: 0 },

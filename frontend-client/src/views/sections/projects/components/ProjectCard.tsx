@@ -1,5 +1,6 @@
 import type { Project } from "@/modules/portfolio.interface"
 import Card from "@/views/components/Card"
+import { formatDateRange } from "@/utils/date"
 
 type Props = {
   project: Project
@@ -7,8 +8,6 @@ type Props = {
 }
 
 function ProjectCard({ project, onClick }: Props) {
-  const getYear = (date: string) => new Date(date).getFullYear()
-
   return (
     <Card onClick={onClick} className="overflow-hidden text-left">
       
@@ -28,7 +27,7 @@ function ProjectCard({ project, onClick }: Props) {
         </h3>
 
         <p className="text-xl text-muted">
-          {getYear(project.startDate)} - {getYear(project.endDate)}
+          {formatDateRange(project.startDate, project.endDate)}
         </p>
 
         <div className="flex flex-wrap gap-2 mt-2">

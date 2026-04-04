@@ -4,6 +4,7 @@ import {
   getProjectImages
 } from "@/modules/project/project.service"
 import ProjectCarousel from "../components/ProjectCarousel"
+import { formatDateRange } from "@/utils/date"
 
 type Props = {
   projectId: string
@@ -27,8 +28,6 @@ function ProjectContent({ projectId }: Props) {
 
   if (!project) return <div>Loading...</div>
 
-  const getYear = (date: string) => new Date(date).getFullYear()
-
   return (
     <div className="space-y-6">
 
@@ -39,7 +38,7 @@ function ProjectContent({ projectId }: Props) {
 
       {/* DATES */}
       <p className="text-xl text-muted">
-        {getYear(project.startDate)} - {getYear(project.endDate)}
+        {formatDateRange(project.startDate, project.endDate)}
       </p>
 
       {/* SKILLS */}

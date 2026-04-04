@@ -1,5 +1,6 @@
 import { usePortfolio } from "@/hooks/usePortfolio"
 import { useTranslation } from "@/hooks/useTranslation"
+import { formatDateRange as formatDate } from "@/utils/date"
 
 function EducationContent() {
   const { t } = useTranslation()
@@ -7,14 +8,6 @@ function EducationContent() {
 
   if (loading) {
     return <div>Loading...</div>
-  }
-
-  const getYear = (date: string) => {
-    return new Date(date).getFullYear()
-  }
-
-  const formatDate = (start: string, end?: string) => {
-    return `${getYear(start)} - ${end ? getYear(end) : "Present"}`
   }
 
   return (

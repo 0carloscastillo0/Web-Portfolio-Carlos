@@ -39,72 +39,78 @@ export const fallbackSkills: Skill[] = [
     },
     {
       id: "7",
+      name: "Vue.js",
+      category: "Frontend",
+      icon: "vue"
+    },
+    {
+      id: "8",
       name: "BootStrap",
       category: "Frontend",
       icon: "bootstrap"
     },
     {
-      id: "8",
+      id: "9",
       name: "Node.js",
       category: "Backend",
       icon: "node"
     },
     {
-      id: "9",
+      id: "10",
       name: "NestJS",
       category: "Backend",
       icon: "nestjs"
     },
     {
-      id: "10",
+      id: "11",
       name: "Django",
       category: "Backend",
       icon: "django"
     },
     {
-      id: "11",
-      name: "MySQL",
-      category: "Databases",
-      icon: "mysql"
+      id: "12",
+      name: "Spring Boot",
+      category: "Backend",
+      icon: "springboot"
     },
     {
-      id: "12",
+      id: "13",
       name: "PostgreSQL",
       category: "Databases",
       icon: "postgresql"
     },
     {
-      id: "13",
+      id: "14",
       name: "MongoDB",
       category: "Databases",
       icon: "mongodb"
     },
     {
-      id: "14",
+      id: "15",
       name: "Git",
       category: "Devops/Tools",
       icon: "git"
     },
     {
-      id: "15",
+      id: "16",
       name: "GitHub",
       category: "Devops/Tools",
       icon: "github"
     },
     {
-      id: "16",
+      id: "17",
       name: "Linux",
       category: "Devops/Tools",
       icon: "linux"
     },
     {
-      id: "17",
+      id: "18",
       name: "Docker",
       category: "Devops/Tools",
       icon: "docker"
     },
     {
-      id: "18",
+      id: "19",
       name: "Figma",
       category: "Design",
       icon: "figma"

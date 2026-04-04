@@ -10,11 +10,13 @@ function ProjectCarousel({ images }: Props) {
     <Slider
       items={images}
       renderItem={(img) => (
-        <img
-          src={img.url}
-          alt=""
-          className="w-full object-cover h-64 md:h-80"
-        />
+        <div className="w-full h-[500px] flex items-center justify-center">
+          <img
+            src={img.url}
+            alt=""
+            className="max-h-full w-auto object-contain rounded-lg"
+          />
+        </div>
       )}
     />
   )

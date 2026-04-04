@@ -11,7 +11,7 @@ type Props = {
 
 function ProjectContent({ projectId }: Props) {
   const [project, setProject] = useState<any>(null)
-  const [images, setImages] = useState<any[]>([])
+  const [images, setImages] = useState<any>([])
 
   useEffect(() => {
     const load = async () => {
@@ -58,10 +58,21 @@ function ProjectContent({ projectId }: Props) {
       <ProjectCarousel images={images} />
 
       {/* DESCRIPTION */}
-      <p className="text-body text-secondary leading-relaxed">
-        {project.description}
-      </p>
-
+      {project.description.includes("•") ? (
+        <ul className="text-body text-secondary leading-relaxed list-disc pl-5 space-y-2">
+          {project.description
+            .split("•")
+            .map((item:any) => item.trim())
+            .filter((item:any) => item.length > 0)
+            .map((item: any, index: number) => (
+              <li key={index}>{item}</li>
+            ))}
+        </ul>
+      ) : (
+        <p className="text-body text-secondary leading-relaxed">
+          {project.description}
+        </p>
+      )}
     </div>
   )
 }

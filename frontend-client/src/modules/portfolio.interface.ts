@@ -34,6 +34,12 @@ export interface Education {
   endDate: string
 }
 
+export interface ProjectImage {
+  id: string
+  url: string
+  order: number
+}
+
 export interface Project {
   id: string
   title: string
@@ -42,13 +48,9 @@ export interface Project {
   endDate: string
   skills: Skill[]
   coverImage: string
+  projectImages: ProjectImage[]
 }
 
-export interface ProjectImage {
-  id: string
-  url: string
-  order: number
-}
 
 export interface PortfolioData {
   profile: Profile | null

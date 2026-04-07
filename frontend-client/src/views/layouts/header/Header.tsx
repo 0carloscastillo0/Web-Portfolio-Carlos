@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from "react"
 import { useTheme } from "@/contexts/ThemeContext"
 import { useLanguage } from "@/contexts/LanguageContext"
 import { useTranslation } from "@/hooks/useTranslation"
+import { usePortfolio } from "@/hooks/usePortfolio"
 import { translations } from "@/i18n/index"
 import type { Language } from "@/i18n/index"
 
@@ -15,6 +16,7 @@ function Header() {
     /* =====================================================
         TYPES & CONSTANTS
     ===================================================== */
+    const { profile } = usePortfolio()
     const sections = [
         { id: "home", label: "nav.home" },
         { id: "about", label: "nav.about" },
@@ -31,13 +33,14 @@ function Header() {
     const { language, setLanguage } = useLanguage()
     const { t } = useTranslation()
 
+    const { theme, setTheme } = useTheme()
+
     const currentLangRef = useRef(language)
     const isScrollingProgrammatically = useRef(false)
 
     /* =====================================================
         STATE
     ===================================================== */
-    const { theme, setTheme } = useTheme()
 
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const [mobileView, setMobileView] = useState<MobileView>("menu")
@@ -158,6 +161,7 @@ function Header() {
                         themes={themes}
                         onChangeTheme={changeTheme}
                         t={t}
+                        cvUrl={profile?.UrlCV}
                     />
 
                     {/* =====================================================
@@ -189,6 +193,8 @@ function Header() {
                 themes={themes}
                 onChangeTheme={changeTheme}
                 t={t}
+                cvUrl={profile?.UrlCV}
+                setMobileMenuOpen={setMobileMenuOpen}
             />
             
         </>

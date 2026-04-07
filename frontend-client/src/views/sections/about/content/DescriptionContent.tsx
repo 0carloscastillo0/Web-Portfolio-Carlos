@@ -36,7 +36,7 @@ function DescriptionContent() {
                 w-52 h-52 md:w-64 md:h-64
                 max-w-md
                 aspect-square
-                rounded-2xl
+                rounded-4xl
                 object-cover
                 shadow-xl
               "

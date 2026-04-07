@@ -19,6 +19,8 @@ type Props = {
   onChangeTheme: (theme: "Dark" | "Light") => void
 
   t: (key: string) => string
+
+  cvUrl?: string
 }
 
 function DesktopHeader(props: Props) {
@@ -32,7 +34,8 @@ function DesktopHeader(props: Props) {
     theme,
     themes,
     onChangeTheme,
-    t
+    t,
+    cvUrl
   } = props
   return (
     <div className="hidden md:flex w-full items-center justify-between">
@@ -70,9 +73,17 @@ function DesktopHeader(props: Props) {
           />
         </div>
 
-        <button className="px-5 py-2 bg-accent rounded-xl text-sm font-semibold text-white">
-          {t("header.downloadCV")}
-        </button>
+        {cvUrl && (
+          <a
+            href={cvUrl}
+            download
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-5 py-2 bg-accent rounded-xl text-sm font-semibold text-white inline-block"
+          >
+            {t("header.downloadCV")}
+          </a>
+        )}
 
       </div>
     </div>

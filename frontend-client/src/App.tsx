@@ -9,21 +9,21 @@ import { PortfolioProvider } from "./contexts/PortfolioContext"
 
 function App() {
   return (
-    <div className="min-h-screen flex flex-col bg-primary text-text transition-colors duration-300">
+    <PortfolioProvider>
+      <div className="min-h-screen flex flex-col bg-primary text-text transition-colors duration-300">
 
-      <Header />
+        <Header />
 
-      <main className="flex-1 px-6 lg:px-12">
-        <PortfolioProvider>
-          <Home />
-          <About />
-          <Projects />
-        </PortfolioProvider>
-      </main>
+        <main className="flex-1 px-6 lg:px-12">
+            <Home />
+            <About />
+            <Projects />
+        </main>
 
-      <Footer />
+        <Footer />
 
-    </div>
+      </div>
+    </PortfolioProvider>
   )
 }
 

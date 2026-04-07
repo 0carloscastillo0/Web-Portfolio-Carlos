@@ -86,7 +86,7 @@ function Home() {
             <img
               src={profile?.Urlphoto}
               alt={profile?.name}
-              className="relative w-72 h-72 md:w-96 md:h-96 rounded-2xl object-cover shadow-xl"
+              className="relative w-72 h-72 md:w-96 md:h-96 rounded-4xl object-cover shadow-xl"
             />
 
           </div>

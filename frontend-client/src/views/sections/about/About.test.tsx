@@ -5,6 +5,7 @@ import About from "./About"
 import { LanguageProvider } from "@/contexts/LanguageContext"
 import { ThemeProvider } from "@/contexts/ThemeContext"
 import { translations } from "@/i18n"
+import { PortfolioProvider } from "@/contexts/PortfolioContext"
 
 /**
  * Helper to render About component with required providers
@@ -13,7 +14,9 @@ const renderAbout = () => {
   return render(
     <ThemeProvider>
       <LanguageProvider>
-        <About />
+        <PortfolioProvider>
+          <About />
+        </PortfolioProvider>
       </LanguageProvider>
     </ThemeProvider>
   )
@@ -122,5 +125,18 @@ describe("About Section", () => {
     await waitFor(() => {
       expect(screen.queryByRole("dialog")).not.toBeInTheDocument()
     })
+  })
+
+  /**
+   * Should render CV download button with correct link and attributes
+   */
+  it("should render CV download button with correct link", async () => {
+    renderAbout()
+
+    const link = await screen.findByRole("link", { name: /download cv/i })
+
+    expect(link).toBeInTheDocument()
+    expect(link).toHaveAttribute("href", "/user/CV_Carlos_Castillo.pdf")
+    expect(link).toHaveAttribute("download")
   })
 })

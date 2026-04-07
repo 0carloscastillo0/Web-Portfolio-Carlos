@@ -35,6 +35,7 @@ const en = {
     description: "Description",
     skills: "Skills",
     education: "Education",
+    textCV: "Download my CV to learn more about my professional background."
   },
 
   projects: {

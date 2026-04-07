@@ -1,5 +1,7 @@
 import { useState } from "react"
 import { useTranslation } from "@/hooks/useTranslation"
+import { usePortfolio } from "@/hooks/usePortfolio"
+
 import Modal from "@/views/components/Modal"
 
 import AboutCard from "./components/AboutCard"
@@ -13,6 +15,7 @@ type ModalType = "description" | "skills" | "education" | null
 function About() {
     const { t } = useTranslation()
     const [activeModal, setActiveModal] = useState<ModalType>(null)
+    const { profile } = usePortfolio()
 
     return (
       <section id="about" className="min-h-screen flex flex-col">
@@ -49,6 +52,21 @@ function About() {
               onClick={() => setActiveModal("education")}
             />
           </div>
+        </div>
+
+        {/* DOWNLOAD CV */}
+        <div className="text-center">
+          <p className="text-body text-secondary mb-4">
+            {t("about.textCV")}
+          </p>
+
+          {profile?.UrlCV && (
+            <a href={profile.UrlCV} download target="_blank" rel="noopener noreferrer">
+              <button className="px-5 py-2 bg-accent rounded-xl text-sm font-semibold text-white">
+                {t("header.downloadCV")}
+              </button>
+            </a>
+          )}
         </div>
 
         {/* MODAL */}

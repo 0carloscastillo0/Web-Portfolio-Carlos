@@ -19,6 +19,9 @@ type Props = {
   onChangeTheme: (theme: "Dark" | "Light") => void
 
   t: (key: string) => string
+
+  cvUrl?: string
+  setMobileMenuOpen: (open: boolean) => void
 }
 
 function MobileMenu({
@@ -34,12 +37,15 @@ function MobileMenu({
   theme,
   themes,
   onChangeTheme,
-  t
+  t,
+  cvUrl,
+  setMobileMenuOpen
 }: Props) {
   return (
     <div
-      className={`fixed top-16 right-0 h-[calc(100vh-4rem)] w-full md:hidden z-50 transform transition-transform surface-primary ${
-        isOpen ? "translate-x-0" : "translate-x-full"
+        data-testid="mobile-menu"
+        className={`fixed top-16 right-0 h-[calc(100vh-4rem)] w-full md:hidden z-50 transform transition-transform surface-primary ${
+            isOpen ? "translate-x-0" : "translate-x-full"
       }`}
     >
         <div className="px-6 py-6 space-y-6 h-full overflow-y-auto">
@@ -61,9 +67,18 @@ function MobileMenu({
                     </button>
                 ))}
 
-                <button className="mx-auto block px-4 py-2 bg-accent hover:bg-accent-hover transition rounded-lg text-body font-semibold text-white">
-                    {t("header.downloadCV")}
-                </button>
+                {cvUrl && (
+                    <a
+                        href={cvUrl}
+                        download
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="mx-auto block px-4 py-2 bg-accent hover:bg-accent-hover transition rounded-lg text-body font-semibold text-white text-center"
+                    >
+                        {t("header.downloadCV")}
+                    </a>
+                )}
 
                 {/* LANGUAGE ENTRY */}
                 <button

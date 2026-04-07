@@ -15,7 +15,7 @@ function MobileHeader({ mobileMenuOpen, onToggleMenu }: Props) {
         Castillo Sites
       </h1>
 
-      <button onClick={onToggleMenu}>
+      <button onClick={onToggleMenu} aria-label="toggle menu">
         {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
       </button>
 

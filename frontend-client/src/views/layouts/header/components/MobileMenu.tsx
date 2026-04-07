@@ -68,6 +68,7 @@ function MobileMenu({
                 {/* LANGUAGE ENTRY */}
                 <button
                     onClick={() => setMobileView("language")}
+                    aria-label="open language menu"
                     className="flex items-center justify-between w-full text-sm py-3"
                 >
                     <span className="flex items-center space-x-2">
@@ -82,6 +83,7 @@ function MobileMenu({
                 {/* THEME ENTRY */}
                 <button
                     onClick={() => setMobileView("theme")}
+                    aria-label="open theme menu"
                     className="flex items-center justify-between w-full text-sm py-3"
                 >
                     <span className="flex items-center space-x-2">

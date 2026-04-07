@@ -105,6 +105,7 @@ function Modal({ children, onClose }: Props) {
 
   return (
     <div
+      role="dialog"
       className={`
         fixed inset-0 z-50
         flex items-end md:items-center justify-center
@@ -155,6 +156,7 @@ function Modal({ children, onClose }: Props) {
         {/* CLOSE DESKTOP */}
         {!isMobile && (
           <button
+            aria-label="close modal"
             onClick={handleClose}
             className="absolute top-4 right-4 p-2 rounded-lg hover:bg-secondary"
           >

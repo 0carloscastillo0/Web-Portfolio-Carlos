@@ -5,7 +5,7 @@ import Home from "./views/sections/home/Home"
 import About from "./views/sections/about/About"
 import Projects from "./views/sections/projects/Projects"
 
-import { PortfolioProvider } from "./contexts/PortfolioProvider"
+import { PortfolioProvider } from "./contexts/PortfolioContext"
 
 function App() {
   return (

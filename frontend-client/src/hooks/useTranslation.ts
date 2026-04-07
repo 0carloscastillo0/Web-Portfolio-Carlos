@@ -6,11 +6,11 @@ export function useTranslation() {
   const { language } = useLanguage()
 
   const t = (path: string) => {
-
     const keys = path.split(".")
     let value: any = translations[language]
 
     for (const key of keys) {
+      if (!value) return undefined
       value = value[key]
     }
 

@@ -7,7 +7,7 @@ type LanguageContextType = {
     setLanguage: (lang: Language) => void
 }
 
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
+export const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
 
 // Detects the user's preferred language using localStorage and browser settings
 const detectBrowserLanguage = (): Language => {

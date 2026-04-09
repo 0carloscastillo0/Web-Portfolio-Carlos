@@ -71,6 +71,6 @@ Prototipo visual completo del sistema.
 - ✅ Modelo ER
 - ✅ Arquitectura
 - ✅ Implementación del modelo
-- ✅ Implementación de consultas REST
-- Implementación del frontend
+- ✅ Implementación del frontend
+- (incompleto) Implementación de consultas REST
 - Deploy en producción

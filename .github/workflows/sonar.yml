@@ -3,7 +3,7 @@ name: SonarCloud Frontend Analysis
 on:
   push:
     branches:
-      - feature/frontend
+      - main
   pull_request:
     branches:
       - main
@@ -23,17 +23,24 @@ jobs:
         with:
           node-version: 20
 
+      # Cache SonarCloud packages
+      - name Cache node modules
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('frontend-client/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       # Install only frontend deps
       - name: Install frontend deps
-        run: |
-          cd frontend-client
-          npm install
+        working-directory: frontend-client
+        run: npm install
 
       # Run test with coverage
       - name: Run tests
-        run: |
-          cd frontend-client
-          npm run test:coverage
+        working-directory: frontend-client
+        run: npm run test:coverage
 
       # SonarCloud scan analyzing only frontend
       - name: SonarCloud Scan

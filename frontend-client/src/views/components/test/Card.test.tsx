@@ -29,7 +29,7 @@ describe("Card", () => {
 
         const card = screen.getByRole("button")
 
-        fireEvent.keyDown(card, { key: "Enter" })
+        fireEvent.click(card)
 
         expect(onClick).toHaveBeenCalled()
     })

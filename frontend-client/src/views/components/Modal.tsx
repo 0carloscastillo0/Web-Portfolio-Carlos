@@ -131,6 +131,7 @@ function Modal({ children, onClose }: Props) {
     >
       {/* OVERLAY CLICK AREA */}
       <div
+        data-testid="modal-overlay"
         className="absolute inset-0"
         onClick={handleClose}
         aria-hidden="true"

@@ -26,7 +26,7 @@ describe("Modal", () => {
             </Modal>
         )
 
-        fireEvent.click(screen.getByRole("dialog"))
+        fireEvent.click(screen.getByTestId("modal-overlay"))
 
         await waitFor(() => {
             expect(onClose).toHaveBeenCalled()

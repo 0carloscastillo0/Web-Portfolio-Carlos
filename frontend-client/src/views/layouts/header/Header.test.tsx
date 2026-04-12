@@ -59,7 +59,15 @@ describe("Header", () => {
         renderHeader()
 
         const button = screen.getByRole("button", { name: /toggle menu/i })
+        const menu = screen.getByTestId("mobile-menu")
+
+        // estado inicial (cerrado)
+        expect(menu).toHaveClass("translate-x-full")
+
         fireEvent.click(button)
+
+        // estado después del click (abierto)
+        expect(menu).not.toHaveClass("translate-x-full")
     })
 
     /**
@@ -262,18 +270,35 @@ describe("Header", () => {
      * Validates that the active section updates based on scroll position.
      */
     it("should update active section on scroll", () => {
-        const element = document.createElement("div")
+        const sections = {
+            home: 0,
+            about: 150,
+            projects: 300,
+        }
 
-        Object.defineProperty(element, "offsetTop", {
-            value: 100,
+        // Mock getElementById to return elements with specific offsetTop values
+        vi.spyOn(document, "getElementById").mockImplementation((id: string) => {
+            const el = document.createElement("div")
+
+            Object.defineProperty(el, "offsetTop", {
+                value: sections[id as keyof typeof sections] ?? 0,
+            })
+
+            return el
         })
-
-        vi.spyOn(document, "getElementById").mockImplementation(() => element)
 
         renderHeader()
 
-        window.scrollY = 150
-
+        // Simulate scrolling to 110px (between home and about)
+        window.scrollY = 110
         fireEvent.scroll(window)
+
+        const nav = screen.getByRole("navigation")
+        // The "About" button should be active (have text-accent class)
+        const aboutBtn = within(nav).getByRole("button", {
+            name: new RegExp(translations.ES.nav.about, "i"),
+        })
+
+        expect(aboutBtn).toHaveClass("text-accent")
     })
 })

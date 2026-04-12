@@ -7,25 +7,39 @@ type CardProps = {
 function Card({ children, onClick, className = "" }: CardProps) {
   const isClickable = !!onClick
 
+  if (isClickable) {
+    return (
+      <button
+        type="button"
+        onClick={onClick}
+        className={`
+          w-full
+          text-left
+          appearance-none
+          bg-transparent
+          flex flex-col
+          rounded-xl
+          border border-soft
+          surface-secondary
+          transition-all duration-300
+          hover:bg-secondary
+          cursor-pointer hover:scale-[1.02]
+
+          ${className}
+        `}
+      >
+        {children}
+      </button>
+    )
+  }
+
   return (
     <div
-      role={isClickable ? "button" : undefined}
-      tabIndex={isClickable ? 0 : undefined}
-      onClick={onClick}
-      onKeyDown={(e) => {
-        if (!isClickable) return
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault()
-          onClick?.()
-        }
-      }}
       className={`
         rounded-xl
         border border-soft
         surface-secondary
-        transition-all duration-300
-        hover:bg-secondary
-        ${isClickable ? "cursor-pointer hover:scale-[1.02]" : ""}
+
         ${className}
       `}
     >

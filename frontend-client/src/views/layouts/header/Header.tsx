@@ -113,13 +113,7 @@ function Header() {
 
         if (element) {
             const headerOffset = 20
-            let offsetPosition = 0
-
-            if (id === "home") {
-                offsetPosition = 0
-            } else {
-                offsetPosition = element.offsetTop - headerOffset
-            }
+            const offsetPosition = (id === "home") ? 0 : (element.offsetTop - headerOffset)
 
             isScrollingProgrammatically.current = true
             setActiveSection(id)

@@ -54,6 +54,15 @@ function Modal({ children, onClose }: Props) {
     }
   }
 
+  // ================= ESC KEY SUPPORT =================
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") handleClose()
+    }
+    window.addEventListener("keydown", handleEsc)
+    return () => window.removeEventListener("keydown", handleEsc)
+  }, [])
+
   // ================= DRAG =================
   useEffect(() => {
     if (!isMobile) return
@@ -62,12 +71,14 @@ function Modal({ children, onClose }: Props) {
     const content = contentRef.current
     if (!sheet || !content) return
 
+    // Touch events for dragging the sheet
     const onTouchStart = (e: TouchEvent) => {
       startYRef.current = e.touches[0].clientY
       currentTranslateRef.current = translateY
       setIsDragging(true)
     }
-
+    
+    // Prevent dragging when content can scroll
     const onTouchMove = (e: TouchEvent) => {
       if (!isDragging) return
 
@@ -81,17 +92,18 @@ function Modal({ children, onClose }: Props) {
       }
     }
 
+    // End dragging and determine if we should close or snap back
     const onTouchEnd = () => {
       setIsDragging(false)
 
-      if (translateY > window.innerHeight*0.25) {
+      if (translateY > window.innerHeight * 0.25) {
         handleClose()
       } else {
         setTranslateY(0)
       }
     }
 
-    // It listen All in the modal
+    // Attach listeners
     sheet.addEventListener("touchstart", onTouchStart, { passive: true })
     sheet.addEventListener("touchmove", onTouchMove, { passive: false })
     sheet.addEventListener("touchend", onTouchEnd)
@@ -105,6 +117,7 @@ function Modal({ children, onClose }: Props) {
 
   return (
     <div
+      aria-modal="true"
       role="dialog"
       className={`
         fixed inset-0 z-50
@@ -115,11 +128,16 @@ function Modal({ children, onClose }: Props) {
         ${!isMobile && !isVisible ? "opacity-0" : ""}
       `}
       style={{ backgroundColor: "rgba(0,0,0,0.6)" }}
-      onClick={handleClose}
     >
+      {/* OVERLAY CLICK AREA */}
+      <div
+        className="absolute inset-0"
+        onClick={handleClose}
+        aria-hidden="true"
+      />
+
       <div
         ref={sheetRef}
-        onClick={(e) => e.stopPropagation()}
         className={`
           relative
           w-full md:w-[90%] md:max-w-6xl
@@ -156,11 +174,11 @@ function Modal({ children, onClose }: Props) {
         {/* CLOSE DESKTOP */}
         {!isMobile && (
           <button
-            aria-label="close modal"
+            aria-label="Close modal"
             onClick={handleClose}
             className="absolute top-4 right-4 p-2 rounded-lg hover:bg-secondary"
           >
-            <iconMap.close size={24}/>
+            <iconMap.close size={24} />
           </button>
         )}
 

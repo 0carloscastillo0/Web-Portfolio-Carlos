@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react"
+import { createContext, useEffect, useMemo, useState } from "react"
 
 import type { PortfolioData } from "@/modules/portfolio.interface"
 import { getProfile } from "@/modules/profile/profile.service"
@@ -48,14 +48,15 @@ export const PortfolioProvider = ({ children }: { children: React.ReactNode }) =
     loadPortfolio()
   }, [])
 
+
+  const value = useMemo(() => ({
+    ...data,
+    loading,
+    error
+  }), [data, loading, error])
+
   return (
-    <PortfolioContext.Provider
-      value={{
-        ...data,
-        loading,
-        error
-      }}
-    >
+    <PortfolioContext.Provider value={value}>
       {children}
     </PortfolioContext.Provider>
   )

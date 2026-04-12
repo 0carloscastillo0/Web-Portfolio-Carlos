@@ -46,7 +46,7 @@ function Modal({ children, onClose }: Props) {
   // ================= CLOSE =================
   const handleClose = () => {
     if (isMobile) {
-      setTranslateY(window.innerHeight)
+      setTranslateY(globalThis.innerHeight)
       setTimeout(onClose, 300)
     } else {
       setIsVisible(false)
@@ -59,8 +59,8 @@ function Modal({ children, onClose }: Props) {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") handleClose()
     }
-    window.addEventListener("keydown", handleEsc)
-    return () => window.removeEventListener("keydown", handleEsc)
+    globalThis.addEventListener("keydown", handleEsc)
+    return () => globalThis.removeEventListener("keydown", handleEsc)
   }, [])
 
   // ================= DRAG =================
@@ -96,7 +96,7 @@ function Modal({ children, onClose }: Props) {
     const onTouchEnd = () => {
       setIsDragging(false)
 
-      if (translateY > window.innerHeight * 0.25) {
+      if (translateY > globalThis.innerHeight * 0.25) {
         handleClose()
       } else {
         setTranslateY(0)

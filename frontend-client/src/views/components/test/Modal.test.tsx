@@ -50,4 +50,50 @@ describe("Modal", () => {
             expect(onClose).toHaveBeenCalled()
         })
     })
+
+    it("should close when pressing Escape", () => {
+        const onClose = vi.fn()
+
+        render(<Modal onClose={onClose}>Content</Modal>)
+
+        fireEvent.keyDown(window, { key: "Escape" })
+
+        expect(onClose).toHaveBeenCalled()
+    })
+
+    it("should close on Escape (async safe)", async () => {
+        const onClose = vi.fn()
+        render(<Modal onClose={onClose}>Content</Modal>)
+
+        fireEvent.keyDown(window, { key: "Escape" })
+
+        await waitFor(() => {
+            expect(onClose).toHaveBeenCalled()
+        })
+    })
+
+    it("should close with animation on desktop", () => {
+        const onClose = vi.fn()
+
+        render(<Modal onClose={onClose}>Content</Modal>)
+
+        fireEvent.click(screen.getByLabelText(/close modal/i))
+
+        expect(onClose).toHaveBeenCalled()
+    })
+
+    it("should handle mobile close behavior", () => {
+        Object.defineProperty(window, "innerWidth", {
+            writable: true,
+            value: 500,
+        })
+
+        const onClose = vi.fn()
+
+        render(<Modal onClose={onClose}>Content</Modal>)
+
+        fireEvent.click(screen.getByTestId("modal-overlay"))
+
+        expect(onClose).toHaveBeenCalled()
+    })
 })

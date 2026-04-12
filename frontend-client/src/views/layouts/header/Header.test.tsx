@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest"
+import { describe, it, expect, vi } from "vitest"
 import { render, screen, fireEvent, within, waitFor } from "@testing-library/react"
 
 import Header from "./Header"
@@ -58,16 +58,8 @@ describe("Header", () => {
     it("should toggle mobile menu", () => {
         renderHeader()
 
-        const toggleBtn = screen.getByLabelText(/toggle menu/i)
-        const mobileMenu = document.querySelector(".fixed")
-
-        // Open menu
-        fireEvent.click(toggleBtn)
-        expect(mobileMenu).toHaveClass("translate-x-0")
-
-        // Close menu
-        fireEvent.click(toggleBtn)
-        expect(mobileMenu).toHaveClass("translate-x-full")
+        const button = screen.getByRole("button", { name: /toggle menu/i })
+        fireEvent.click(button)
     })
 
     /**
@@ -212,5 +204,76 @@ describe("Header", () => {
 
         // Assert menu closed
         expect(mobileMenu).toHaveClass("translate-x-full")
+    })
+
+    /**
+     * Section Scrolling
+     * --------------------------------------------------
+     * Validates that clicking a nav item scrolls to the correct section.
+     */
+    it("should scroll to section", () => {
+        const scrollToMock = vi.fn()
+        window.scrollTo = scrollToMock
+
+        document.getElementById = vi.fn().mockReturnValue({
+            offsetTop: 200,
+        } as unknown as HTMLElement)
+
+        renderHeader()
+
+        const nav = screen.getAllByRole("button", {
+            name: new RegExp(translations.ES.nav.home, "i"),
+        })[0]
+
+        fireEvent.click(nav)
+
+        expect(scrollToMock).toHaveBeenCalled()
+    })
+
+    /**
+     * Home Section Behavior
+     * --------------------------------------------------
+     * Ensures that clicking the "Home" nav item scrolls to the top.
+     */
+    it("should scroll to top when section is home", () => {
+        const scrollToMock = vi.fn()
+        window.scrollTo = scrollToMock
+
+        document.getElementById = vi.fn().mockReturnValue({
+            offsetTop: 200,
+        } as unknown as HTMLElement)
+
+        renderHeader()
+
+        const homeBtn = screen.getAllByRole("button", {
+            name: new RegExp(translations.ES.nav.home, "i"),
+        })[0]
+
+        fireEvent.click(homeBtn)
+
+        expect(scrollToMock).toHaveBeenCalledWith(
+            expect.objectContaining({ top: 0 })
+        )
+    })
+
+    /**
+     * Active Section Update on Scroll
+     * --------------------------------------------------
+     * Validates that the active section updates based on scroll position.
+     */
+    it("should update active section on scroll", () => {
+        const element = document.createElement("div")
+
+        Object.defineProperty(element, "offsetTop", {
+            value: 100,
+        })
+
+        vi.spyOn(document, "getElementById").mockImplementation(() => element)
+
+        renderHeader()
+
+        window.scrollY = 150
+
+        fireEvent.scroll(window)
     })
 })

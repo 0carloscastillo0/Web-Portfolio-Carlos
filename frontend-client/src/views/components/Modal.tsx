@@ -50,14 +50,16 @@ function Modal({ children, onClose }: Props) {
       setTimeout(onClose, 300)
     } else {
       setIsVisible(false)
-      setTimeout(onClose, 200)
     }
+    onClose()
   }
 
   // ================= ESC KEY SUPPORT =================
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === "Escape") handleClose()
+      if (e.key === "Escape") {
+        onClose()
+      }
     }
     globalThis.addEventListener("keydown", handleEsc)
     return () => globalThis.removeEventListener("keydown", handleEsc)

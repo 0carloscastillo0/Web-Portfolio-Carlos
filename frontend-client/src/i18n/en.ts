@@ -40,7 +40,7 @@ const en = {
 
   projects: {
     title: "Projects",
-    subtitle: "Here you will find my personal work and the projects I have collaborated on."
+    subtitle: "Here you will find the projects I have collaborated on."
   }
 }
 

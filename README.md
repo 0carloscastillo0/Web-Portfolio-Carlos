@@ -4,7 +4,7 @@ Aplicación web fullstack desarrollada para presentar la información relacionad
 
 El sistema está diseñado bajo una arquitectura cliente-servidor, incorporando un backend tipado con TypeScript, un modelo de datos relacional y una interfaz moderna desarrollada en React.
 
-> 📌 Actualmente el portafolio se encuentra en fase de implementación, con diseño de interfaz finalizado y arquitectura definida.
+> 📌 Actualmente el portafolio se encuentra en fase de implementación, con la arquitectura definida y el frontend desplegado en producción.
 
 ---
 
@@ -23,10 +23,13 @@ Construir un portafolio profesional dinámico que:
 # 🛠 Stack Tecnológico
 
 <ul>
+<li>Lenguaje: TypeScript</li>
 <li>Base de datos: PostgreSQL</li>
-<li>Backend: Node.js, Express.js, TypeScript, Prisma ORM</li>
-<li>Frontend: React, TypeScript, Tailwind CSS</li>
-<li>Deploy (planeado): Vercel</li>
+<li>Backend: Node.js, Express.js, Prisma ORM</li>
+<li>Frontend: React, Tailwind CSS</li>
+<li>Test coverage: Sonarqube</li>
+<li>Deploy: Vercel</li>
+<li>Pipeline CI/CD: Github Actions
 </ul>
 
 ---
@@ -72,5 +75,7 @@ Prototipo visual completo del sistema.
 - ✅ Arquitectura
 - ✅ Implementación del modelo
 - ✅ Implementación del frontend
-- (incompleto) Implementación de consultas REST
-- Deploy en producción
+- ✅ Deploy del frontend en producción
+- Implementación de la API (backend)
+- Integración del Backend con el Frontend
+- Deploy del sistema completo en producción (Backend + Frontend)

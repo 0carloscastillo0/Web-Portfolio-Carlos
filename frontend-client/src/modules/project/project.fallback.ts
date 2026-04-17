@@ -4,7 +4,7 @@ export const fallbackProjects: Project[] = [
   {
     id: "1",
     title: "Design and development of a CMS for the creation of websites about meeting management.",
-    description: "• Led the design and development of a scalable SaaS-based CMS platform, aimed at enabling non-technical users to create customized web applications. • Integrated the backend (NestJS, Node.js, JavaScript, TypeScript) based on a microservices architecture (REST APIs), adding new CMS configuration endpoints. • Implemented the frontend (React, TypeScript) based on a microfrontend architecture (Webpack 5 Module Federation) in a maintainable and scalable way. • Redesigned the NoSQL database model (MongoDB) with a dynamic and long-term maintainability approach. • Managed cloud deployments using Docker (Docker Compose) and handled the software lifecycle through Git version control (GitHub, CI/CD). • Reduced implementation time by 90% for two new systems. • Decreased development effort for new features by 60% by identifying core functionalities and system-specific components.",
+    description: "• Led the design and development of a scalable SaaS-type CMS platform, facilitating the creation of personalized meeting websites by non-technical users. • The CMS was built with TypeScript, based on microfrontends (React) and integrating a REST API built with microservices (NestJS, Node.js), focused on domains and user-oriented. • Redesigned the NoSQL data model (MongoDB) with a dynamic and long-term maintainable approach. • Managed deployment in Cloud environments (Virtual Machine) with Docker (Docker Compose) controlled with GitHub (Git, CI/CD, SonarQube). • Reduced implementation time for new systems by 90%, automating creation for 3 meeting systems. • Decreased development effort for new meeting features by 60%.",
     startDate: "2024-08-05 00:00:00.000",
     endDate: "2025-07-18 00:00:00.000",
     coverImage: "/projects/project-cms-1.png",
@@ -27,13 +27,14 @@ export const fallbackProjects: Project[] = [
       { id: "10", name: "GitHub", category: "Devops/Tools", icon: "github" },
       { id: "11", name: "Linux", category: "Devops/Tools", icon: "linux" },
       { id: "12", name: "Docker", category: "Devops/Tools", icon: "docker" },
-      { id: "13", name: "Figma", category: "Design", icon: "figma" },
+      { id: "13", name: "Trello", category: "Project Management", icon: "trello" },
+      { id: "14", name: "Figma", category: "Design", icon: "figma" },
     ]
   },
   {
     id: "2",
     title: "Public website maintenance.",
-    description: "• Optimized the company's website by developing and maintaining modules in Django (Python), using an MVC architecture (models with PostgreSQL and views with HTML templates), with asynchronous communication between components (fetch). • Edited statistical charts (Chart.js), improving data visualization on the site. • Led the development of a video repository showcasing company activities, centralizing audiovisual content and enabling full public access. • Redesigned the navigation flow of the Whistleblowing Channel, reducing the time required to find critical information for administrative staff by 25%. • Documented technological incidents through continuous improvement processes and the resolution of technical problems.",
+    description: "• Supported the maintenance of the company website (Django, Python), using the MVC pattern (models with PostgreSQL and views with HTML templates), with asynchronous communication between components (fetch). • Edited statistical charts (Chart.js), improving data visualization on the site. • Led the development of a new company video repository, achieving centralized audiovisual material and enabling public access. • Redesigned the user interface and navigation flow of the Whistleblower Channel, increasing critical complaint information visibility by 30%. • Resolved requirements from the company support system through documentation processes and continuous improvement.",
     startDate: "2025-01-06 00:00:00.000",
     endDate: "2025-02-21 00:00:00.000",
     coverImage: "/projects/project-web-4.png",
@@ -58,7 +59,7 @@ export const fallbackProjects: Project[] = [
   {
     id: "3",
     title: "Prototype of an advanced document management system.",
-    description: "• Designed and implemented a desktop application for document management using Python. • The system allows managing documents locally or in the cloud (via Google Drive). • Advanced document search using Python libraries such as NLTK and PyPDF. • Intelligent document organization from a specific location using the Scikit-learn library in Python. • Implemented AI-assisted features using OpenAI to query information within specific documents. • Achieved a reduction in search time for unorganized documents. • Improved user productivity and operational efficiency.",
+    description: "• Participated in the development of a desktop document management application, using advanced Python libraries and the MVC pattern. • The system allows managing documents locally or in the cloud (via Google Drive). • Collaborated in the implementation of an advanced search engine (using NLTK and PyPDF), achieving reduced search time for disorganized documents. • Collaborated in the implementation of a document classifier (using Scikit-Learn), using criteria of date, language, and topics, achieving automated organization. • Supported the implementation of an AI chatbot (using OpenAI), achieving systematization of information in documents.",
     startDate: "2023-08-28 00:00:00.000",
     endDate: "2023-12-22 00:00:00.000",
     coverImage: "/projects/project-docs-2.png",
@@ -73,13 +74,14 @@ export const fallbackProjects: Project[] = [
       { id: "2", name: "GitHub", category: "Devops/Tools", icon: "github" },
       { id: "3", name: "Git", category: "Devops/Tools", icon: "git" },
       { id: "4", name: "Linux", category: "Devops / Tools", icon: "linux" },
-      { id: "5", name: "Figma", category: "Design", icon: "figma" },
+      { id: "5", name: "Jira", category: "Project Management", icon: "jira" },
+      { id: "6", name: "Figma", category: "Design", icon: "figma" },
     ]
   },
   {
     id: "4",
     title: "Web interface for an educational system simulating mathematical exercises.",
-    description: "• Collaborated in the development of an educational web application (using Scrum) to automate course management and simulate exercises on integers using a number line. • Supported the understanding of interactive exercises (metaphors) for different simulation scenarios on the number line. • Designed and developed the user interface using Vue.js, including the consumption of CRUD requests with Axios to a backend (REST API) built with Spring Boot (Java). • Reduced teachers' preparation time by 30% through automation in the creation and grading of exercises.",
+    description: "• Collaborated in the development of an educational web application (using Scrum) to automate course management and simulate exercises on integers using a number line. • Supported the creation of metaphors for better understanding in simulated exercises. • Developed the user interface (Vue.js) of the entire system. • Integrated and consumed a REST API (Spring Boot) connected to an SQL database (PostgreSQL). • Reduced teacher workload by 30% in automated exercise generation.",
     startDate: "2023-03-06 00:00:00.000",
     endDate: "2023-08-04 00:00:00.000",
     coverImage: "/projects/project-math-1.png",
@@ -98,7 +100,8 @@ export const fallbackProjects: Project[] = [
       { id: "7", name: "GitHub", category: "Devops/Tools", icon: "github" },
       { id: "8", name: "Linux", category: "Devops/Tools", icon: "linux" },
       { id: "9", name: "Docker", category: "Devops/Tools", icon: "docker" },
-      { id: "10", name: "Figma", category: "Design", icon: "figma" },
+      { id: "10", name: "Jira", category: "Project Management", icon: "jira" },
+      { id: "11", name: "Figma", category: "Design", icon: "figma" },
     ]
   },
 ]

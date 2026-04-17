@@ -111,6 +111,18 @@ export const fallbackSkills: Skill[] = [
     },
     {
       id: "19",
+      name: "Trello",
+      category: "Project Management",
+      icon: "trello"
+    },
+    {
+      id: "20",
+      name: "Jira",
+      category: "Project Management",
+      icon: "jira"
+    },
+    {
+      id: "21",
       name: "Figma",
       category: "Design",
       icon: "figma"

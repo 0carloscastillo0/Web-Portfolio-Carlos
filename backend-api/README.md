@@ -1,76 +1,154 @@
-# 🚀 Portafolio Profesional Fullstack
+# 🚀 Portfolio Backend API (EN DESARROLLO)
 
-Aplicación web fullstack desarrollada para presentar la información relacionada a los proyectos en los que he participado, incluyendo datos personales relevantes.
+API backend desarrollada con **Node.js + Express + TypeScript**, encargada de gestionar la información del portafolio profesional y proveer endpoints REST para el frontend.
 
-El sistema está diseñado bajo una arquitectura cliente-servidor, incorporando un backend tipado con TypeScript, un modelo de datos relacional y una interfaz moderna desarrollada en React.
-
-> 📌 Actualmente el portafolio se encuentra en fase de implementación, con diseño de interfaz finalizado y arquitectura definida.
+El proyecto sigue una arquitectura modular y escalable, preparada para integrarse con base de datos mediante **Prisma ORM**.
 
 ---
 
-# 🎯 Objetivo del Proyecto
+## 📦 Tecnologías utilizadas
 
-Construir un portafolio profesional dinámico que:
-
-- No dependa de información hardcodeada.
-- Implemente un backend real mediante una API REST.
-- Utilice un modelo de datos relacional.
-- Aplique tipado fuerte con TypeScript tanto en frontend como en backend.
-- Portafolio escalable para considerar futuras expansiones.
-
----
-
-# 🛠 Stack Tecnológico
-
-<ul>
-<li>Base de datos: PostgreSQL</li>
-<li>Backend: Node.js, Express.js, TypeScript, Prisma ORM</li>
-<li>Frontend: React, TypeScript, Tailwind CSS</li>
-<li>Deploy (planeado): Vercel</li>
-</ul>
+* Node.js  
+* Express.js  
+* TypeScript  
+* Prisma ORM  
+* PostgreSQL
+* dotenv    
+* API REST  
 
 ---
 
-# 🏗 Artefactos del Proyecto
+## 📌 Estado del proyecto
 
-A continuación se presentan los artefactos de análisis y diseño utilizados en el desarrollo del portafolio:
+🚧 **Proyecto en desarrollo**
 
-## 📊 Requerimientos Funcionales (RF) y No Funcionales (RNF)
-Documento que define el alcance del portafolio, incluyendo restricciones y criterios de calidad.
+Actualmente, el backend está en proceso de construcción y tiene como objetivo:
 
-🔗 Ver documento: [Google Sheets - Requerimientos](https://docs.google.com/spreadsheets/d/1Et3okoDISRrPpKiXxBZogM9ToRui50uEGnlKq4qgNOM/edit?usp=sharing)
-
----
-
-## 🗄 Modelo Entidad-Relación (ER)
-Diseño del modelo de datos relacional del portafolio.
-
-🔗 Ver diagrama ER: [Draw.io - Diagrama ER](https://drive.google.com/file/d/1P8MQth2Y8B7kQehHWOwmyf8D4_7r4sS5/view?usp=sharing)
+* Reemplazar la capa de datos simulada del frontend  
+* Proveer endpoints reales  
+* Centralizar la lógica de negocio  
+* Integrarse con base de datos mediante Prisma  
 
 ---
 
-## 🏗 Diagrama de Arquitectura
-Representación de la arquitectura cliente-servidor y tecnologías utilizadas.
+## 📌 Funcionalidades previstas
 
-🔗 Ver arquitectura: [Draw.io - Diagrama de Arquitectura](https://drive.google.com/file/d/1ztBFRXENwxvPkEyTgVM1OiXiNmsZWk5z/view?usp=sharing)
-
----
-
-## 🎨 Mockups y Diseño UX/UI
-Prototipo visual completo del sistema.
-
-🔗 Ver mockups: [Figma - Prototipo](https://www.figma.com/design/gMcWf12msJUwOiLWmfIy4t/Prototipe-Portfolio?node-id=0-1&m=dev&t=LWp0ZndpuCVTmWoN-1
-)
+* Gestión de perfil (user)
+* Gestión de proyectos (project)
+* Gestión de educación (education)
+* Gestión de habilidades (skill)  
+* Gestión de contactos (contact)
+* Manejo de archivos (uploads)  
+* API REST estructurada  
+* Validación de datos  
 
 ---
 
-# ⚙️ Etapas del Proyecto (en desarrollo)
+## 📁 Estructura del proyecto
 
-- ✅ Análisis de requerimientos
-- ✅ Diseño preliminar UX/UI
-- ✅ Modelo ER
-- ✅ Arquitectura
-- ✅ Implementación del modelo
-- Implementación de consultas REST
-- Implementación del frontend
-- Deploy en producción
+```bash
+.
+├── src/
+│   │
+│   ├── config/         # Configuración de prisma ORM
+│   ├── controllers/    # Controladores (manejo de request/response)
+│   ├── docs/           # Documentación por Swagger
+│   ├── middlewares/    # Middlewares (validaciones y errores)
+│   ├── routes/         # Definición de rutas (endpoints)
+│   ├── schemas/        # Validaciones del modelo con Joi
+│   ├── services/       # Lógica de negocio
+│   ├── utils/          # Funciones auxiliares
+│   │
+│   ├── app.ts          # Configuración de Express
+│   └── index.ts        # Punto de entrada
+│
+├── prisma/             # Esquema y migraciones de Prisma
+├── generated/          # Código generado por Prisma
+├── uploads/            # Archivos subidos
+│
+├── .env                # Variables de entorno
+├── .gitignore
+├── package.json
+├── package-lock.json
+├── prisma.config.ts    # Configuración de Prisma
+├── tsconfig.json       # Configuración de TypeScript
+├── README.md
+```
+
+## ⚙️ Instalación y ejecución en local (Backend)
+
+Este proyecto forma parte de un repositorio que contiene tanto frontend como backend.
+
+---
+### 📥 1. Clonar el repositorio
+
+```bash
+git clone https://github.com/0carloscastillo0/Web-Portfolio-Carlos.git
+cd Web-Portfolio-Carlos
+```
+---
+
+### 📂 2. Acceder al proyecto backend
+
+```bash
+cd backend-api
+```
+
+---
+
+### 📦 3. Instalar dependencias
+
+```bash
+npm install
+```
+
+---
+### ⚙️ 4. Configurar variables de entorno
+Crear un archivo .env en la raíz del proyecto y añadir la URL de la base de datos:
+
+```bash
+DATABASE_URL="postgresql://postgres:1234@localhost:5432/webPortfolio?schema=public"
+```
+
+---
+### 🧬 5. Configurar Prisma
+Generar el cliente de prisma:
+```bash
+npx prisma generate
+```
+
+Ejecutar migraciones (si existen):
+```bash
+npx prisma migrate dev
+```
+
+---
+
+### ▶️ 6. Ejecutar el servidor en desarrollo
+
+```bash
+npm run dev
+```
+---
+
+### 🌐 7. Acceder a la API
+
+Por defecto, la aplicación estará disponible en:
+```
+http://localhost:3000
+```
+
+---
+
+## 📄 Licencia
+Proyecto de uso personal / portafolio.
+
+---
+
+## 👨‍💻 Autor
+Desarrollado por **Carlos Castillo Domínguez**
+
+---
+
+
+

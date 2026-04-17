@@ -40,7 +40,7 @@ const es = {
 
   projects: {
     title: "Proyectos",
-    subtitle: "Aquí encontrarás mis trabajos personales y los proyectos en los que he colaborado."
+    subtitle: "Aquí encontrarás los proyectos en los que he colaborado."
   }
 }
 

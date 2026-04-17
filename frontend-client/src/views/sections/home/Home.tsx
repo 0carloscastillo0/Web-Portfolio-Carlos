@@ -79,7 +79,7 @@ function Home() {
           </div>
 
           {/* ================= IMAGE SIDE ================= */}
-          <div className="relative flex items-center justify-center md:justify-end order-1 md:order-2">
+          <div className="relative flex items-center justify-center md:justify-end order-1 md:order-2 mt-8 md:mt-0">
 
             <div className="absolute w-72 h-72 md:w-96 md:h-96 rounded-2xl bg-accent/20 blur-3xl" />
 

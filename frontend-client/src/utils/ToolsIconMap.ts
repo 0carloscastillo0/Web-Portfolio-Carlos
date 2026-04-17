@@ -17,6 +17,8 @@ import {
     SiGithub,
     SiLinux,
     SiDocker,
+    SiTrello,
+    SiJira,
     SiFigma,
 } from "react-icons/si"
 
@@ -39,5 +41,7 @@ export const skillIconMap = {
     github: SiGithub,
     linux: SiLinux,
     docker: SiDocker,
+    trello: SiTrello,
+    jira: SiJira,
     figma: SiFigma
 }

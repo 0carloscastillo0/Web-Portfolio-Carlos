@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from "vitest"
+import { describe, it, expect, vi, beforeEach } from "vitest"
 import { render, screen, fireEvent, within, waitFor } from "@testing-library/react"
 
 import Header from "./Header"
@@ -15,6 +15,10 @@ import { translations } from "@/i18n"
  * a consistent test environment.
  */
 const renderHeader = () => {
+    beforeEach(() => {
+        localStorage.setItem("language", "ES")
+    })
+
     return render(
         <ThemeProvider>
             <LanguageProvider>

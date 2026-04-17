@@ -30,7 +30,9 @@ describe("LanguageContext", () => {
       wrapper: LanguageProvider,
     })
 
-    result.current.setLanguage("EN")
+    act(() => {
+      result.current.setLanguage("EN")
+    })
 
     expect(result.current.language).toBe("EN")
   })

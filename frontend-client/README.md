@@ -51,6 +51,8 @@ Aplicación frontend desarrollada con **React + TypeScript + Vite**, orientada a
 │   │   ├── skills/
 │   │   └── portfolio.interface.ts
 │   │
+│   ├── test/          # Configuración de test unitarios
+│   │
 │   ├── utils/          # Funciones utilitarias
 │   │
 │   ├── views/          # Capa de presentación (UI)
@@ -168,11 +170,29 @@ El archivo `index.css` define un **mini sistema de diseño** basado en TailwindC
 
 ---
 
+### 🧪 Testing
+
+El proyecto incluye pruebas unitarias para validar el comportamiento de componentes, hooks y lógica de negocio. Se utilizaron las tecnologías Vitest, React Testing Library y jsdom.
+
+Los tests cubren:
+
+* Hooks personalizados (ej: manejo de idioma, estado global)
+* Context API (providers y comportamiento)
+* Componentes clave (ej: Header)
+* Interacciones del usuario (eventos, navegación, UI dinámica)
+
+La cual, cada componente tiene su correspondiente carpeta test
+
+Para ejecutar los tests, ejecute el siguiente comando:
+
+```bash
+npm run test:run
+```
+
 ## 🔄 Flujo de datos (simplificado)
 
-```text id="y2y9q2"
+
 Fallback → Service → Hook → Context → View
-```
 
 * **Fallback** → fuente de datos simulada
 * **Service** → capa de acceso a datos
@@ -203,8 +223,8 @@ Actualmente, el frontend puede ejecutarse de forma independiente, ya que utiliza
 ### 📥 1. Clonar el repositorio
 
 ```bash
-git clone <url-del-repo>
-cd <nombre-del-repositorio>
+git clone https://github.com/0carloscastillo0/Web-Portfolio-Carlos.git
+cd Web-Portfolio-Carlos
 ```
 
 ---

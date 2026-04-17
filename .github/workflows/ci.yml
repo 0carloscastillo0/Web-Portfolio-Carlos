@@ -32,7 +32,6 @@ jobs:
         run: npm run test:coverage
 
       - name: Sonar Scan
-        working-directory: frontend-client
         run: npx sonar-scanner
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

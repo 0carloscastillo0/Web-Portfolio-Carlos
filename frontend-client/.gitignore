@@ -41,3 +41,5 @@ coverage/
 
 # Optional cache
 .cache/
+.vercel
+.env*.local

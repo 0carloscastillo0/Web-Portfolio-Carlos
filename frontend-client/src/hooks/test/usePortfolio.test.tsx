@@ -10,7 +10,7 @@ describe("usePortfolio", () => {
 
     expect(result.current).toEqual({
       profile: null,
-      contacts: [],
+      socialLinks: [],
       skills: [],
       educations: [],
       projects: [],
@@ -23,7 +23,7 @@ describe("usePortfolio", () => {
 
     const mockContext = {
       profile: null,
-      contacts: [],
+      socialLinks: [],
       skills: [],
       educations: [],
       projects: [],

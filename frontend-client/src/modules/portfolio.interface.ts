@@ -11,7 +11,7 @@ export interface Profile {
   Urlphoto: string
 }
 
-export interface Contact {
+export interface SocialLink {
   id: string
   name: string
   url: string
@@ -51,11 +51,17 @@ export interface Project {
   projectImages: ProjectImage[]
 }
 
+export interface ContactMessage {
+  name: string
+  email: string
+  subject: string
+  message: string
+}
 
 export interface PortfolioData {
   profile: Profile | null
   skills: Skill[]
-  contacts: Contact[]
+  socialLinks: SocialLink[]
   educations: Education[]
   projects: Project[]
 }

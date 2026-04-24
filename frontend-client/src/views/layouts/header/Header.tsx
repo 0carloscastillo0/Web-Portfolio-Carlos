@@ -20,7 +20,8 @@ function Header() {
     const sections = [
         { id: "home", label: "nav.home" },
         { id: "about", label: "nav.about" },
-        { id: "projects", label: "nav.projects" }
+        { id: "projects", label: "nav.projects" },
+        { id: "contact", label: "nav.contact" },
     ]
 
     const languages = Object.keys(translations) as Language[]

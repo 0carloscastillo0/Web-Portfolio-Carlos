@@ -3,6 +3,7 @@ const en = {
     home: "Home",
     about: "About Me",
     projects: "Projects",
+    contact: "Contact",
   },
 
   header: {
@@ -41,6 +42,25 @@ const en = {
   projects: {
     title: "Projects",
     subtitle: "Here you will find the projects I have collaborated on."
+  },
+
+  contact: {
+    title: "Contact",
+    subtitle: "Feel free to contact me for any inquiries or collaborations.",
+    sending: "Sending...",
+    success: "Message sent successfully",
+    form: {
+      name: "Your name",
+      email: "Your email",
+      subject: "Subject",
+      message: "Your message",
+      submit: "Send message"
+    },
+    error: {
+      required: "All fields are required",
+      invalidEmail: "Invalid email format",
+      failed: "Failed to send message"
+    }
   }
 }
 

@@ -24,7 +24,7 @@ vi.spyOn(portfolioHook, "usePortfolio").mockReturnValue({
         Urlphoto: "/test.jpg",
         UrlCV: "/test.pdf",
     },
-    contacts: [
+    socialLinks: [
         {
             id: "1",
             name: "GitHub",
@@ -66,7 +66,7 @@ describe("Home Section", () => {
         loading: true,
         error: null,
         profile: null,
-        contacts: [],
+        socialLinks: [],
         skills: [],
         educations: [],
         projects: [],

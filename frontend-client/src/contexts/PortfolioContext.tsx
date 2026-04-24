@@ -2,7 +2,7 @@ import { createContext, useEffect, useMemo, useState } from "react"
 
 import type { PortfolioData } from "@/modules/portfolio.interface"
 import { getProfile } from "@/modules/profile/profile.service"
-import { getContacts } from "@/modules/contact/contact.service"
+import { getSocialLinks } from "@/modules/socialLink/socialLink.service"
 import { getUserSkills } from "@/modules/skills/skill.service"
 import { getEducations } from "@/modules/education/education.service"
 import { getProjects } from "@/modules/project/project.service"
@@ -16,10 +16,10 @@ export const PortfolioProvider = ({ children }: { children: React.ReactNode }) =
 
   const [data, setData] = useState<PortfolioData>({
     profile: null,
-    contacts: [],
+    socialLinks: [],
     skills: [],
     educations: [],
-    projects: [],
+    projects: []
   })
 
   const [loading, setLoading] = useState(true)
@@ -28,15 +28,15 @@ export const PortfolioProvider = ({ children }: { children: React.ReactNode }) =
   useEffect(() => {
     const loadPortfolio = async () => {
       try {
-        const [profile, contacts, skills, educations, projects] = await Promise.all([
+        const [profile, socialLinks, skills, educations, projects] = await Promise.all([
           getProfile(),
-          getContacts(),
+          getSocialLinks(),
           getUserSkills(),
           getEducations(),
-          getProjects(),
+          getProjects()
         ])
 
-        setData({ profile, contacts, skills, educations, projects })
+        setData({ profile, socialLinks, skills, educations, projects })
 
       } catch {
         setError("Unexpected error loading portfolio")
@@ -64,7 +64,7 @@ export const PortfolioProvider = ({ children }: { children: React.ReactNode }) =
 
 export const PortfolioContext = createContext<PortfolioContextType>({
   profile: null,
-  contacts: [],
+  socialLinks: [],
   skills: [],
   educations: [],
   projects: [],

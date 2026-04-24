@@ -278,6 +278,7 @@ describe("Header", () => {
             home: 0,
             about: 150,
             projects: 300,
+            contact: 450,
         }
 
         // Mock getElementById to return elements with specific offsetTop values

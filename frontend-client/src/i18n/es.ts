@@ -1,8 +1,11 @@
+import { MdSubject } from "react-icons/md"
+
 const es = {
   nav: {
     home: "Inicio",
     about: "Sobre mí",
     projects: "Proyectos",
+    contact: "Contacto",
   },
 
   header: {
@@ -41,6 +44,25 @@ const es = {
   projects: {
     title: "Proyectos",
     subtitle: "Aquí encontrarás los proyectos en los que he colaborado."
+  },
+
+  contact: {
+    title: "Contacto",
+    subtitle: "Siéntete libre de contactarme para cualquier consulta o colaboración.",
+    sending: "Enviando...",
+    success: "Mensaje enviado correctamente",
+    form: {
+      name: "Tu nombre",
+      email: "Tu correo electrónico",
+      subject: "Asunto",
+      message: "Tu mensaje",
+      submit: "Enviar mensaje"
+    },
+    error: {
+      required: "Todos los campos son requeridos",
+      invalidEmail: "Formato de correo electrónico inválido",
+      failed: "No se pudo enviar el mensaje"
+    }
   }
 }
 

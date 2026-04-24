@@ -5,7 +5,7 @@ import { usePortfolio } from "@/hooks/usePortfolio"
 function Home() {
 
   const { t } = useTranslation()
-  const { profile, contacts, loading } = usePortfolio()
+  const { profile, socialLinks, loading } = usePortfolio()
 
   if (loading) {
     return <div>Loading...</div>
@@ -44,18 +44,18 @@ function Home() {
             {/* SOCIAL LINKS */}
             <div className="flex justify-center md:justify-start gap-5">
 
-              {contacts.map((contact) => {
+              {socialLinks.map((link) => {
 
-                const Icon = iconMap[contact.icon as keyof typeof iconMap]
+                const Icon = iconMap[link.icon as keyof typeof iconMap]
 
                 return (
                   <a
-                    key={contact.id}
-                    href={contact.url}
+                    key={link.id}
+                    href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-2 rounded-lg hover:bg-secondary hover:scale-110 transition duration-200"
-                    aria-label={contact.name}
+                    aria-label={link.name}
                   >
                     {Icon && <Icon size={28} />}
                   </a>

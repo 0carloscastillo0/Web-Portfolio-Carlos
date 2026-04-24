@@ -3,7 +3,7 @@ import { createContext, useEffect, useMemo, useState } from "react"
 import type { PortfolioData } from "@/modules/portfolio.interface"
 import { getProfile } from "@/modules/profile/profile.service"
 import { getSocialLinks } from "@/modules/socialLink/socialLink.service"
-import { getUserSkills } from "@/modules/skills/skill.service"
+import { getUserSkills } from "@/modules/skill/skill.service"
 import { getEducations } from "@/modules/education/education.service"
 import { getProjects } from "@/modules/project/project.service"
 

@@ -23,6 +23,7 @@ export interface Skill {
   name: string
   category: string
   icon: string
+  level: string
 }
 
 export interface Education {

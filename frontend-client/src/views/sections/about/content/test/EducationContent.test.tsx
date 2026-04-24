@@ -31,7 +31,7 @@ describe("EducationContent", () => {
         error: null,
         educations: [],
         profile: null,
-        contacts: [],
+        socialLinks: [],
         skills: [],
         projects: [],
       })
@@ -56,7 +56,7 @@ describe("EducationContent", () => {
           },
         ],
         profile: null,
-        contacts: [],
+        socialLinks: [],
         skills: [],
         projects: [],
       })

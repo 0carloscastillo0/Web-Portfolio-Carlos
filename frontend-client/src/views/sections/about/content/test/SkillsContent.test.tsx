@@ -181,6 +181,6 @@ describe("SkillsContent", () => {
     const advancedButton = screen.getByRole("button", { name: /advanced/i })
     await user.click(advancedButton)
 
-    expect(advancedButton).toHaveClass("bg-red-500")
+    expect(advancedButton).toHaveAttribute("aria-pressed", "true")
   })
 })

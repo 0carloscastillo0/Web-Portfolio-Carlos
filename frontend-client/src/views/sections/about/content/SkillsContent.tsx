@@ -4,38 +4,58 @@ import { useTranslation } from "@/hooks/useTranslation"
 import { skillIconMap } from "@/utils/ToolsIconMap"
 import type { Skill } from "@/modules/portfolio.interface"
 
+// ================= FILTER OPTIONS =================
+const LEVEL_CONFIG = {
+  ALL: {
+    label: "All",
+    button: {
+      base: "border-button text-secondary",
+      active: "bg-secondary text-primary border-button",
+    }
+  },
+  Advanced: {
+    label: "Advanced",
+    button: {
+      base: "border-advanced text-advanced",
+      active: "bg-advanced text-white border-advanced",
+    },
+    skill: {
+      border: "border-advanced",
+    },
+  },
+  Intermediate: {
+    label: "Intermediate",
+    button: {
+      base: "border-intermediate text-intermediate",
+      active: "bg-intermediate text-white border-intermediate",
+    },
+    skill: {
+      border: "border-intermediate",
+    },
+  },
+  Basic: {
+    label: "Basic",
+    button: {
+      base: "border-basic text-basic",
+      active: "bg-basic text-white border-basic",
+    },
+    skill: {
+      border: "border-basic",
+    },
+  },
+} as const
+
+
+// ================= SKILLS CONTENT COMPONENT =================
 function SkillsContent() {
   const { t } = useTranslation()
   const { skills, loading } = usePortfolio()
-  const [filter, setFilter] = useState<"ALL" | "Advanced" | "Intermediate" | "Basic">("ALL")
+  
+  type LevelFilter = keyof typeof LEVEL_CONFIG
+  const [filter, setFilter] = useState<LevelFilter>("ALL")
 
   if (loading) {
     return <div>Loading...</div>
-  }
-
-  const skillBorderStyles = {
-    Advanced: "border-red-300",
-    Intermediate: "border-yellow-300",
-    Basic: "border-green-300",
-  }
-
-  const filterButtonStyles = {
-    ALL: {
-      base: "border-gray-400 text-gray-500",
-      active: "bg-gray-500 text-white border-gray-500",
-    },
-    Advanced: {
-      base: "border-red-400 text-red-500",
-      active: "bg-red-500 text-white border-red-500",
-    },
-    Intermediate: {
-      base: "border-yellow-400 text-yellow-500",
-      active: "bg-yellow-500 text-white border-yellow-500",
-    },
-    Basic: {
-      base: "border-green-400 text-green-500",
-      active: "bg-green-500 text-white border-green-500",
-    },
   }
 
   // ================= FILTER AND GROUP BY CATEGORY =================
@@ -64,32 +84,24 @@ function SkillsContent() {
       {/* ================= FILTER BUTTONS ================= */}
       <div className="flex flex-wrap gap-2 justify-center">
 
-        {[
-          { label: "All", value: "ALL" },
-          { label: "Advanced", value: "Advanced" },
-          { label: "Intermediate", value: "Intermediate" },
-          { label: "Basic", value: "Basic" },
-        ].map((btn) => {
-
-          return (
-            <button
-              key={btn.value}
-              onClick={() => setFilter(btn.value as any)}
-              className={`
-                px-4 py-1.5 rounded-full text-sm font-medium
-                border transition-all duration-200
-
-                ${
-                  filter === btn.value
-                    ? filterButtonStyles[btn.value as keyof typeof filterButtonStyles].active
-                    : filterButtonStyles[btn.value as keyof typeof filterButtonStyles].base
-                }
-              `}
-            >
-              {btn.label}
-            </button>
-          )
-        })}
+        {Object.entries(LEVEL_CONFIG).map(([value, config]) => (
+          <button
+            key={value}
+            aria-pressed={filter === value}
+            onClick={() => setFilter(value as LevelFilter)}
+            className={`
+              px-4 py-1.5 rounded-full text-sm font-medium
+              border transition-all duration-200
+              ${
+                filter === value
+                  ? config.button.active
+                  : config.button.base
+              }
+            `}
+          >
+            {config.label}
+          </button>
+        ))}
 
       </div>
 
@@ -121,7 +133,7 @@ function SkillsContent() {
                       p-4 rounded-xl
                       surface-secondary
                       border
-                      ${skillBorderStyles[skill.level as keyof typeof skillBorderStyles]}
+                      ${LEVEL_CONFIG[skill.level as Exclude<LevelFilter, "ALL">].skill.border}
                     `}
                   >
                     {/* ICON */}

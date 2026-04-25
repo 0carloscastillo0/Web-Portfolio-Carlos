@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest"
 import { render, screen, fireEvent, waitFor } from "@testing-library/react"
+import { userEvent } from "@testing-library/user-event"
 
 import About from "./About"
 import { LanguageProvider } from "@/contexts/LanguageContext"
@@ -128,15 +129,21 @@ describe("About Section", () => {
   })
 
   /**
-   * Should render CV download button with correct link and attributes
+   * Should allow selecting CV language from modal
    */
-  it("should render CV download button with correct link", async () => {
+  it("should allow selecting CV language from modal", async () => {
     renderAbout()
 
-    const link = await screen.findByRole("link", { name: /download cv/i })
+    const button = await screen.findByRole("button", {
+      name: /download cv/i
+    })
 
-    expect(link).toBeInTheDocument()
-    expect(link).toHaveAttribute("href", "/user/CV_Carlos_Castillo.pdf")
-    expect(link).toHaveAttribute("download")
+    await userEvent.click(button)
+
+    const spanishOption = await screen.findByRole("link", {
+      name: /spanish/i
+    })
+
+    expect(spanishOption).toHaveAttribute("href", "/user/CV_Carlos_Castillo_ES.pdf")
   })
 })

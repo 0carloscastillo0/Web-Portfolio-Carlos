@@ -7,7 +7,8 @@ export interface Profile {
   city: string
   country: string
   description: string
-  UrlCV: string
+  UrlCVEN: string
+  UrlCVES: string
   Urlphoto: string
 }
 

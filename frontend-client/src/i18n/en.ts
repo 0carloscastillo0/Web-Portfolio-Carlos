@@ -61,6 +61,12 @@ const en = {
       invalidEmail: "Invalid email format",
       failed: "Failed to send message"
     }
+  },
+
+  cv: {
+    selectLanguage: "Select CV language",
+    spanish: "Spanish",
+    english: "English"
   }
 }
 

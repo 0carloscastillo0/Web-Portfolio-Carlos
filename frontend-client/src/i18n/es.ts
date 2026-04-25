@@ -63,6 +63,12 @@ const es = {
       invalidEmail: "Formato de correo electrónico inválido",
       failed: "No se pudo enviar el mensaje"
     }
+  },
+
+  cv: {
+    selectLanguage: "Selecciona el idioma del CV",
+    spanish: "Español",
+    english: "Inglés"
   }
 }
 

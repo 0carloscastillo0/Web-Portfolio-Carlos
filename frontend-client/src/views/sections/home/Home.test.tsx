@@ -22,7 +22,8 @@ vi.spyOn(portfolioHook, "usePortfolio").mockReturnValue({
         country: "Chile",
         city: "Santiago",
         Urlphoto: "/test.jpg",
-        UrlCV: "/test.pdf",
+        UrlCVES: "/testES.pdf",
+        UrlCVEN: "/testEN.pdf",
     },
     socialLinks: [
         {

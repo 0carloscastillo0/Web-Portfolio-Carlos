@@ -60,7 +60,7 @@ const es = {
     },
     error: {
       required: "Todos los campos son requeridos",
-      invalidEmail: "Formato de correo electrónico inválido",
+      invalidEmail: "Escriba el formato de correo válido. Ejemplo: formato@correo.cl",
       failed: "No se pudo enviar el mensaje"
     }
   },

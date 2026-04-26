@@ -36,13 +36,31 @@ function Contact() {
 
   // Validate form fields before submission
   const validate = () => {
+
+    // Validate required fields
     if (!form.name || !form.email || !form.subject || !form.message) {
-        return t("contact.error.required")
+      return t("contact.error.required")
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(form.email)) {
-        return t("contact.error.invalidEmail")
+    // Validate email format
+    const email = form.email.trim()
+    const parts = email.split("@")
+    if (parts.length !== 2) {
+      return t("contact.error.invalidEmail")
+    }
+
+    const [local, domain] = parts
+    if (!local || !domain) {
+      return t("contact.error.invalidEmail")
+    }
+    if (!domain.includes(".")) {
+      return t("contact.error.invalidEmail")
+    }
+    if (
+      domain.startsWith(".") ||
+      domain.endsWith(".")
+    ) {
+      return t("contact.error.invalidEmail")
     }
 
     return null
@@ -105,6 +123,7 @@ function Contact() {
         <form
           onSubmit={handleSubmit}
           role="form"
+          noValidate
           className="max-w-xl mx-auto space-y-4"
         >
           {/* NAME */}
@@ -119,7 +138,7 @@ function Contact() {
 
           {/* EMAIL */}
           <input
-            type="email"
+            type="text"
             name="email"
             placeholder={t("contact.form.email")}
             value={form.email}

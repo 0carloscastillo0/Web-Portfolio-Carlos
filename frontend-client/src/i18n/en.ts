@@ -58,7 +58,7 @@ const en = {
     },
     error: {
       required: "All fields are required",
-      invalidEmail: "Invalid email format",
+      invalidEmail: "Please enter a valid email format. Example: format@email.cl",
       failed: "Failed to send message"
     }
   },

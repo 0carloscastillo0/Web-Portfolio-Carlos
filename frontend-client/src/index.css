@@ -29,6 +29,14 @@ button {
   --color-accent: #06b6d4;
   --color-accent-hover: #0891b2;
 
+  --color-level-advanced: #ef4444;
+  --color-level-intermediate: #f59e0b;
+  --color-level-basic: #22c55e;
+
+  --color-level-advanced-soft: #fee2e2;
+  --color-level-intermediate-soft: #fef3c7;
+  --color-level-basic-soft: #dcfce7;
+
 }
 
 /* ===============================
@@ -48,6 +56,14 @@ button {
 
   --color-accent: #06b6d4;
   --color-accent-hover: #0891b2;
+
+  --color-level-advanced: #f87171;
+  --color-level-intermediate: #fbbf24;
+  --color-level-basic: #4ade80;
+
+  --color-level-advanced-soft: #7f1d1d;
+  --color-level-intermediate-soft: #78350f;
+  --color-level-basic-soft: #14532d;
 
 }
 
@@ -97,6 +113,46 @@ button {
 
 .text-accent {
   color: var(--color-accent);
+}
+
+/* ===============================
+   SKILL LEVEL UTILITIES
+================================ */
+
+.border-advanced {
+  border-color: var(--color-level-advanced);
+}
+
+.border-intermediate {
+  border-color: var(--color-level-intermediate);
+}
+
+.border-basic {
+  border-color: var(--color-level-basic);
+}
+
+.text-advanced {
+  color: var(--color-level-advanced);
+}
+
+.text-intermediate {
+  color: var(--color-level-intermediate);
+}
+
+.text-basic {
+  color: var(--color-level-basic);
+}
+
+.bg-advanced {
+  background-color: var(--color-level-advanced);
+}
+
+.bg-intermediate {
+  background-color: var(--color-level-intermediate);
+}
+
+.bg-basic {
+  background-color: var(--color-level-basic);
 }
 
 /* ===============================

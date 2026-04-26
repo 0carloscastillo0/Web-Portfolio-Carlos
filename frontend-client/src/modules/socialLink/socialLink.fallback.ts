@@ -1,20 +1,14 @@
-import type { Contact } from "../portfolio.interface"
+import type { SocialLink } from "../portfolio.interface"
 
-export const fallbackContacts: Contact[] = [
+export const fallbackSocialLink: SocialLink[] = [
   {
     id: "1",
-    name: "email",
-    url: "mailto:carlos.castillo.d@usach.cl",
-    icon: "mail"
-  },
-  {
-    id: "2",
     name: "linkedin",
     url: "https://www.linkedin.com/in/carlos-castillo-d",
     icon: "linkedin"
   },
   {
-    id: "3",
+    id: "2",
     name: "github",
     url: "https://github.com/0carloscastillo0",
     icon: "github"

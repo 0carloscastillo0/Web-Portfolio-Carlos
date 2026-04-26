@@ -6,6 +6,7 @@ import { useTranslation } from "@/hooks/useTranslation"
 import { usePortfolio } from "@/hooks/usePortfolio"
 import { translations } from "@/i18n/index"
 import type { Language } from "@/i18n/index"
+import DownloadCVModal from "@/views/components/DownloadCVModal"
 
 import DesktopHeader from "./components/DesktopHeader"
 import MobileHeader from "./components/MobileHeader"
@@ -20,7 +21,8 @@ function Header() {
     const sections = [
         { id: "home", label: "nav.home" },
         { id: "about", label: "nav.about" },
-        { id: "projects", label: "nav.projects" }
+        { id: "projects", label: "nav.projects" },
+        { id: "contact", label: "nav.contact" },
     ]
 
     const languages = Object.keys(translations) as Language[]
@@ -46,6 +48,8 @@ function Header() {
     const [mobileView, setMobileView] = useState<MobileView>("menu")
 
     const [activeSection, setActiveSection] = useState("home")
+
+    const [isCVModalOpen, setIsCVModalOpen] = useState(false)
 
     /* =====================================================
         REFS
@@ -155,7 +159,9 @@ function Header() {
                         themes={themes}
                         onChangeTheme={changeTheme}
                         t={t}
-                        cvUrl={profile?.UrlCV}
+                        cvUrlES={profile?.UrlCVES}
+                        cvUrlEN={profile?.UrlCVEN}
+                        onOpenCVModal={() => setIsCVModalOpen(true)}
                     />
 
                     {/* =====================================================
@@ -187,10 +193,22 @@ function Header() {
                 themes={themes}
                 onChangeTheme={changeTheme}
                 t={t}
-                cvUrl={profile?.UrlCV}
-                setMobileMenuOpen={setMobileMenuOpen}
+                cvUrlES={profile?.UrlCVES}
+                cvUrlEN={profile?.UrlCVEN}
+                onOpenCVModal={() => setIsCVModalOpen(true)}
             />
             
+            {/* =====================================================
+                DOWNLOAD CV MODAL
+            ===================================================== */}
+            {isCVModalOpen && (
+                <DownloadCVModal
+                    onClose={() => setIsCVModalOpen(false)}
+                    urlES={profile?.UrlCVES}
+                    urlEN={profile?.UrlCVEN}
+                    t={t}
+                />
+            )}
         </>
     )
 }

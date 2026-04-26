@@ -22,9 +22,9 @@ function DescriptionContent() {
       <div className="grid md:grid-cols-2 gap-10 items-center">
 
         {/* ================= IMAGE ================= */}
-        <div className="flex justify-center">
+        <div className="flex flex-col justify-center items-center gap-4">
           <div className="relative">
-
+            
             {/* Glow effect */}
             <div className="absolute w-52 h-52 md:w-64 md:h-64 rounded-full bg-accent/20 blur-3xl" />
 
@@ -42,6 +42,11 @@ function DescriptionContent() {
               "
             />
           </div>
+
+          <p className="text-body text-accent font-semibold text-center">
+              {profile?.title}
+          </p>
+
         </div>
 
         {/* ================= TEXT ================= */}

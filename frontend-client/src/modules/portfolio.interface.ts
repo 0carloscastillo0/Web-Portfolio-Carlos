@@ -7,11 +7,12 @@ export interface Profile {
   city: string
   country: string
   description: string
-  UrlCV: string
+  UrlCVEN: string
+  UrlCVES: string
   Urlphoto: string
 }
 
-export interface Contact {
+export interface SocialLink {
   id: string
   name: string
   url: string
@@ -23,6 +24,7 @@ export interface Skill {
   name: string
   category: string
   icon: string
+  level: string
 }
 
 export interface Education {
@@ -51,11 +53,17 @@ export interface Project {
   projectImages: ProjectImage[]
 }
 
+export interface ContactMessage {
+  name: string
+  email: string
+  subject: string
+  message: string
+}
 
 export interface PortfolioData {
   profile: Profile | null
   skills: Skill[]
-  contacts: Contact[]
+  socialLinks: SocialLink[]
   educations: Education[]
   projects: Project[]
 }

@@ -20,7 +20,9 @@ type Props = {
 
   t: (key: string) => string
 
-  cvUrl?: string
+  cvUrlES?: string
+  cvUrlEN?: string
+  onOpenCVModal: () => void
 }
 
 function DesktopHeader(props: Props) {
@@ -35,7 +37,9 @@ function DesktopHeader(props: Props) {
     themes,
     onChangeTheme,
     t,
-    cvUrl
+    cvUrlES,
+    cvUrlEN,
+    onOpenCVModal
   } = props
   return (
     <div className="hidden md:flex w-full items-center justify-between">
@@ -73,16 +77,14 @@ function DesktopHeader(props: Props) {
           />
         </div>
 
-        {cvUrl && (
-          <a
-            href={cvUrl}
-            download
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-5 py-2 bg-accent rounded-xl text-sm font-semibold text-white inline-block"
+        {(cvUrlES || cvUrlEN) && (
+          <button
+            onClick={onOpenCVModal}
+            aria-label={t("header.downloadCV")}
+            className="px-5 py-2 bg-accent rounded-xl text-sm font-semibold text-white"
           >
             {t("header.downloadCV")}
-          </a>
+          </button>
         )}
 
       </div>

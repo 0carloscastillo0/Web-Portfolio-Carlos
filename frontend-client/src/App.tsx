@@ -4,6 +4,7 @@ import Footer from "./views/layouts/footer/Footer"
 import Home from "./views/sections/home/Home"
 import About from "./views/sections/about/About"
 import Projects from "./views/sections/projects/Projects"
+import Contact from "./views/sections/contact/Contact"
 
 import { PortfolioProvider } from "./contexts/PortfolioContext"
 
@@ -18,6 +19,7 @@ function App() {
             <Home />
             <About />
             <Projects />
+            <Contact />
         </main>
 
         <Footer />

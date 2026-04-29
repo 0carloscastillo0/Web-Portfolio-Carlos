@@ -1,8 +1,8 @@
-export const contactPaths = {
-    "/users/{userId}/contacts": {
+export const socialLinkPaths = {
+    "/users/{userId}/social-links": {
         post: {
-            tags: ["Contacts"],
-            summary: "Create a new contact for a user",
+            tags: ["Social Links"],
+            summary: "Create a new social link for a user",
             parameters: [
                 {
                     in: "path",
@@ -19,14 +19,14 @@ export const contactPaths = {
                 content: {
                     "application/json": {
                         schema: {
-                            $ref: "#/components/schemas/ContactCreate"
+                            $ref: "#/components/schemas/SocialLinkCreate"
                         }
                     }
                 }
             },
             responses: {
                 201: {
-                    description: "Contact created successfully",
+                    description: "Social link created successfully",
                     content: {
                         "application/json": {
                         schema: {
@@ -36,7 +36,7 @@ export const contactPaths = {
                                     type: "object",
                                     properties: {
                                         data: {
-                                            $ref: "#/components/schemas/Contact"
+                                            $ref: "#/components/schemas/SocialLink"
                                         }
                                     }
                                 }
@@ -57,8 +57,8 @@ export const contactPaths = {
             }
         },
         get: {
-            summary: "Get all contacts for a user",
-            tags: ["Contacts"],
+            summary: "Get all social links for a user",
+            tags: ["Social Links"],
             parameters: [
                 {
                     in: "path",
@@ -83,7 +83,7 @@ export const contactPaths = {
                                             data: {
                                                 type: "array",
                                                 items: {
-                                                    $ref: "#/components/schemas/Contact"
+                                                    $ref: "#/components/schemas/SocialLink"
                                                 }
                                             }
                                         }

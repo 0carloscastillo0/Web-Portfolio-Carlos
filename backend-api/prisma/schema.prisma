@@ -28,7 +28,7 @@ model User {
   educations Education[]
   skills Skill[]
   projects Project[]
-  contacts Contact[]
+  socialLinks SocialLink[]
 }
 
 model Education {
@@ -95,7 +95,7 @@ model SkillProject {
   @@id([skillId, projectId])
 }
 
-model Contact {
+model SocialLink {
   id Int @id @default(autoincrement())
   name String
   icon String

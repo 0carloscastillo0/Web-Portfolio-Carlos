@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import skillService from "../services/skill.service";
-import { asyncHandler } from "../utils/asyncHanfler";
-import { sendResponse } from "../utils/response";
+import skillService from "./skill.service";
+import { asyncHandler } from "../../utils/asyncHanfler";
+import { sendResponse } from "../../utils/response";
 
 /// Controller for user-related operations
 const skillController = {

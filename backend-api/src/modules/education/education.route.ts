@@ -1,7 +1,7 @@
 import { Router } from "express";
-import educationController from "../controllers/education.controller";
-import { validate } from "../middlewares/validate.middleware";
-import { educationCreateSchema, userIdParamSchema } from "../schemas/education.schema";
+import educationController from "./education.controller";
+import { validate } from "../../middlewares/validate.middleware";
+import { educationCreateSchema, userIdParamSchema } from "./education.schema";
 
 // Router for user-related endpoints
 const educationRouter = Router();

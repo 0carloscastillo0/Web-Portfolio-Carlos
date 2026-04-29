@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import educationService from "../services/education.service";
-import { asyncHandler } from "../utils/asyncHanfler";
-import { sendResponse } from "../utils/response";
+import educationService from "./education.service";
+import { asyncHandler } from "../../utils/asyncHanfler";
+import { sendResponse } from "../../utils/response";
 
 /// Controller for user-related operations
 const educationController = {

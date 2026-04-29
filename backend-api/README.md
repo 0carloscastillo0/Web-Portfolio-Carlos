@@ -50,30 +50,59 @@ Actualmente, el backend está en proceso de construcción y tiene como objetivo:
 .
 ├── src/
 │   │
-│   ├── config/         # Configuración de prisma ORM
-│   ├── controllers/    # Controladores (manejo de request/response)
-│   ├── docs/           # Documentación por Swagger
-│   ├── middlewares/    # Middlewares (validaciones y errores)
-│   ├── routes/         # Definición de rutas (endpoints)
-│   ├── schemas/        # Validaciones del modelo con Joi
-│   ├── services/       # Lógica de negocio
-│   ├── utils/          # Funciones auxiliares
+│   ├── config/             # Configuración de Prisma ORM
+│   ├── docs/               # Documentación Swagger/OpenAPI
+│   ├── middlewares/        # Middlewares globales
+│   ├── utils/              # Funciones utilitarias
 │   │
-│   ├── app.ts          # Configuración de Express
-│   └── index.ts        # Punto de entrada
+│   ├── modules/
+│   │   │
+│   │   ├── user/
+│   │   │   ├── user.controller.ts
+│   │   │   ├── user.route.ts
+│   │   │   ├── user.schema.ts
+│   │   │   └── user.service.ts
+│   │   │
+│   │   ├── project/
+│   │   │   ├── project.controller.ts
+│   │   │   ├── project.route.ts
+│   │   │   ├── project.schema.ts
+│   │   │   └── project.service.ts
+│   │   │
+│   │   ├── education/
+│   │   │   ├── education.controller.ts
+│   │   │   ├── education.route.ts
+│   │   │   ├── education.schema.ts
+│   │   │   └── education.service.ts
+│   │   │
+│   │   ├── skill/
+│   │   │   ├── skill.controller.ts
+│   │   │   ├── skill.route.ts
+│   │   │   ├── skill.schema.ts
+│   │   │   └── skill.service.ts
+│   │   │
+│   │   └── socialLink/
+│   │       ├── socialLink.controller.ts
+│   │       ├── socialLink.route.ts
+│   │       ├── socialLink.schema.ts
+│   │       └── socialLink.service.ts
+│   │
+│   ├── app.ts              # Configuración principal de Express
+│   └── index.ts            # Punto de entrada del servidor
 │
-├── prisma/             # Esquema y migraciones de Prisma
-├── generated/          # Código generado por Prisma
-├── uploads/            # Archivos subidos
+├── prisma/                 # Schema y migraciones de Prisma
+├── generated/              # Cliente generado por Prisma
+├── uploads/                # Archivos subidos
 │
-├── .env                # Variables de entorno
+├── .env                    # Variables de entorno
 ├── .gitignore
 ├── package.json
 ├── package-lock.json
-├── prisma.config.ts    # Configuración de Prisma
-├── tsconfig.json       # Configuración de TypeScript
-├── README.md
+├── prisma.config.ts        # Configuración de Prisma
+├── tsconfig.json           # Configuración de TypeScript
+└── README.md
 ```
+
 
 ## ⚙️ Instalación y ejecución en local (Backend)
 

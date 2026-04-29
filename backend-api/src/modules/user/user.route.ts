@@ -1,8 +1,8 @@
 import { Router } from "express";
-import userController from "../controllers/user.controller";
-import { validate } from "../middlewares/validate.middleware";
-import { userCreateSchema } from "../schemas/user.schema";
-import { uploadUserCV, uploadUserImage } from "../utils/multer";
+import userController from "./user.controller";
+import { validate } from "../../middlewares/validate.middleware";
+import { userCreateSchema } from "./user.schema";
+import { uploadUserCV, uploadUserImage } from "../../utils/multer";
 
 // Router for user-related endpoints
 const userRouter = Router();

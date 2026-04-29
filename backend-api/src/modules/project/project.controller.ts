@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import projectService from "../services/project.service";
-import { asyncHandler } from "../utils/asyncHanfler";
-import { sendResponse } from "../utils/response";
+import projectService from "./project.service";
+import { asyncHandler } from "../../utils/asyncHanfler";
+import { sendResponse } from "../../utils/response";
 
 /// Controller for project-related operations
 const projectController = {

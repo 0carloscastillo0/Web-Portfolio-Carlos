@@ -1,7 +1,7 @@
 import Joi from "joi";
 
 /// Joi schema for validating contact creation/edition input
-export const contactCreateSchema = Joi.object({
+export const socialLinkCreateSchema = Joi.object({
     name: Joi.string().trim().required(),
     icon: Joi.string().trim().required(),
     url: Joi.string().trim().required(),

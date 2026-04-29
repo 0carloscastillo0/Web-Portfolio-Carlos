@@ -1,5 +1,5 @@
-export const contactSchemas = {
-    Contact: {
+export const socialLinkSchemas = {
+    SocialLink: {
         type: "object",
         properties: {
             id: { 
@@ -25,7 +25,7 @@ export const contactSchemas = {
         }
     },
 
-    ContactCreate: {
+    SocialLinkCreate: {
         type: "object",
         required: ["name", "icon", "url"],
         properties: {

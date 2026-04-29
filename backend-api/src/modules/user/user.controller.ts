@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import userService from "../services/user.service";
-import { asyncHandler } from "../utils/asyncHanfler";
-import { sendResponse } from "../utils/response";
+import userService from "./user.service";
+import { asyncHandler } from "../../utils/asyncHanfler";
+import { sendResponse } from "../../utils/response";
 
 /// Controller for user-related operations
 const userController = {

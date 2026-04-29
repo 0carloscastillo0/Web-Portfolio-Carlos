@@ -1,7 +1,7 @@
 import { Router } from "express";
-import skillController from "../controllers/skill.controller";
-import { validate } from "../middlewares/validate.middleware";
-import { skillCreateSchema, userIdParamSchema } from "../schemas/skill.schema";
+import skillController from "./skill.controller";
+import { validate } from "../../middlewares/validate.middleware";
+import { skillCreateSchema, userIdParamSchema } from "./skill.schema";
 
 // Router for user-related endpoints
 const skillRouter = Router();

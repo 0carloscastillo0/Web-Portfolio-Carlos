@@ -3,11 +3,11 @@ import { errorHandler } from "./middlewares/error.middleware";
 import swaggerUi from "swagger-ui-express";
 import { swaggerSpec } from "./docs/swagger";
 
-import userRouter from "./routes/user.route";
-import educationRouter from "./routes/education.route";
-import projectRouter from "./routes/project.route";
-import contactRouter from "./routes/contact.route";
-import skillRouter from "./routes/skill.route";
+import userRouter from "./modules/user/user.route";
+import educationRouter from "./modules/education/education.route";
+import projectRouter from "./modules/project/project.route";
+import socialLinkRouter from "./modules/socialLink/socialLink.route";
+import skillRouter from "./modules/skill/skill.route";
 
 // Create Express app
 const app = express();
@@ -22,7 +22,7 @@ app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1", educationRouter);
 app.use("/api/v1", projectRouter);
-app.use("/api/v1", contactRouter);
+app.use("/api/v1", socialLinkRouter);
 app.use("/api/v1", skillRouter);
 
 // Error handling middleware

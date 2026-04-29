@@ -1,5 +1,5 @@
-import { prisma } from "../config/prisma";
-import { AppError } from "../utils/AppError";
+import { prisma } from "../../config/prisma";
+import { AppError } from "../../utils/AppError";
 
 /// Service for user-related operations
 const educationService = {

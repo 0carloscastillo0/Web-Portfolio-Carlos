@@ -117,7 +117,14 @@ function Header() {
 
         if (element) {
             const headerOffset = 20
-            const offsetPosition = (id === "home") ? 0 : (element.offsetTop - headerOffset)
+            const offsetPosition =
+                id === "home"
+                    ? 0
+                    : (
+                        element.getBoundingClientRect().top +
+                        window.scrollY -
+                        headerOffset
+                    )
 
             isScrollingProgrammatically.current = true
             setActiveSection(id)

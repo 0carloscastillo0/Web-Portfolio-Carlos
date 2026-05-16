@@ -8,23 +8,40 @@ import Contact from "./views/sections/contact/Contact"
 
 import { PortfolioProvider } from "./contexts/PortfolioContext"
 
+import LazyRenderSection from "./views/components/LazyRenderSection"
+
 function App() {
   return (
     <PortfolioProvider>
+
       <div className="min-h-screen flex flex-col bg-primary text-text transition-colors duration-300">
 
         <Header />
 
         <main className="flex-1 px-6 lg:px-12">
+
+          <LazyRenderSection id="home">
             <Home />
+          </LazyRenderSection>
+
+          <LazyRenderSection id="about">
             <About />
+          </LazyRenderSection>
+
+          <LazyRenderSection id="projects">
             <Projects />
+          </LazyRenderSection>
+
+          <LazyRenderSection id="contact">
             <Contact />
+          </LazyRenderSection>
+
         </main>
 
         <Footer />
 
       </div>
+
     </PortfolioProvider>
   )
 }

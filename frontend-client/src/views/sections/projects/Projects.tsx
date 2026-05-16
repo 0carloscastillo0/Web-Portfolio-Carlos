@@ -18,7 +18,7 @@ function Projects() {
   }, [])
 
   return (
-    <section id="projects" className="min-h-screen flex flex-col">
+    <section className="min-h-screen flex flex-col">
       <div className="max-w-7xl mx-auto w-full py-16">
 
         {/* HEADER */}

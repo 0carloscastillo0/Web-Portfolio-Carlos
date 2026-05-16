@@ -1,5 +1,3 @@
-import { MdSubject } from "react-icons/md"
-
 const es = {
   nav: {
     home: "Inicio",

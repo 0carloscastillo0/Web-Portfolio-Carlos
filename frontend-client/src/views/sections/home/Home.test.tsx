@@ -103,7 +103,7 @@ describe("Home Section", () => {
         renderHome()
 
         expect(
-        screen.getByText(/chile, santiago/i)
+        screen.getByText(/santiago, chile/i)
         ).toBeInTheDocument()
     })
 

@@ -70,7 +70,7 @@ function Home() {
               <iconMap.MapPin size={18} />
 
               <span className="text-body">
-                {profile?.country}, {profile?.city}
+                {profile?.city}, {profile?.country}
               </span>
 
             </div>

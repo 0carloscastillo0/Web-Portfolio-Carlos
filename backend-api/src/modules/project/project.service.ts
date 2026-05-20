@@ -1,3 +1,5 @@
+import path from "path";
+import fs from "fs";
 import { prisma } from "../../config/prisma";
 import { AppError } from "../../utils/AppError";
 
@@ -179,7 +181,7 @@ const projectService = {
         return images;
     },
 
-    /* 
+    /*
     Method to get images for a project for a specific user.
     Input: User ID and Project ID as parameters.
     Output: Array of image objects for the specified project, or error message if project not found or if project does not belong to the user.
@@ -204,6 +206,162 @@ const projectService = {
             where: { projectId: projectId },
             orderBy: { order: "asc" }
         });
+
+        return images;
+    },
+
+    /*
+    Method to update an existing project for a specific user.
+    Input: User ID, Project ID, and JSON body with project details to update.
+    Output: Updated project object or error message if project not found or does not belong to the user.
+    */
+    updateProject: async (userId: number, projectId: number, data: any) => {
+        // Validate that the user exists
+        const existingUser = await prisma.user.findUnique({
+            where: { id: userId },
+        });
+        if (!existingUser) throw new AppError("User not found", 404);
+
+        // Validate that the project exists and belongs to the user
+        const existingProject = await prisma.project.findUnique({
+            where: { id: projectId, userId: userId }
+        });
+        if (!existingProject) {
+            throw new AppError("Project not found for this user", 404);
+        }
+
+        // Extract skillIds from the input data
+        const { skillIds, ...projectData } = data;
+
+        // Validate that skills exist and belong to the user if skillIds are provided
+        if (skillIds && skillIds.length > 0) {
+            const existingSkills = await prisma.skill.findMany({
+                where: {
+                    id: { in: skillIds },
+                    userId: userId
+                }
+            });
+            if (existingSkills.length !== skillIds.length) {
+                throw new AppError("Some skills do not exist or do not belong to this user", 400);
+            }
+        }
+
+        // First, delete existing skill associations
+        await prisma.skillProject.deleteMany({
+            where: { projectId: projectId }
+        });
+
+        // Update the project and create new skill associations
+        const updatedProject = await prisma.project.update({
+            where: { id: projectId },
+            data: {
+                ...projectData,
+                skills: skillIds
+                    ? {
+                        create: skillIds.map((skillId: number) => ({
+                            skill: {
+                                connect: { id: skillId }
+                            }
+                        }))
+                    }
+                    : undefined
+            },
+            include: {
+                skills: {
+                    include: {
+                        skill: true
+                    }
+                }
+            }
+        });
+
+        return updatedProject;
+    },
+
+    /*
+    Method to delete a project for a specific user, including associated images from filesystem.
+    Input: User ID and Project ID as parameters.
+    Output: Success message or error message if project not found or does not belong to the user.
+    */
+    deleteProject: async (userId: number, projectId: number) => {
+        // Validate that the user exists
+        const existingUser = await prisma.user.findUnique({
+            where: { id: userId },
+        });
+        if (!existingUser) throw new AppError("User not found", 404);
+
+        // Validate that the project exists and belongs to the user
+        const existingProject = await prisma.project.findUnique({
+            where: { id: projectId, userId: userId },
+            include: {
+                images: true
+            }
+        });
+        if (!existingProject) {
+            throw new AppError("Project not found for this user", 404);
+        }
+
+        // Delete associated image files from filesystem
+        for (const image of existingProject.images) {
+            const imagePath = path.resolve("uploads/projects", image.filename);
+            if (fs.existsSync(imagePath)) {
+                fs.unlinkSync(imagePath);
+            }
+        }
+
+        // Delete associated skill projects (SkillProject does not have cascade delete)
+        await prisma.skillProject.deleteMany({
+            where: { projectId: projectId }
+        });
+
+        // Delete the project (images will be cascade deleted due to onDelete: Cascade)
+        await prisma.project.delete({
+            where: { id: projectId }
+        });
+
+        return { message: "Project deleted successfully" };
+    },
+
+    /*
+    Method to upload images to a project (renamed from addImageToProject).
+    Input: Project ID as a parameter, image file/s in the request body.
+    Output: Array of created image objects, or error message if project not found or if project does not belong to the user.
+    */
+    uploadImageProject: async (userId: number, projectId: number, files?: Express.Multer.File[]) => {
+        // Validate that the user exists        
+        const existingUser = await prisma.user.findUnique({
+            where: { id: userId },
+        });
+        if (!existingUser) throw new AppError("User not found", 404);
+
+        // Validate that files are provided
+        if (!files || files.length === 0) {
+            throw new AppError("No image files provided", 400);
+        }
+
+        // Validate that the project exists and belongs to the user
+        const project = await prisma.project.findUnique({
+            where: { id: projectId, userId: userId }
+        });
+        if (!project) {
+            throw new AppError("Project not found for this user", 404);
+        }
+
+        // Create image records for each uploaded file and associate them with the project
+        const images = await Promise.all(
+            files.map((file, index) =>
+                prisma.imgProject.create({
+                    data: {
+                        url: `/uploads/projects/${file.filename}`,
+                        filename: file.filename,
+                        size: file.size,
+                        mimeType: file.mimetype,
+                        projectId: projectId,
+                        order: index
+                    }
+                })
+            )
+        );
 
         return images;
     }

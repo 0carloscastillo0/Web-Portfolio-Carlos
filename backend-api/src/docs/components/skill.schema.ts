@@ -42,5 +42,24 @@ export const skillSchemas = {
         example: "typescript-icon"
       }
     }
+  },
+
+  SkillUpdate: {
+    type: "object",
+    required: ["name", "category", "icon"],
+    properties: {
+      name: {
+        type: "string",
+        example: "TypeScript"
+      },
+      category: {
+        type: "string",
+        example: "Programming Language"
+      },
+      icon: {
+        type: "string",
+        example: "typescript-icon"
+      }
+    }
   }
 };

@@ -40,17 +40,41 @@ const projectController = {
         sendResponse(res, 200, "Project retrieved successfully", project);
      }),
 
-    /* 
-    Method to add one or more images to a project for a specific user.
+/*
+    Method to upload images to a project (renamed from addImageToProject).
     Input: User ID and Project ID as URL parameters, image/s file/s in the request body.
-    Output: Updated project object with the new image/s, or error message if project not found or if project does not belong to the user.
+    Output: Created image objects or error message if project not found or if project does not belong to the user.
     */
-    addImageToProject: asyncHandler(async (req: Request, res: Response) => {
+    uploadImageProject: asyncHandler(async (req: Request, res: Response) => {
         const userId = Number(req.params.userId);
         const projectId = Number(req.params.projectId);
         const files = req.files as Express.Multer.File[];
-        const images = await projectService.addImageToProject(userId, projectId, files);
-        sendResponse(res, 201, "Image(s) added to project successfully", images);
+        const images = await projectService.uploadImageProject(userId, projectId, files);
+        sendResponse(res, 201, "Image(s) uploaded to project successfully", images);
+    }),
+
+    /*
+    Method to update an existing project for a specific user.
+    Input: User ID and Project ID as URL parameters, JSON body with project details to update.
+    Output: Updated project object or error message if project not found or does not belong to the user.
+    */
+    updateProject: asyncHandler(async (req: Request, res: Response) => {
+        const userId = Number(req.params.userId);
+        const projectId = Number(req.params.projectId);
+        const updatedProject = await projectService.updateProject(userId, projectId, req.body);
+        sendResponse(res, 200, "Project updated successfully", updatedProject);
+    }),
+
+    /*
+    Method to delete a project for a specific user, including associated images from filesystem.
+    Input: User ID and Project ID as URL parameters.
+    Output: Success message or error message if project not found or does not belong to the user.
+    */
+    deleteProject: asyncHandler(async (req: Request, res: Response) => {
+        const userId = Number(req.params.userId);
+        const projectId = Number(req.params.projectId);
+        await projectService.deleteProject(userId, projectId);
+        sendResponse(res, 200, "Project deleted successfully", null);
     }),
 
     /* 

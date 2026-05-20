@@ -103,5 +103,111 @@ export const skillPaths = {
                 }
             }
         }
+    },
+
+    "/users/{userId}/skills/{skillId}": {
+        put: {
+            tags: ["Skills"],
+            summary: "Update an existing skill for a user",
+            parameters: [
+                {
+                    in: "path",
+                    name: "userId",
+                    required: true,
+                    schema: {
+                        type: "integer"
+                    }
+                },
+                {
+                    in: "path",
+                    name: "skillId",
+                    required: true,
+                    schema: {
+                        type: "integer"
+                    }
+                }
+            ],
+            requestBody: {
+                required: true,
+                content: {
+                    "application/json": {
+                        schema: {
+                            $ref: "#/components/schemas/SkillUpdate"
+                        }
+                    }
+                }
+            },
+            responses: {
+                200: {
+                    description: "Skill updated successfully",
+                    content: {
+                        "application/json": {
+                            schema: {
+                                allOf: [
+                                    { $ref: "#/components/schemas/SuccessResponse" },
+                                    {
+                                        type: "object",
+                                        properties: {
+                                            data: {
+                                                $ref: "#/components/schemas/Skill"
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                400: {
+                    $ref: "#/components/responses/BadRequest"
+                },
+                404: {
+                    $ref: "#/components/responses/NotFound"
+                },
+                500: {
+                    $ref: "#/components/responses/InternalServerError"
+                }
+            }
+        },
+        delete: {
+            tags: ["Skills"],
+            summary: "Delete a skill for a user",
+            parameters: [
+                {
+                    in: "path",
+                    name: "userId",
+                    required: true,
+                    schema: {
+                        type: "integer"
+                    }
+                },
+                {
+                    in: "path",
+                    name: "skillId",
+                    required: true,
+                    schema: {
+                        type: "integer"
+                    }
+                }
+            ],
+            responses: {
+                200: {
+                    description: "Skill deleted successfully",
+                    content: {
+                        "application/json": {
+                            schema: {
+                                $ref: "#/components/schemas/SuccessResponse"
+                            }
+                        }
+                    }
+                },
+                404: {
+                    $ref: "#/components/responses/NotFound"
+                },
+                500: {
+                    $ref: "#/components/responses/InternalServerError"
+                }
+            }
+        }
     }
 };

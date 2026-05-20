@@ -82,10 +82,10 @@ const userService = {
         return updatedUser;
     },
 
-    /*
+/*
     Method to upload a CV for a user.
     Input: User ID as a parameter and a PDF file.
-    Output: Updated user object with the new CV URL or an error message if the upload fails.
+    Output: Updated user object with the new CV URL or error message if the upload fails.
      */
     uploadUserCV: async (id: number, file?: Express.Multer.File) => {
         // If no file is provided, throw an error
@@ -120,6 +120,37 @@ const userService = {
         });
 
         return updatedUser;     
+    },
+
+    /*
+    Method to update an existing user (excludes urlCV and urlPhoto).
+    Input: User ID and JSON body with user details to update.
+    Output: Updated user object or error message if user not found or email already exists.
+    */
+    updateUser: async (id: number, data: any) => {
+        // Check if the user exists
+        const existingUser = await prisma.user.findUnique({
+            where: { id },
+        });
+        if (!existingUser) throw new AppError("User not found", 404);
+
+        // Check if the email is being changed and if it's already in use by another user
+        if (data.email && data.email !== existingUser.email) {
+            const emailInUse = await prisma.user.findUnique({
+                where: { email: data.email },
+            });
+            if (emailInUse) throw new AppError("Email already in use by another user", 409);
+        }
+
+        // Update the user, excluding urlCV and urlPhoto fields
+        const { urlCV, urlPhoto, ...updateData } = data;
+
+        const updatedUser = await prisma.user.update({
+            where: { id },
+            data: updateData,
+        });
+
+        return updatedUser;
     },
     
 };

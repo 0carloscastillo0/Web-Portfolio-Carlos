@@ -153,6 +153,109 @@ export const projectPaths = {
                     $ref: "#/components/responses/InternalServerError"
                 }
             }
+        },
+        put: {
+            tags: ["Projects"],
+            summary: "Update an existing project for a user",
+            parameters: [
+                {
+                    in: "path",
+                    name: "userId",
+                    required: true,
+                    schema: {
+                        type: "integer"
+                    }
+                },
+                {
+                    in: "path",
+                    name: "projectId",
+                    required: true,
+                    schema: {
+                        type: "integer"
+                    }
+                }
+            ],
+            requestBody: {
+                required: true,
+                content: {
+                    "application/json": {
+                        schema: {
+                            $ref: '#/components/schemas/ProjectUpdate'
+                        }
+                    }
+                }
+            },
+            responses: {
+                200: {
+                    description: "Project updated successfully",
+                    content: {
+                        "application/json": {
+                            schema: {
+                                allOf: [
+                                    { $ref: "#/components/schemas/SuccessResponse" },
+                                    {
+                                        type: "object",
+                                        properties: {
+                                            data: {
+                                                $ref: "#/components/schemas/Project"
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                400: {
+                    $ref: "#/components/responses/BadRequest"
+                },
+                404: {
+                    $ref: "#/components/responses/NotFound"
+                },
+                500: {
+                    $ref: "#/components/responses/InternalServerError"
+                }
+            }
+        },
+        delete: {
+            tags: ["Projects"],
+            summary: "Delete a project for a user (including associated images from filesystem)",
+            parameters: [
+                {
+                    in: "path",
+                    name: "userId",
+                    required: true,
+                    schema: {
+                        type: "integer"
+                    }
+                },
+                {
+                    in: "path",
+                    name: "projectId",
+                    required: true,
+                    schema: {
+                        type: "integer"
+                    }
+                }
+            ],
+            responses: {
+                200: {
+                    description: "Project deleted successfully",
+                    content: {
+                        "application/json": {
+                            schema: {
+                                $ref: "#/components/schemas/SuccessResponse"
+                            }
+                        }
+                    }
+                },
+                404: {
+                    $ref: "#/components/responses/NotFound"
+                },
+                500: {
+                    $ref: "#/components/responses/InternalServerError"
+                }
+            }
         }
     },
 

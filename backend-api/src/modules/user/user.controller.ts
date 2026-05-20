@@ -48,6 +48,17 @@ const userController = {
         const updatedUser = await userService.uploadUserCV(id, req.file);
         sendResponse(res, 201, "User CV uploaded successfully", updatedUser);  
     }),
+
+    /*
+    Method to update an existing user (excludes urlCV and urlPhoto).
+    Input: User ID as a URL parameter and JSON body with user details to update.
+    Output: Updated user object or error message if user not found.
+    */
+    updateUser: asyncHandler( async (req: Request, res: Response) => {
+        const id = Number(req.params.id);
+        const updatedUser = await userService.updateUser(id, req.body);
+        sendResponse(res, 200, "User updated successfully", updatedUser);
+    }),
     
 };
 

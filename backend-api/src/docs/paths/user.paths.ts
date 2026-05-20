@@ -92,6 +92,64 @@ export const userPaths = {
                     $ref: "#/components/responses/InternalServerError"
                 }
             }
+        },
+        put: {
+            tags: ["Users"],
+            summary: "Update an existing user (excludes urlCV and urlPhoto)",
+            parameters: [
+                {
+                    in: "path",
+                    name: "id",
+                    required: true,
+                    schema: {
+                        type: "integer"
+                    }
+                }
+            ],
+            requestBody: {
+                required: true,
+                content: {
+                    "application/json": {
+                        schema: {
+                            $ref: '#/components/schemas/UserUpdate'
+                        }
+                    }
+                }
+            },
+            responses: {
+                200: {
+                    description: "User updated successfully",
+                    content: {
+                        "application/json": {
+                            schema: {
+                                allOf: [
+                                    { $ref: "#/components/schemas/SuccessResponse" },
+                                    {
+                                        type: "object",
+                                        properties: {
+                                            data: {
+                                                $ref: "#/components/schemas/User"
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                400: {
+                    $ref: "#/components/responses/BadRequest"
+                },
+                404: {
+                    $ref: "#/components/responses/NotFound"
+                },
+                409: {
+                    $ref: "#/components/responses/Conflict"
+                },
+                500: {
+                    $ref: "#/components/responses/InternalServerError"
+                }
+            }
         }
     },
 

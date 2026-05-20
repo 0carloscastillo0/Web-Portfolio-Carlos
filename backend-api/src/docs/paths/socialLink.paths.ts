@@ -101,5 +101,111 @@ export const socialLinkPaths = {
                 }
             }
         }
+    },
+
+    "/users/{userId}/social-links/{socialLinkId}": {
+        put: {
+            tags: ["Social Links"],
+            summary: "Update an existing social link for a user",
+            parameters: [
+                {
+                    in: "path",
+                    name: "userId",
+                    required: true,
+                    schema: {
+                        type: "integer"
+                    }
+                },
+                {
+                    in: "path",
+                    name: "socialLinkId",
+                    required: true,
+                    schema: {
+                        type: "integer"
+                    }
+                }
+            ],
+            requestBody: {
+                required: true,
+                content: {
+                    "application/json": {
+                        schema: {
+                            $ref: "#/components/schemas/SocialLinkUpdate"
+                        }
+                    }
+                }
+            },
+            responses: {
+                200: {
+                    description: "Social link updated successfully",
+                    content: {
+                        "application/json": {
+                            schema: {
+                                allOf: [
+                                    { $ref: "#/components/schemas/SuccessResponse" },
+                                    {
+                                        type: "object",
+                                        properties: {
+                                            data: {
+                                                $ref: "#/components/schemas/SocialLink"
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                400: {
+                    $ref: "#/components/responses/BadRequest"
+                },
+                404: {
+                    $ref: "#/components/responses/NotFound"
+                },
+                500: {
+                    $ref: "#/components/responses/InternalServerError"
+                }
+            }
+        },
+        delete: {
+            tags: ["Social Links"],
+            summary: "Delete a social link for a user",
+            parameters: [
+                {
+                    in: "path",
+                    name: "userId",
+                    required: true,
+                    schema: {
+                        type: "integer"
+                    }
+                },
+                {
+                    in: "path",
+                    name: "socialLinkId",
+                    required: true,
+                    schema: {
+                        type: "integer"
+                    }
+                }
+            ],
+            responses: {
+                200: {
+                    description: "Social link deleted successfully",
+                    content: {
+                        "application/json": {
+                            schema: {
+                                $ref: "#/components/schemas/SuccessResponse"
+                            }
+                        }
+                    }
+                },
+                404: {
+                    $ref: "#/components/responses/NotFound"
+                },
+                500: {
+                    $ref: "#/components/responses/InternalServerError"
+                }
+            }
+        }
     }
 };

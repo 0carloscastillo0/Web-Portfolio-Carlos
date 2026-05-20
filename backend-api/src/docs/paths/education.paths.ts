@@ -101,5 +101,111 @@ export const educationPaths = {
                 }
             }
         }
+    },
+
+    "/users/{userId}/educations/{educationId}": {
+        put: {
+            tags: ["Educations"],
+            summary: "Update an existing education for a user",
+            parameters: [
+                {
+                    in: "path",
+                    name: "userId",
+                    required: true,
+                    schema: {
+                        type: "integer"
+                    }
+                },
+                {
+                    in: "path",
+                    name: "educationId",
+                    required: true,
+                    schema: {
+                        type: "integer"
+                    }
+                }
+            ],
+            requestBody: {
+                required: true,
+                content: {
+                    "application/json": {
+                        schema: {
+                            $ref: "#/components/schemas/EducationUpdate"
+                        }
+                    }
+                }
+            },
+            responses: {
+                200: {
+                    description: "Education updated successfully",
+                    content: {
+                        "application/json": {
+                            schema: {
+                                allOf: [
+                                    { $ref: "#/components/schemas/SuccessResponse" },
+                                    {
+                                        type: "object",
+                                        properties: {
+                                            data: {
+                                                $ref: "#/components/schemas/Education"
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                400: {
+                    $ref: "#/components/responses/BadRequest"
+                },
+                404: {
+                    $ref: "#/components/responses/NotFound"
+                },
+                500: {
+                    $ref: "#/components/responses/InternalServerError"
+                }
+            }
+        },
+        delete: {
+            tags: ["Educations"],
+            summary: "Delete an education for a user",
+            parameters: [
+                {
+                    in: "path",
+                    name: "userId",
+                    required: true,
+                    schema: {
+                        type: "integer"
+                    }
+                },
+                {
+                    in: "path",
+                    name: "educationId",
+                    required: true,
+                    schema: {
+                        type: "integer"
+                    }
+                }
+            ],
+            responses: {
+                200: {
+                    description: "Education deleted successfully",
+                    content: {
+                        "application/json": {
+                            schema: {
+                                $ref: "#/components/schemas/SuccessResponse"
+                            }
+                        }
+                    }
+                },
+                404: {
+                    $ref: "#/components/responses/NotFound"
+                },
+                500: {
+                    $ref: "#/components/responses/InternalServerError"
+                }
+            }
+        }
     }
 };

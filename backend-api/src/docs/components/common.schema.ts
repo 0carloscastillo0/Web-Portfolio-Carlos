@@ -119,5 +119,21 @@ export const commonResponses = {
         }
       }
     }
+  },
+
+  Conflict: {
+    description: "Resource already exists",
+    content: {
+      "application/json": {
+        schema: {
+          $ref: "#/components/schemas/ErrorResponse"
+        },
+        example: {
+          success: false,
+          message: "Email already in use",
+          errors: []
+        }
+      }
+    }
   }
 };

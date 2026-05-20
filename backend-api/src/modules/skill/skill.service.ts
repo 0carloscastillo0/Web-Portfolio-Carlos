@@ -21,7 +21,7 @@ const skillService = {
         return newSkill;
     },
 
-    /* 
+/*
     Method to get all skills for a user by user ID.
     Input: User ID as a parameter.
     Output: Array of skill objects for the specified user, or error message if user not found.
@@ -39,6 +39,63 @@ const skillService = {
         });
 
         return skills;
+    },
+
+    /*
+    Method to update an existing skill for a specific user.
+    Input: User ID, Skill ID, and JSON body with skill details to update.
+    Output: Updated skill object or error message if skill not found or does not belong to the user.
+    */
+    updateSkill: async (userId: number, skillId: number, data: any) => {
+        // Validate that the user exists
+        const existingUser = await prisma.user.findUnique({
+            where: { id: userId },
+        });
+        if (!existingUser) throw new AppError("User not found", 404);
+
+        // Validate that the skill exists and belongs to the user
+        const existingSkill = await prisma.skill.findUnique({
+            where: { id: skillId, userId: userId }
+        });
+        if (!existingSkill) {
+            throw new AppError("Skill not found for this user", 404);
+        }
+
+        // Update the skill
+        const updatedSkill = await prisma.skill.update({
+            where: { id: skillId },
+            data: data,
+        });
+
+        return updatedSkill;
+    },
+
+    /*
+    Method to delete a skill for a specific user.
+    Input: User ID and Skill ID as parameters.
+    Output: Success message or error message if skill not found or does not belong to the user.
+    */
+    deleteSkill: async (userId: number, skillId: number) => {
+        // Validate that the user exists
+        const existingUser = await prisma.user.findUnique({
+            where: { id: userId },
+        });
+        if (!existingUser) throw new AppError("User not found", 404);
+
+        // Validate that the skill exists and belongs to the user
+        const existingSkill = await prisma.skill.findUnique({
+            where: { id: skillId, userId: userId }
+        });
+        if (!existingSkill) {
+            throw new AppError("Skill not found for this user", 404);
+        }
+
+        // Delete the skill (skillProject associations will be cascade deleted)
+        await prisma.skill.delete({
+            where: { id: skillId }
+        });
+
+        return { message: "Skill deleted successfully" };
     }
 
 };

@@ -1,7 +1,7 @@
 import { Router } from "express";
 import educationController from "./education.controller";
 import { validate } from "../../middlewares/validate.middleware";
-import { educationCreateSchema, userIdParamSchema } from "./education.schema";
+import { educationCreateSchema, educationUpdateSchema, userIdParamSchema, userEducationParamSchema } from "./education.schema";
 
 // Router for user-related endpoints
 const educationRouter = Router();
@@ -12,6 +12,10 @@ educationRouter.post("/users/:userId/educations", validate(userIdParamSchema, "p
 // Get all educations for an user with validation of userId parameter
 educationRouter.get("/users/:userId/educations", validate(userIdParamSchema, "params"), educationController.getAllEducationsByUserId);
 
-// Additional routes (getOne, update, delete) can be added here in the future
+// Update education by ID with validation of userId and educationId parameters
+educationRouter.put("/users/:userId/educations/:educationId", validate(userEducationParamSchema, "params"), validate(educationUpdateSchema, "body"), educationController.updateEducation);
+
+// Delete education by ID with validation of userId and educationId parameters
+educationRouter.delete("/users/:userId/educations/:educationId", validate(userEducationParamSchema, "params"), educationController.deleteEducation);
 
 export default educationRouter;

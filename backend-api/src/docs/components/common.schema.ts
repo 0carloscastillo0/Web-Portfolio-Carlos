@@ -135,5 +135,37 @@ export const commonResponses = {
         }
       }
     }
+  },
+
+  Unauthorized: {
+    description: "Authentication required or invalid credentials",
+    content: {
+      "application/json": {
+        schema: {
+          $ref: "#/components/schemas/ErrorResponse"
+        },
+        example: {
+          success: false,
+          message: "Invalid credentials",
+          errors: []
+        }
+      }
+    }
+  },
+
+  Forbidden: {
+    description: "Forbidden resource access",
+    content: {
+      "application/json": {
+        schema: {
+          $ref: "#/components/schemas/ErrorResponse"
+        },
+        example: {
+          success: false,
+          message: "You are not allowed to access this resource",
+          errors: []
+        }
+      }
+    }
   }
 };

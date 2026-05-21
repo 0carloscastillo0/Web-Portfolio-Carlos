@@ -8,6 +8,7 @@ import educationRouter from "./modules/education/education.route";
 import projectRouter from "./modules/project/project.route";
 import socialLinkRouter from "./modules/socialLink/socialLink.route";
 import skillRouter from "./modules/skill/skill.route";
+import authRouter from "./modules/auth/auth.route";
 
 // Create Express app
 const app = express();
@@ -19,6 +20,7 @@ app.use("/uploads", express.static("uploads"));
 app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Routes
+app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1", educationRouter);
 app.use("/api/v1", projectRouter);

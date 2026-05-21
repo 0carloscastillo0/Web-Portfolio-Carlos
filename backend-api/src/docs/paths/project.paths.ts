@@ -3,6 +3,7 @@ export const projectPaths = {
         post: {
             tags: ["Projects"],
             summary: "Create a new project for a user",
+            security: [{ bearerAuth: [] }],
             parameters: [
                 {
                     in: "path",
@@ -50,6 +51,9 @@ export const projectPaths = {
                 },
                 404: {
                     $ref: "#/components/responses/NotFound"
+                },
+                403: {
+                    $ref: "#/components/responses/Forbidden"
                 },
                 500: {
                     $ref: "#/components/responses/InternalServerError"
@@ -157,6 +161,7 @@ export const projectPaths = {
         put: {
             tags: ["Projects"],
             summary: "Update an existing project for a user",
+            security: [{ bearerAuth: [] }],
             parameters: [
                 {
                     in: "path",
@@ -212,6 +217,9 @@ export const projectPaths = {
                 404: {
                     $ref: "#/components/responses/NotFound"
                 },
+                403: {
+                    $ref: "#/components/responses/Forbidden"
+                },
                 500: {
                     $ref: "#/components/responses/InternalServerError"
                 }
@@ -220,6 +228,7 @@ export const projectPaths = {
         delete: {
             tags: ["Projects"],
             summary: "Delete a project for a user (including associated images from filesystem)",
+            security: [{ bearerAuth: [] }],
             parameters: [
                 {
                     in: "path",
@@ -252,6 +261,9 @@ export const projectPaths = {
                 404: {
                     $ref: "#/components/responses/NotFound"
                 },
+                403: {
+                    $ref: "#/components/responses/Forbidden"
+                },
                 500: {
                     $ref: "#/components/responses/InternalServerError"
                 }
@@ -263,6 +275,7 @@ export const projectPaths = {
         post: {
             tags: ["Projects"],
             summary: "Upload images to a project",
+            security: [{ bearerAuth: [] }],
             parameters: [
                 {
                     in: "path",
@@ -329,6 +342,9 @@ export const projectPaths = {
                 },
                 404: {
                     $ref: "#/components/responses/NotFound"
+                },
+                403: {
+                    $ref: "#/components/responses/Forbidden"
                 },
                 500: {
                     $ref: "#/components/responses/InternalServerError"

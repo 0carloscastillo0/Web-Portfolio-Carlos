@@ -3,6 +3,7 @@ export const educationPaths = {
         post: {
             tags: ["Educations"],
             summary: "Create a new education for a user",
+            security: [{ bearerAuth: [] }],
             parameters: [
                 {
                     in: "path",
@@ -50,6 +51,9 @@ export const educationPaths = {
                 },
                 404: {
                     $ref: "#/components/responses/NotFound"
+                },
+                403: {
+                    $ref: "#/components/responses/Forbidden"
                 },
                 500: {
                     $ref: "#/components/responses/InternalServerError"
@@ -107,6 +111,7 @@ export const educationPaths = {
         put: {
             tags: ["Educations"],
             summary: "Update an existing education for a user",
+            security: [{ bearerAuth: [] }],
             parameters: [
                 {
                     in: "path",
@@ -162,6 +167,9 @@ export const educationPaths = {
                 404: {
                     $ref: "#/components/responses/NotFound"
                 },
+                403: {
+                    $ref: "#/components/responses/Forbidden"
+                },
                 500: {
                     $ref: "#/components/responses/InternalServerError"
                 }
@@ -170,6 +178,7 @@ export const educationPaths = {
         delete: {
             tags: ["Educations"],
             summary: "Delete an education for a user",
+            security: [{ bearerAuth: [] }],
             parameters: [
                 {
                     in: "path",
@@ -201,6 +210,9 @@ export const educationPaths = {
                 },
                 404: {
                     $ref: "#/components/responses/NotFound"
+                },
+                403: {
+                    $ref: "#/components/responses/Forbidden"
                 },
                 500: {
                     $ref: "#/components/responses/InternalServerError"

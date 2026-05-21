@@ -3,6 +3,7 @@ export const skillPaths = {
         post: {
             tags: ["Skills"],
             summary: "Create a new skill for a user",
+            security: [{ bearerAuth: [] }],
             parameters: [
                 {
                     in: "path",
@@ -50,6 +51,9 @@ export const skillPaths = {
                 },
                 404: {
                     $ref: "#/components/responses/NotFound"
+                },
+                403: {
+                    $ref: "#/components/responses/Forbidden"
                 },
                 500: {
                     $ref: "#/components/responses/InternalServerError"
@@ -109,6 +113,7 @@ export const skillPaths = {
         put: {
             tags: ["Skills"],
             summary: "Update an existing skill for a user",
+            security: [{ bearerAuth: [] }],
             parameters: [
                 {
                     in: "path",
@@ -164,6 +169,9 @@ export const skillPaths = {
                 404: {
                     $ref: "#/components/responses/NotFound"
                 },
+                403: {
+                    $ref: "#/components/responses/Forbidden"
+                },
                 500: {
                     $ref: "#/components/responses/InternalServerError"
                 }
@@ -172,6 +180,7 @@ export const skillPaths = {
         delete: {
             tags: ["Skills"],
             summary: "Delete a skill for a user",
+            security: [{ bearerAuth: [] }],
             parameters: [
                 {
                     in: "path",
@@ -203,6 +212,9 @@ export const skillPaths = {
                 },
                 404: {
                     $ref: "#/components/responses/NotFound"
+                },
+                403: {
+                    $ref: "#/components/responses/Forbidden"
                 },
                 500: {
                     $ref: "#/components/responses/InternalServerError"

@@ -3,6 +3,7 @@ export const socialLinkPaths = {
         post: {
             tags: ["Social Links"],
             summary: "Create a new social link for a user",
+            security: [{ bearerAuth: [] }],
             parameters: [
                 {
                     in: "path",
@@ -50,6 +51,9 @@ export const socialLinkPaths = {
                 },
                 404: {
                     $ref: "#/components/responses/NotFound"
+                },
+                403: {
+                    $ref: "#/components/responses/Forbidden"
                 },
                 500: {
                     $ref: "#/components/responses/InternalServerError"
@@ -107,6 +111,7 @@ export const socialLinkPaths = {
         put: {
             tags: ["Social Links"],
             summary: "Update an existing social link for a user",
+            security: [{ bearerAuth: [] }],
             parameters: [
                 {
                     in: "path",
@@ -162,6 +167,9 @@ export const socialLinkPaths = {
                 404: {
                     $ref: "#/components/responses/NotFound"
                 },
+                403: {
+                    $ref: "#/components/responses/Forbidden"
+                },
                 500: {
                     $ref: "#/components/responses/InternalServerError"
                 }
@@ -170,6 +178,7 @@ export const socialLinkPaths = {
         delete: {
             tags: ["Social Links"],
             summary: "Delete a social link for a user",
+            security: [{ bearerAuth: [] }],
             parameters: [
                 {
                     in: "path",
@@ -201,6 +210,9 @@ export const socialLinkPaths = {
                 },
                 404: {
                     $ref: "#/components/responses/NotFound"
+                },
+                403: {
+                    $ref: "#/components/responses/Forbidden"
                 },
                 500: {
                     $ref: "#/components/responses/InternalServerError"

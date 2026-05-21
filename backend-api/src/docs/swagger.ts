@@ -5,6 +5,7 @@ import { projectSchemas } from "./components/project.schema";
 import { educationSchemas } from "./components/education.schema";
 import { socialLinkSchemas } from "./components/socialLink.schema";
 import { skillSchemas } from "./components/skill.schema";
+import { authSchemas } from "./components/auth.schema";
 import { commonResponses, commonSchema } from "./components/common.schema";
 
 import { userPaths } from "./paths/user.paths";
@@ -12,6 +13,7 @@ import { projectPaths } from "./paths/project.paths";
 import { educationPaths } from "./paths/education.paths";
 import { socialLinkPaths } from "./paths/socialLink.paths";
 import { skillPaths } from "./paths/skill.paths";
+import { authPaths } from "./paths/auth.paths";
 
 const options: swaggerJsdoc.Options = {
   definition: {
@@ -28,7 +30,15 @@ const options: swaggerJsdoc.Options = {
         ...educationSchemas,
         ...socialLinkSchemas,
         ...skillSchemas,
+        ...authSchemas,
         ...commonSchema,
+      },
+      securitySchemes: {
+        bearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT",
+        },
       },
       responses: {
         ...commonResponses,
@@ -39,7 +49,8 @@ const options: swaggerJsdoc.Options = {
       ...projectPaths,
       ...educationPaths,
       ...socialLinkPaths,
-      ...skillPaths
+      ...skillPaths,
+      ...authPaths
     },
     servers: [
       {

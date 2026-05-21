@@ -1,52 +1,4 @@
 export const userPaths = {
-    "/users": {
-        post: {
-            tags: ["Users"],
-            summary: "Create a new user",
-            requestBody: {
-                required: true,
-                content: {
-                    "application/json": {
-                        schema: {
-                            $ref: '#/components/schemas/UserCreate'
-                        }
-                    }
-                }
-            },
-            responses: {
-                201: {
-                    description: "User created successfully",
-                    content: {
-                        "application/json": {
-                            schema: {
-                                allOf: [
-                                    { $ref: "#/components/schemas/SuccessResponse" },
-                                    {
-                                        type: "object",
-                                        properties: {
-                                            data: {
-                                                $ref: "#/components/schemas/User"
-                                            }
-                                        }
-                                    }
-                                ]
-                            }
-                        }
-                    }
-                },
-                400: {
-                    $ref: "#/components/responses/BadRequest"
-                },
-                404: {
-                    $ref: "#/components/responses/NotFound"
-                },
-                500: {
-                    $ref: "#/components/responses/InternalServerError"
-                }
-            }
-        }
-    },
-
     "/users/{id}": {
         get: {
             tags: ["Users"],
@@ -96,6 +48,7 @@ export const userPaths = {
         put: {
             tags: ["Users"],
             summary: "Update an existing user (excludes urlCV and urlPhoto)",
+            security: [{ bearerAuth: [] }],
             parameters: [
                 {
                     in: "path",
@@ -143,6 +96,9 @@ export const userPaths = {
                 404: {
                     $ref: "#/components/responses/NotFound"
                 },
+                403: {
+                    $ref: "#/components/responses/Forbidden"
+                },
                 409: {
                     $ref: "#/components/responses/Conflict"
                 },
@@ -157,6 +113,7 @@ export const userPaths = {
         post: {
             tags: ["Users"],
             summary: "Upload user photo",
+            security: [{ bearerAuth: [] }],
             parameters: [
                 {
                     in: "path",
@@ -210,6 +167,9 @@ export const userPaths = {
                 404: {
                     $ref: "#/components/responses/NotFound"
                 },
+                403: {
+                    $ref: "#/components/responses/Forbidden"
+                },
                 500: {
                     $ref: "#/components/responses/InternalServerError"
                 }
@@ -221,6 +181,7 @@ export const userPaths = {
         post: {
             tags: ["Users"],
             summary: "Upload user CV",
+            security: [{ bearerAuth: [] }],
             parameters: [
                 {
                     in: "path",
@@ -273,6 +234,9 @@ export const userPaths = {
                 },
                 404: {
                     $ref: "#/components/responses/NotFound"
+                },
+                403: {
+                    $ref: "#/components/responses/Forbidden"
                 },
                 500: {
                     $ref: "#/components/responses/InternalServerError"

@@ -18,12 +18,14 @@ model User {
   name String
   lastname String
   email String @unique
+  password String?
   title String
   city String
   country String
   description String
   urlCV String?
   urlPhoto String?
+  refreshTokenHash String?
 
   educations Education[]
   skills Skill[]

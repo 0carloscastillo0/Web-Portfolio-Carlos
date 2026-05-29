@@ -33,6 +33,18 @@ const userService = {
         // Find the user by ID
         const user = await prisma.user.findUnique({
             where: { id },
+            select: {
+                id: true,
+                name: true,
+                lastname: true,
+                email: true,
+                title: true,
+                city: true,
+                country: true,
+                description: true,
+                urlCV: true,
+                urlPhoto: true,
+            },
         });
 
         // If user not found, throw an error

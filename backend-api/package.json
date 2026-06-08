@@ -4,7 +4,11 @@
   "description": "Aplicación web fullstack desarrollada para presentar la información relacionada a los proyectos en los que he participado, incluyendo datos personales relevantes.",
   "main": "index.js",
   "scripts": {
-    "dev": "tsx watch src/index.ts"
+    "dev": "tsx watch src/index.ts",
+    "test": "dotenv -e .env.test -- vitest run --fileParallelism=false",
+    "test:watch": "dotenv -e .env.test -- vitest --fileParallelism=false",
+    "test:coverage": "dotenv -e .env.test -- vitest run --coverage --fileParallelism=false",
+    "test:db:migrate": "dotenv -e .env.test -- prisma migrate deploy"
   },
   "repository": {
     "type": "git",
@@ -25,11 +29,16 @@
     "@types/multer": "^2.0.0",
     "@types/node": "^25.3.0",
     "@types/pg": "^8.20.0",
+    "@types/supertest": "^7.2.0",
     "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui-express": "^4.1.8",
+    "@vitest/coverage-v8": "^4.1.7",
+    "dotenv-cli": "^11.0.0",
     "prisma": "^7.4.0",
+    "supertest": "^7.2.2",
     "tsx": "^4.21.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.7"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.4.2",

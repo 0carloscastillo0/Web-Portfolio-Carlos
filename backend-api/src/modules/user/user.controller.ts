@@ -7,16 +7,6 @@ import { sendResponse } from "../../utils/response";
 const userController = {
 
     /*
-    Method to create a new user with error handling.
-    Input: JSON body with user details (name, email, password).
-    Output: Created user object or error message.
-    */
-    createUser: asyncHandler( async (req: Request, res: Response) => {
-        const user = await userService.createUser(req.body);
-        sendResponse(res, 201, "User created successfully", user);
-    }),
-
-    /*
     Method to get a user by ID.
     Input: User ID as a URL parameter.
     Output: User object if found, or error message if not found.

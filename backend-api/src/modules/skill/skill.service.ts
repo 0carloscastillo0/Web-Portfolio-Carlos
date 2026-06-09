@@ -90,7 +90,12 @@ const skillService = {
             throw new AppError("Skill not found for this user", 404);
         }
 
-        // Delete the skill (skillProject associations will be cascade deleted)
+        // Delete associated skill projects first (no cascade delete on this relation)
+        await prisma.skillProject.deleteMany({
+            where: { skillId: skillId }
+        });
+
+        // Delete the skill
         await prisma.skill.delete({
             where: { id: skillId }
         });

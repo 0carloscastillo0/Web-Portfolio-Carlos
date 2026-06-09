@@ -30,7 +30,10 @@ export const authenticate = (req: Request, _res: Response, next: NextFunction) =
     const token = authHeader.split(" ")[1];
 
     try {
-        const decoded = jwt.verify(token, process.env.JWT_ACCESS_SECRET || "dev-access-secret") as AuthPayload;
+        const accessSecret = process.env.JWT_ACCESS_SECRET;
+        if (!accessSecret) return next(new AppError("JWT not configured", 500));
+
+        const decoded = jwt.verify(token, accessSecret) as AuthPayload;
         req.user = decoded;
         return next();
     } catch {

@@ -8,10 +8,15 @@ type JwtPayload = {
     email: string;
 };
 
-const accessSecret = process.env.JWT_ACCESS_SECRET || "dev-access-secret";
-const refreshSecret = process.env.JWT_REFRESH_SECRET || "dev-refresh-secret";
+const accessSecret = process.env.JWT_ACCESS_SECRET;
+const refreshSecret = process.env.JWT_REFRESH_SECRET;
 const accessExpiresIn = process.env.JWT_ACCESS_EXPIRES_IN || "15m";
 const refreshExpiresIn = process.env.JWT_REFRESH_EXPIRES_IN || "7d";
+
+if (!accessSecret || !refreshSecret) {
+    console.error("FATAL: JWT_ACCESS_SECRET and JWT_REFRESH_SECRET must be set in environment variables");
+    process.exit(1);
+}
 
 const publicUserSelect = {
     id: true,

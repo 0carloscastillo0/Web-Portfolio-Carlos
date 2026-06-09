@@ -25,6 +25,8 @@ model User {
   description String
   urlCV String?
   urlPhoto String?
+  photoPublicId String?
+  cvPublicId String?
   refreshTokenHash String?
 
   educations Education[]

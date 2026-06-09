@@ -1,12 +1,11 @@
-import path from "path";
-import fs from "fs";
 import { prisma } from "../../config/prisma";
 import { AppError } from "../../utils/AppError";
+import { uploadImage, deleteCloudinaryFile } from "../../utils/cloudinary";
 
 // Service for project-related operations
 const projectService = {
 
-    /* 
+    /*
     Method to create a new project from idUser.
     Input: JSON body with project details (title, startDate, endDate, description, userId).
     Output: Created project object or error message.
@@ -60,7 +59,7 @@ const projectService = {
         return newProject;
     },
 
-    /* 
+    /*
     Method to get all projects for a user by user ID.
     Input: User ID as a parameter.
     Output: Array of project objects for the specified user, or error message if user not found.
@@ -107,7 +106,7 @@ const projectService = {
         }));
     },
 
-    /* 
+    /*
     Method to get a project by its ID for a specific user.
     Input: User ID and Project ID as parameters.
     Output: Project object if found, or error message if not found or if project does not belong to the user.
@@ -136,50 +135,6 @@ const projectService = {
 
         return project;
     },    
-
-    /* 
-    Method to add one or more images to a project.
-    Input: Project ID as a parameter, image file/s in the request body.
-    Output: Updated project object with the new image/s, or error message if project not found or if project does not belong to the user.
-    */
-    addImageToProject: async (userId: number, projectId: number, files?: Express.Multer.File[]) => {
-        // Validate that the user exists        
-        const existingUser = await prisma.user.findUnique({
-            where: { id: userId },
-        });
-        if (!existingUser) throw new AppError("User not found", 404);
-
-        // Validate that files are provided
-        if (!files || files.length === 0) {
-            throw new AppError("No image files provided", 400);
-        }
-
-        // Validate that the project exists and belongs to the user
-        const project = await prisma.project.findUnique({
-            where: { id: projectId, userId: userId }
-        });
-        if (!project) {
-            throw new AppError("Project not found for this user", 404);
-        }
-
-        // Create image records for each uploaded file and associate them with the project
-        const images = await Promise.all(
-            files.map((file, index) =>
-                prisma.imgProject.create({
-                    data: {
-                        url: `/uploads/projects/${file.filename}`,
-                        filename: file.filename,
-                        size: file.size,
-                        mimeType: file.mimetype,
-                        projectId: projectId,
-                        order: index
-                    }
-                })
-            )
-        );
-
-        return images;
-    },
 
     /*
     Method to get images for a project for a specific user.
@@ -279,7 +234,7 @@ const projectService = {
     },
 
     /*
-    Method to delete a project for a specific user, including associated images from filesystem.
+    Method to delete a project for a specific user, including associated images from Cloudinary.
     Input: User ID and Project ID as parameters.
     Output: Success message or error message if project not found or does not belong to the user.
     */
@@ -301,12 +256,9 @@ const projectService = {
             throw new AppError("Project not found for this user", 404);
         }
 
-        // Delete associated image files from filesystem
+        // Delete associated image files from Cloudinary
         for (const image of existingProject.images) {
-            const imagePath = path.resolve("uploads/projects", image.filename);
-            if (fs.existsSync(imagePath)) {
-                fs.unlinkSync(imagePath);
-            }
+            await deleteCloudinaryFile(image.filename, "image");
         }
 
         // Delete associated skill projects (SkillProject does not have cascade delete)
@@ -323,8 +275,8 @@ const projectService = {
     },
 
     /*
-    Method to upload images to a project (renamed from addImageToProject).
-    Input: Project ID as a parameter, image file/s in the request body.
+    Method to upload images to a project via Cloudinary.
+    Input: Project ID as a parameter, image file/s buffers in the request body.
     Output: Array of created image objects, or error message if project not found or if project does not belong to the user.
     */
     uploadImageProject: async (userId: number, projectId: number, files?: Express.Multer.File[]) => {
@@ -347,20 +299,22 @@ const projectService = {
             throw new AppError("Project not found for this user", 404);
         }
 
-        // Create image records for each uploaded file and associate them with the project
+        // Upload each image to Cloudinary and create records
         const images = await Promise.all(
-            files.map((file, index) =>
-                prisma.imgProject.create({
+            files.map(async (file, index) => {
+                const result = await uploadImage(file.buffer, "portfolio/projects");
+
+                return prisma.imgProject.create({
                     data: {
-                        url: `/uploads/projects/${file.filename}`,
-                        filename: file.filename,
+                        url: result.secure_url,
+                        filename: result.public_id,
                         size: file.size,
                         mimeType: file.mimetype,
                         projectId: projectId,
                         order: index
                     }
-                })
-            )
+                });
+            })
         );
 
         return images;

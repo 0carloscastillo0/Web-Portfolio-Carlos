@@ -1,12 +1,26 @@
-import fs from "fs";
-import path from "path";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi, beforeEach } from "vitest";
 import { api } from "../../../../tests/helpers/request.helper";
 import { authHeader, createAuthenticatedUser } from "../../../../tests/helpers/auth.helper";
 import { imageFixturePath, textFixturePath } from "../../../../tests/helpers/file.helper";
 import { prisma } from "../../../../tests/helpers/db.helper";
 
+vi.mock("../../../../src/utils/cloudinary", () => ({
+  uploadImage: vi.fn().mockResolvedValue({
+    secure_url: "https://res.cloudinary.com/test/image/upload/portfolio/users/test-photo.png",
+    public_id: "portfolio/users/test-photo",
+  }),
+  uploadPdf: vi.fn().mockResolvedValue({
+    secure_url: "https://res.cloudinary.com/test/raw/upload/portfolio/cv/test-cv.pdf",
+    public_id: "portfolio/cv/test-cv",
+  }),
+  deleteCloudinaryFile: vi.fn().mockResolvedValue({ result: "ok" }),
+}));
+
 describe("POST /api/v1/users/:id/photo", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
   it("uploads user photo for owner", async () => {
     const { user, accessToken } = await createAuthenticatedUser();
 
@@ -16,9 +30,10 @@ describe("POST /api/v1/users/:id/photo", () => {
       .attach("image", imageFixturePath)
       .expect(201);
 
-    expect(response.body.data.urlPhoto).toContain("/uploads/users/");
+    expect(response.body.data.urlPhoto).toContain("cloudinary.com");
     const updatedUser = await prisma.user.findUnique({ where: { id: user.id } });
     expect(updatedUser?.urlPhoto).toBe(response.body.data.urlPhoto);
+    expect(updatedUser?.photoPublicId).toBeTruthy();
   });
 
   it("returns 401 without token", async () => {
@@ -40,16 +55,13 @@ describe("POST /api/v1/users/:id/photo", () => {
     await api().post(`/api/v1/users/${user.id}/photo`).set("Authorization", authHeader(accessToken)).attach("image", textFixturePath).expect(400);
   });
 
-  it("replaces previous image file", async () => {
+  it("replaces previous photo and calls deleteCloudinaryFile", async () => {
     const { user, accessToken } = await createAuthenticatedUser();
-    const oldFile = "old-photo.png";
-    const oldPath = path.resolve("uploads/users", oldFile);
-    fs.mkdirSync(path.dirname(oldPath), { recursive: true });
-    fs.writeFileSync(oldPath, "old");
-    await prisma.user.update({ where: { id: user.id }, data: { urlPhoto: `/uploads/users/${oldFile}` } });
+    await prisma.user.update({ where: { id: user.id }, data: { urlPhoto: "https://res.cloudinary.com/test/old.png", photoPublicId: "portfolio/users/old-photo" } });
 
     await api().post(`/api/v1/users/${user.id}/photo`).set("Authorization", authHeader(accessToken)).attach("image", imageFixturePath).expect(201);
 
-    expect(fs.existsSync(oldPath)).toBe(false);
+    const { deleteCloudinaryFile } = await import("../../../../src/utils/cloudinary");
+    expect(deleteCloudinaryFile).toHaveBeenCalledWith("portfolio/users/old-photo", "image");
   });
 });

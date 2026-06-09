@@ -3,11 +3,12 @@ import authController from "./auth.controller";
 import { validate } from "../../middlewares/validate.middleware";
 import { registerSchema, loginSchema, refreshTokenSchema, logoutSchema, changePasswordSchema } from "./auth.schema";
 import { authenticate } from "../../middlewares/auth.middleware";
+import { ensureRegisterEnabled } from "./auth.guard";
 
 const authRouter = Router();
 
-// Register a new user with a hashed password
-authRouter.post("/register", validate(registerSchema, "body"), authController.register);
+// Register a new user with a hashed password (disabled in production after admin creation)
+authRouter.post("/register", ensureRegisterEnabled, validate(registerSchema, "body"), authController.register);
 
 // Login user and generate access/refresh tokens
 authRouter.post("/login", validate(loginSchema, "body"), authController.login);

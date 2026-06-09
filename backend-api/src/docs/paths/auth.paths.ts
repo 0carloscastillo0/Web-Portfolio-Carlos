@@ -1,42 +1,4 @@
 export const authPaths = {
-    "/auth/register": {
-        post: {
-            tags: ["Auth"],
-            summary: "Register a new user with hashed password",
-            requestBody: {
-                required: true,
-                content: {
-                    "application/json": {
-                        schema: { $ref: "#/components/schemas/AuthRegister" },
-                    },
-                },
-            },
-            responses: {
-                201: {
-                    description: "User registered successfully",
-                    content: {
-                        "application/json": {
-                            schema: {
-                                allOf: [
-                                    { $ref: "#/components/schemas/SuccessResponse" },
-                                    {
-                                        type: "object",
-                                        properties: {
-                                            data: { $ref: "#/components/schemas/User" },
-                                        },
-                                    },
-                                ],
-                            },
-                        },
-                    },
-                },
-                400: { $ref: "#/components/responses/BadRequest" },
-                409: { $ref: "#/components/responses/Conflict" },
-                500: { $ref: "#/components/responses/InternalServerError" },
-            },
-        },
-    },
-
     "/auth/login": {
         post: {
             tags: ["Auth"],

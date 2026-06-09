@@ -1,10 +1,26 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi, beforeEach } from "vitest";
 import { api } from "../../../../tests/helpers/request.helper";
 import { authHeader, createAuthenticatedUser } from "../../../../tests/helpers/auth.helper";
 import { imageFixturePath, textFixturePath } from "../../../../tests/helpers/file.helper";
 import { createProject, prisma } from "../../../../tests/helpers/db.helper";
 
+vi.mock("../../../../src/utils/cloudinary", () => ({
+  uploadImage: vi.fn().mockResolvedValue({
+    secure_url: "https://res.cloudinary.com/test/image/upload/portfolio/projects/test.png",
+    public_id: "portfolio/projects/test",
+  }),
+  uploadPdf: vi.fn().mockResolvedValue({
+    secure_url: "https://res.cloudinary.com/test/raw/upload/portfolio/cv/test.pdf",
+    public_id: "portfolio/cv/test",
+  }),
+  deleteCloudinaryFile: vi.fn().mockResolvedValue({ result: "ok" }),
+}));
+
 describe("POST /api/v1/users/:userId/projects/:projectId/images", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
   it("uploads project images for owner", async () => {
     const { user, accessToken } = await createAuthenticatedUser();
     const project = await createProject(user.id);
@@ -18,6 +34,7 @@ describe("POST /api/v1/users/:userId/projects/:projectId/images", () => {
 
     expect(response.body.data).toHaveLength(2);
     expect(await prisma.imgProject.findMany({ where: { projectId: project.id } })).toHaveLength(2);
+    expect(response.body.data[0].url).toContain("cloudinary.com");
   });
 
   it("returns 401 without token", async () => {

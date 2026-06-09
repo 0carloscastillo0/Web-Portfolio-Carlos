@@ -29,6 +29,11 @@ export const errorHandler = (
   if (!(err instanceof AppError)) {
     console.error(err);
   }
+
+  // In production, hide internal error details
+  if (process.env.NODE_ENV === "production" && !(err instanceof AppError) && !(err instanceof multer.MulterError)) {
+    message = "Internal server error";
+  }
   
   return res.status(statusCode).json({
     success: false,

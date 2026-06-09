@@ -24,12 +24,14 @@ describe("DELETE /api/v1/users/:userId/skills/:skillId", () => {
     await api().delete(`/api/v1/users/${other.user.id}/skills/${skill.id}`).set("Authorization", authHeader(accessToken)).expect(403);
   });
 
-  it("detects current behavior when deleting a skill associated to a project", async () => {
+  it("deletes skill even when associated to a project", async () => {
     const { user, accessToken } = await createAuthenticatedUser();
     const skill = await createSkill(user.id);
     const project = await createProject(user.id);
     await prisma.skillProject.create({ data: { skillId: skill.id, projectId: project.id } });
 
-    await api().delete(`/api/v1/users/${user.id}/skills/${skill.id}`).set("Authorization", authHeader(accessToken)).expect(500);
+    await api().delete(`/api/v1/users/${user.id}/skills/${skill.id}`).set("Authorization", authHeader(accessToken)).expect(200);
+    expect(await prisma.skill.findUnique({ where: { id: skill.id } })).toBeNull();
+    expect(await prisma.skillProject.findMany({ where: { skillId: skill.id } })).toHaveLength(0);
   });
 });

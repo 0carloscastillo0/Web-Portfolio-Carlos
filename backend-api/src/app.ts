@@ -1,5 +1,8 @@
 import express from "express";
+import cors from "cors";
+import helmet from "helmet";
 import { errorHandler } from "./middlewares/error.middleware";
+import { authRateLimit } from "./middlewares/rateLimit.middleware";
 import swaggerUi from "swagger-ui-express";
 import { swaggerSpec } from "./docs/swagger";
 
@@ -13,11 +16,42 @@ import authRouter from "./modules/auth/auth.route";
 // Create Express app
 const app = express();
 
-// Middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use("/uploads", express.static("uploads"));
+// Security middleware
+app.use(helmet({ contentSecurityPolicy: false }));
+
+// CORS configuration
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+].filter(Boolean);
+
+app.use(cors({
+  origin(origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    return callback(new Error("Not allowed by CORS"));
+  },
+  credentials: true,
+}));
+
+// Body parsing with limits
+app.use(express.json({ limit: "1mb" }));
+app.use(express.urlencoded({ extended: true, limit: "1mb" }));
+
+// Health check endpoint
+app.get("/health", (_req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "OK",
+  });
+});
+
+// Swagger documentation
 app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+// Rate limiting for auth routes
+app.use("/api/v1/auth", authRateLimit);
 
 // Routes
 app.use("/api/v1/auth", authRouter);

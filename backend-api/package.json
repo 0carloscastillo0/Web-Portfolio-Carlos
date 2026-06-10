@@ -8,7 +8,7 @@
     "build": "prisma generate && tsc",
     "start": "tsx src/index.ts",
     "migrate:deploy": "prisma migrate deploy",
-    "render:build": "npm install && prisma generate && prisma migrate deploy && npm run build",
+    "render:build": "npm install --include=dev && prisma generate && prisma migrate deploy && npm run build",
     "test": "dotenv -e .env.test -- vitest run --fileParallelism=false",
     "test:watch": "dotenv -e .env.test -- vitest --fileParallelism=false",
     "test:coverage": "dotenv -e .env.test -- vitest run --coverage --fileParallelism=false",

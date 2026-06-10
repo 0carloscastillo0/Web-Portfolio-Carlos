@@ -1,15 +1,16 @@
-name: CI Pipeline
+name: CI/CD Pipeline
 
 on:
-  push:
-    branches: [main]
   pull_request:
+    branches: [main]
+  push:
     branches: [main]
 
 jobs:
 
   # ================= CI =================
   ci:
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
 
     steps:
@@ -31,6 +32,10 @@ jobs:
         working-directory: frontend-client
         run: npm run test:coverage
 
+      - name: Build project
+        working-directory: frontend-client
+        run: npm run build
+
       - name: Sonar Scan
         run: npx sonar-scanner
         env:
@@ -38,9 +43,8 @@ jobs:
 
   # ================= CD =================
   deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    needs: ci
-    if: github.ref == 'refs/heads/main'
 
     steps:
       - name: Checkout repo

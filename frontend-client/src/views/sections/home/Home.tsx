@@ -5,7 +5,7 @@ import { usePortfolio } from "@/hooks/usePortfolio"
 function Home() {
 
   const { t } = useTranslation()
-  const { profile, contacts, loading } = usePortfolio()
+  const { profile, socialLinks, loading } = usePortfolio()
 
   if (loading) {
     return <div>Loading...</div>
@@ -13,7 +13,6 @@ function Home() {
 
   return (
     <section
-      id="home"
       className="min-h-[calc(100vh-80px)] flex items-center"
     >
       <div className="max-w-7xl mx-auto w-full">
@@ -44,18 +43,18 @@ function Home() {
             {/* SOCIAL LINKS */}
             <div className="flex justify-center md:justify-start gap-5">
 
-              {contacts.map((contact) => {
+              {socialLinks.map((link) => {
 
-                const Icon = iconMap[contact.icon as keyof typeof iconMap]
+                const Icon = iconMap[link.icon as keyof typeof iconMap]
 
                 return (
                   <a
-                    key={contact.id}
-                    href={contact.url}
+                    key={link.id}
+                    href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-2 rounded-lg hover:bg-secondary hover:scale-110 transition duration-200"
-                    aria-label={contact.name}
+                    aria-label={link.name}
                   >
                     {Icon && <Icon size={28} />}
                   </a>
@@ -71,7 +70,7 @@ function Home() {
               <iconMap.MapPin size={18} />
 
               <span className="text-body">
-                {profile?.country}, {profile?.city}
+                {profile?.city}, {profile?.country}
               </span>
 
             </div>

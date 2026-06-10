@@ -20,8 +20,9 @@ type Props = {
 
   t: (key: string) => string
 
-  cvUrl?: string
-  setMobileMenuOpen: (open: boolean) => void
+  cvUrlES?: string
+  cvUrlEN?: string
+  onOpenCVModal: () => void
 }
 
 function MobileMenu({
@@ -38,9 +39,11 @@ function MobileMenu({
   themes,
   onChangeTheme,
   t,
-  cvUrl,
-  setMobileMenuOpen
+  cvUrlES,
+  cvUrlEN,
+  onOpenCVModal
 }: Props) {
+    
   return (
     <div
         data-testid="mobile-menu"
@@ -67,17 +70,14 @@ function MobileMenu({
                     </button>
                 ))}
 
-                {cvUrl && (
-                    <a
-                        href={cvUrl}
-                        download
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={() => setMobileMenuOpen(false)}
+                {(cvUrlES || cvUrlEN) && (
+                    <button
+                        onClick={onOpenCVModal}
+                        aria-label={t("header.downloadCV")}
                         className="mx-auto block px-4 py-2 bg-accent hover:bg-accent-hover transition rounded-lg text-body font-semibold text-white text-center"
                     >
                         {t("header.downloadCV")}
-                    </a>
+                    </button>
                 )}
 
                 {/* LANGUAGE ENTRY */}

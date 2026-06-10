@@ -22,9 +22,10 @@ vi.spyOn(portfolioHook, "usePortfolio").mockReturnValue({
         country: "Chile",
         city: "Santiago",
         Urlphoto: "/test.jpg",
-        UrlCV: "/test.pdf",
+        UrlCVES: "/testES.pdf",
+        UrlCVEN: "/testEN.pdf",
     },
-    contacts: [
+    socialLinks: [
         {
             id: "1",
             name: "GitHub",
@@ -66,7 +67,7 @@ describe("Home Section", () => {
         loading: true,
         error: null,
         profile: null,
-        contacts: [],
+        socialLinks: [],
         skills: [],
         educations: [],
         projects: [],
@@ -102,7 +103,7 @@ describe("Home Section", () => {
         renderHome()
 
         expect(
-        screen.getByText(/chile, santiago/i)
+        screen.getByText(/santiago, chile/i)
         ).toBeInTheDocument()
     })
 

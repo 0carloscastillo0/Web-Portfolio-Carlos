@@ -3,6 +3,7 @@ import { useTranslation } from "@/hooks/useTranslation"
 import { usePortfolio } from "@/hooks/usePortfolio"
 
 import Modal from "@/views/components/Modal"
+import DownloadCVModal from "@/views/components/DownloadCVModal"
 
 import AboutCard from "./components/AboutCard"
 
@@ -15,10 +16,11 @@ type ModalType = "description" | "skills" | "education" | null
 function About() {
     const { t } = useTranslation()
     const [activeModal, setActiveModal] = useState<ModalType>(null)
+    const [isCVModalOpen, setIsCVModalOpen] = useState(false)
     const { profile } = usePortfolio()
 
     return (
-      <section id="about" className="min-h-screen flex flex-col">
+      <section className="min-h-screen flex flex-col">
         <div className="max-w-7xl mx-auto w-full py-16">
 
           {/* HEADER */}
@@ -60,12 +62,13 @@ function About() {
             {t("about.textCV")}
           </p>
 
-          {profile?.UrlCV && (
-            <a href={profile.UrlCV} download target="_blank" rel="noopener noreferrer">
-              <button className="px-5 py-2 bg-accent rounded-xl text-sm font-semibold text-white">
-                {t("header.downloadCV")}
-              </button>
-            </a>
+          {(profile?.UrlCVES || profile?.UrlCVEN) && (
+            <button
+              onClick={() => setIsCVModalOpen(true)}
+              className="px-5 py-2 bg-accent rounded-xl text-sm font-semibold text-white"
+            >
+              {t("header.downloadCV")}
+            </button>
           )}
         </div>
 
@@ -76,6 +79,14 @@ function About() {
             {activeModal === "skills" && <SkillsContent />}
             {activeModal === "education" && <EducationContent />}
           </Modal>
+        )}
+        {isCVModalOpen && (
+          <DownloadCVModal
+            onClose={() => setIsCVModalOpen(false)}
+            urlES={profile?.UrlCVES}
+            urlEN={profile?.UrlCVEN}
+            t={t}
+          />
         )}
       </section>
     )

@@ -3,6 +3,7 @@ export const projectPaths = {
         post: {
             tags: ["Projects"],
             summary: "Create a new project for a user",
+            security: [{ bearerAuth: [] }],
             parameters: [
                 {
                     in: "path",
@@ -50,6 +51,9 @@ export const projectPaths = {
                 },
                 404: {
                     $ref: "#/components/responses/NotFound"
+                },
+                403: {
+                    $ref: "#/components/responses/Forbidden"
                 },
                 500: {
                     $ref: "#/components/responses/InternalServerError"
@@ -153,6 +157,117 @@ export const projectPaths = {
                     $ref: "#/components/responses/InternalServerError"
                 }
             }
+        },
+        put: {
+            tags: ["Projects"],
+            summary: "Update an existing project for a user",
+            security: [{ bearerAuth: [] }],
+            parameters: [
+                {
+                    in: "path",
+                    name: "userId",
+                    required: true,
+                    schema: {
+                        type: "integer"
+                    }
+                },
+                {
+                    in: "path",
+                    name: "projectId",
+                    required: true,
+                    schema: {
+                        type: "integer"
+                    }
+                }
+            ],
+            requestBody: {
+                required: true,
+                content: {
+                    "application/json": {
+                        schema: {
+                            $ref: '#/components/schemas/ProjectUpdate'
+                        }
+                    }
+                }
+            },
+            responses: {
+                200: {
+                    description: "Project updated successfully",
+                    content: {
+                        "application/json": {
+                            schema: {
+                                allOf: [
+                                    { $ref: "#/components/schemas/SuccessResponse" },
+                                    {
+                                        type: "object",
+                                        properties: {
+                                            data: {
+                                                $ref: "#/components/schemas/Project"
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                400: {
+                    $ref: "#/components/responses/BadRequest"
+                },
+                404: {
+                    $ref: "#/components/responses/NotFound"
+                },
+                403: {
+                    $ref: "#/components/responses/Forbidden"
+                },
+                500: {
+                    $ref: "#/components/responses/InternalServerError"
+                }
+            }
+        },
+        delete: {
+            tags: ["Projects"],
+            summary: "Delete a project for a user (including associated images from filesystem)",
+            security: [{ bearerAuth: [] }],
+            parameters: [
+                {
+                    in: "path",
+                    name: "userId",
+                    required: true,
+                    schema: {
+                        type: "integer"
+                    }
+                },
+                {
+                    in: "path",
+                    name: "projectId",
+                    required: true,
+                    schema: {
+                        type: "integer"
+                    }
+                }
+            ],
+            responses: {
+                200: {
+                    description: "Project deleted successfully",
+                    content: {
+                        "application/json": {
+                            schema: {
+                                $ref: "#/components/schemas/SuccessResponse"
+                            }
+                        }
+                    }
+                },
+                404: {
+                    $ref: "#/components/responses/NotFound"
+                },
+                403: {
+                    $ref: "#/components/responses/Forbidden"
+                },
+                500: {
+                    $ref: "#/components/responses/InternalServerError"
+                }
+            }
         }
     },
 
@@ -160,6 +275,7 @@ export const projectPaths = {
         post: {
             tags: ["Projects"],
             summary: "Upload images to a project",
+            security: [{ bearerAuth: [] }],
             parameters: [
                 {
                     in: "path",
@@ -226,6 +342,9 @@ export const projectPaths = {
                 },
                 404: {
                     $ref: "#/components/responses/NotFound"
+                },
+                403: {
+                    $ref: "#/components/responses/Forbidden"
                 },
                 500: {
                     $ref: "#/components/responses/InternalServerError"

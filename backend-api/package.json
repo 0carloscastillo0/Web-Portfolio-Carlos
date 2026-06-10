@@ -4,7 +4,15 @@
   "description": "Aplicación web fullstack desarrollada para presentar la información relacionada a los proyectos en los que he participado, incluyendo datos personales relevantes.",
   "main": "index.js",
   "scripts": {
-    "dev": "tsx watch src/index.ts"
+    "dev": "tsx watch src/index.ts",
+    "build": "prisma generate && tsc",
+    "start": "tsx src/index.ts",
+    "migrate:deploy": "prisma migrate deploy",
+    "render:build": "npm install && prisma generate && prisma migrate deploy && npm run build",
+    "test": "dotenv -e .env.test -- vitest run --fileParallelism=false",
+    "test:watch": "dotenv -e .env.test -- vitest --fileParallelism=false",
+    "test:coverage": "dotenv -e .env.test -- vitest run --coverage --fileParallelism=false",
+    "test:db:migrate": "dotenv -e .env.test -- prisma migrate deploy"
   },
   "repository": {
     "type": "git",
@@ -19,23 +27,38 @@
   },
   "homepage": "https://github.com/0carloscastillo0/Web-Portfolio-Carlos#readme",
   "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/multer": "^2.0.0",
     "@types/node": "^25.3.0",
+    "@types/pg": "^8.20.0",
+    "@types/supertest": "^7.2.0",
     "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui-express": "^4.1.8",
+    "@vitest/coverage-v8": "^4.1.7",
+    "dotenv-cli": "^11.0.0",
     "prisma": "^7.4.0",
-    "tsx": "^4.21.0",
-    "typescript": "^5.9.3"
+    "supertest": "^7.2.2",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.7"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.4.2",
     "@prisma/client": "^7.4.2",
+    "bcrypt": "^6.0.0",
+    "cloudinary": "^2.10.0",
+    "cors": "^2.8.6",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
+    "express-rate-limit": "^8.5.2",
+    "helmet": "^8.2.0",
     "joi": "^18.0.2",
+    "jsonwebtoken": "^9.0.3",
     "multer": "^2.0.2",
     "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.1"
+    "swagger-ui-express": "^5.0.1",
+    "tsx": "^4.21.0"
   }
 }

@@ -18,17 +18,21 @@ model User {
   name String
   lastname String
   email String @unique
+  password String?
   title String
   city String
   country String
   description String
   urlCV String?
   urlPhoto String?
+  photoPublicId String?
+  cvPublicId String?
+  refreshTokenHash String?
 
   educations Education[]
   skills Skill[]
   projects Project[]
-  contacts Contact[]
+  socialLinks SocialLink[]
 }
 
 model Education {
@@ -95,7 +99,7 @@ model SkillProject {
   @@id([skillId, projectId])
 }
 
-model Contact {
+model SocialLink {
   id Int @id @default(autoincrement())
   name String
   icon String

@@ -3,7 +3,16 @@
     "module": "ESNext",
     "moduleResolution": "bundler",
     "target": "ES2023",
+    "outDir": "dist",
     "strict": true,
-    "esModuleInterop": true
-  }
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "sourceMap": true
+  },
+  "include": ["src"],
+  "exclude": [
+    "src/modules/**/__tests__/**",
+    "tests",
+    "vitest.config.ts"
+  ]
 }
